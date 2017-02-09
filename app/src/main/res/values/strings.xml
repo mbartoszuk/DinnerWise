@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">DinnerWise</string>
+
+    // Activity titles
+    <string name="homeScreen_title">Menu this week</string>
+
+    // Action bar icon buttons
+    <string name="action_calendar"></string>
+    <string name="action_secondarymenu"></string>
+
+    // Secondary menu options
+    <string name="action_dietaryPreferences">Dietary preferences</string>
+    <string name="action_accountSettings">Account settings</string>
+    <string name="action_aboutDinnerWise">About DinnerWise</string>
+    <string name="action_feedback">Feedback</string>
+    <string name="action_signOut">Sign out</string>
+    <string name="week_activity_title">Menu this week</string>
+</resources>
