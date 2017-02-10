@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_ownrecipes"
+        icon="@drawable/ic_receipt_24dp"
+        title="Own recipes" />
+    <tab
+        id="@+id/tab_favourites"
+        icon="@drawable/ic_favorite_24dp"
+        title="Favourites" />
+    <tab
+        id="@+id/tab_groceries"
+        icon="@drawable/ic_shopping_cart_24dp"
+        title="Groceries" />
+</tabs>

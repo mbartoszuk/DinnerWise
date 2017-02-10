@@ -12,6 +12,8 @@ import android.view.Menu;
 import android.widget.ExpandableListView;
 
 import com.bartoszuk.dinnerwise.R;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.BottomBarTab;
 
 public class WeekActivity extends AppCompatActivity {
 

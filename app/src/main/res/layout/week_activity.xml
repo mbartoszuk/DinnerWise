@@ -4,8 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
     android:orientation="vertical" >
 
     <ExpandableListView android:id="@+id/weeklyListView"
@@ -16,5 +14,12 @@
         android:clickable="true"
         android:indicatorRight="20dp"
         android:groupIndicator="@drawable/group_indicator" />
+
+    <com.roughike.bottombar.BottomBar
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        app:bb_tabXmlResource="@xml/bottombar" />
 
 </LinearLayout>
