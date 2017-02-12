@@ -7,6 +7,7 @@ package com.bartoszuk.dinnerwise.activity.week;
  */
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.CardView;
@@ -16,11 +17,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bartoszuk.dinnerwise.R;
 import com.bartoszuk.dinnerwise.model.DayOfWeek;
+import com.bartoszuk.dinnerwise.model.Recipe;
 import com.bartoszuk.dinnerwise.model.Week;
 
 final class WeekListAdapter extends BaseExpandableListAdapter {
@@ -60,13 +63,20 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.recipe_daily_options, null);
         }
 
+        Recipe recipe = new Recipe("1", "Aubergine & Couscous Salad");
         CardView left = (CardView) convertView.findViewById(R.id.recipe_option_left);
+        ImageView leftImage = (ImageView) left.findViewById(R.id.recipe_photo);
+        recipe.renderInto(leftImage);
+
         TextView leftTitle = (TextView) left.findViewById(R.id.recipe_title);
-        leftTitle.setText("Aubergine & Couscous Salad");
+        leftTitle.setText(recipe.getTitle());
 
         CardView right = (CardView) convertView.findViewById(R.id.recipe_option_right);
+        ImageView rightImage = (ImageView) right.findViewById(R.id.recipe_photo);
+        recipe.renderInto(rightImage);
+
         TextView rightTitle = (TextView) right.findViewById(R.id.recipe_title);
-        rightTitle.setText("Falafel");
+        rightTitle.setText(recipe.getTitle());
 
         final AppCompatCheckBox leftCheckbox =
                 (AppCompatCheckBox) left.findViewById(R.id.checkbox_icon);
