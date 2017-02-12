@@ -7,7 +7,7 @@ package com.bartoszuk.dinnerwise.model;
 public class RecipesDB {
 
     public Recipe findRecipeById(String id) {
-        return new Recipe(id, "Aubergine & Couscous Salad");
+        return new Recipe(id, "Aubergine & Couscous " + id);
     }
 
 }

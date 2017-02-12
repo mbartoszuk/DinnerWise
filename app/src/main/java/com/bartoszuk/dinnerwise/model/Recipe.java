@@ -1,13 +1,8 @@
 package com.bartoszuk.dinnerwise.model;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
 import com.bartoszuk.dinnerwise.R;
-
-import java.io.InputStream;
 
 /**
  * Created by Maria Bartoszuk on 12/02/2017.

@@ -7,7 +7,6 @@ package com.bartoszuk.dinnerwise.activity.week;
  */
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.CardView;
@@ -22,8 +21,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bartoszuk.dinnerwise.R;
-import com.bartoszuk.dinnerwise.model.DayOfWeek;
+import com.bartoszuk.dinnerwise.model.Date;
 import com.bartoszuk.dinnerwise.model.Recipe;
+import com.bartoszuk.dinnerwise.model.RecipeChoice;
+import com.bartoszuk.dinnerwise.model.RecipeChoiceDB;
 import com.bartoszuk.dinnerwise.model.RecipesDB;
 import com.bartoszuk.dinnerwise.model.Week;
 
@@ -33,6 +34,7 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
     private final LayoutInflater layoutInflater;
     private final Week week = new Week();
     private final RecipesDB recipesDB = new RecipesDB();
+    private final RecipeChoiceDB recipeChoiceDB = new RecipeChoiceDB();
 
     WeekListAdapter(Context context, LayoutInflater layoutInflater) {
         this.context = context;
@@ -65,7 +67,10 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.recipe_daily_options, null);
         }
 
-        Recipe leftRecipe = recipesDB.findRecipeById("001");
+        Date date = getGroup(groupPosition);
+
+        RecipeChoice recipeChoice = recipeChoiceDB.findRecipeChoiceByDate(date);
+        Recipe leftRecipe = recipesDB.findRecipeById(recipeChoice.getRecipeOneId());
         CardView left = (CardView) convertView.findViewById(R.id.recipe_option_left);
         ImageView leftImage = (ImageView) left.findViewById(R.id.recipe_photo);
         leftRecipe.renderInto(leftImage);
@@ -73,7 +78,7 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
         TextView leftTitle = (TextView) left.findViewById(R.id.recipe_title);
         leftTitle.setText(leftRecipe.getTitle());
 
-        Recipe rightRecipe = recipesDB.findRecipeById("002");
+        Recipe rightRecipe = recipesDB.findRecipeById(recipeChoice.getRecipeTwoId());
         CardView right = (CardView) convertView.findViewById(R.id.recipe_option_right);
         ImageView rightImage = (ImageView) right.findViewById(R.id.recipe_photo);
         rightRecipe.renderInto(rightImage);
@@ -107,7 +112,7 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public DayOfWeek getGroup(int groupPosition) {
+    public Date getGroup(int groupPosition) {
         return week.getDay(groupPosition);
     }
 
@@ -128,8 +133,8 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView textView = (TextView) convertView.findViewById(R.id.week_list_item_header_text);
-        DayOfWeek dayOfWeek = getGroup(groupPosition);
-        textView.setText(dayOfWeek.toString());
+        Date date = getGroup(groupPosition);
+        textView.setText(date.getDayOfWeek().toString());
         int colorResourceId = isExpanded ? R.color.primary : R.color.black;
         int color = ResourcesCompat.getColor(context.getResources(), colorResourceId, null);
         textView.setTextColor(color);
