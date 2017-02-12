@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.bartoszuk.dinnerwise.R;
 import com.bartoszuk.dinnerwise.model.DayOfWeek;
 import com.bartoszuk.dinnerwise.model.Recipe;
+import com.bartoszuk.dinnerwise.model.RecipesDB;
 import com.bartoszuk.dinnerwise.model.Week;
 
 final class WeekListAdapter extends BaseExpandableListAdapter {
@@ -31,6 +32,7 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
     private final Context context;
     private final LayoutInflater layoutInflater;
     private final Week week = new Week();
+    private final RecipesDB recipesDB = new RecipesDB();
 
     WeekListAdapter(Context context, LayoutInflater layoutInflater) {
         this.context = context;
@@ -63,20 +65,21 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.recipe_daily_options, null);
         }
 
-        Recipe recipe = new Recipe("1", "Aubergine & Couscous Salad");
+        Recipe leftRecipe = recipesDB.findRecipeById("001");
         CardView left = (CardView) convertView.findViewById(R.id.recipe_option_left);
         ImageView leftImage = (ImageView) left.findViewById(R.id.recipe_photo);
-        recipe.renderInto(leftImage);
+        leftRecipe.renderInto(leftImage);
 
         TextView leftTitle = (TextView) left.findViewById(R.id.recipe_title);
-        leftTitle.setText(recipe.getTitle());
+        leftTitle.setText(leftRecipe.getTitle());
 
+        Recipe rightRecipe = recipesDB.findRecipeById("002");
         CardView right = (CardView) convertView.findViewById(R.id.recipe_option_right);
         ImageView rightImage = (ImageView) right.findViewById(R.id.recipe_photo);
-        recipe.renderInto(rightImage);
+        rightRecipe.renderInto(rightImage);
 
         TextView rightTitle = (TextView) right.findViewById(R.id.recipe_title);
-        rightTitle.setText(recipe.getTitle());
+        rightTitle.setText(rightRecipe.getTitle());
 
         final AppCompatCheckBox leftCheckbox =
                 (AppCompatCheckBox) left.findViewById(R.id.checkbox_icon);
