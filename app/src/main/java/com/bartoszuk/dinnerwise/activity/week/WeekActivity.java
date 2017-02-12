@@ -26,6 +26,7 @@ public class WeekActivity extends AppCompatActivity {
         setContentView(R.layout.week_activity);
         listView = (ExpandableListView) findViewById(R.id.weeklyListView);
         listView.setAdapter(new WeekListAdapter(getBaseContext(), getLayoutInflater()));
+        setExpandArrowPosition();
     }
 
     @Override
@@ -47,7 +48,6 @@ public class WeekActivity extends AppCompatActivity {
         }
     }
 
-    // TODO: extract to common code
     /** Converts from DPI to px. */
     private static int dpi(int dpiValue) {
         return dpiValue * Resources.getSystem().getDisplayMetrics().densityDpi

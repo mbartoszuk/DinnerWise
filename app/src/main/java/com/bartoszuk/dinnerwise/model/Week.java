@@ -1,6 +1,8 @@
 package com.bartoszuk.dinnerwise.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Maria Bartoszuk on 01/02/2017.
