@@ -9,13 +9,18 @@
         android:supportsRtl="true"
         android:theme="@style/DinnerWiseTheme">
 
-        <activity
-            android:name=".activity.week.WeekActivity">
+        <activity android:name=".activity.week.WeekActivity">
+        </activity>
+
+        <activity android:name=".activity.onboarding.OnboardingActivity"
+            android:theme="@style/DinnerWiseTheme_noActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

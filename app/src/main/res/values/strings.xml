@@ -15,4 +15,16 @@
     <string name="action_feedback">Feedback</string>
     <string name="action_signOut">Sign out</string>
     <string name="week_activity_title">Menu this week</string>
+
+    // Onboarding titles
+    <string name="onboarding_title_one">Dietary preferences</string>
+    <string name="onboarding_title_two">Recipe options</string>
+    <string name="onboarding_title_three">Grocery list</string>
+    <string name="onboarding_title_four">Own recipes</string>
+
+    // Onboarding tips
+    <string name="onboarding_tip_one">Set up your dietary preferences to tailor recipes to your needs.</string>
+    <string name="onboarding_tip_two">Choose one of two suggested recipes for each day.</string>
+    <string name="onboarding_tip_three">Quickly synchronise recipe ingredients with your grocery list.</string>
+    <string name="onboarding_tip_four">Add your own recipes to use them along the provided ones.</string>
 </resources>

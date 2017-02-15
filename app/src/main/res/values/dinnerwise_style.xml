@@ -11,4 +11,10 @@
         <item name="android:textColorSecondary">@color/secondary_text</item>
     </style>
 
+    <style name="DinnerWiseTheme_noActionBar" parent="DinnerWiseTheme">
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 </resources>
