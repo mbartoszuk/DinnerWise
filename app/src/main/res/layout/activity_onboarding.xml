@@ -17,10 +17,12 @@
     <LinearLayout
         android:id="@+id/layout_dots"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="-25dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
         android:gravity = "center"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:orientation="horizontal" >
     </LinearLayout>
 
