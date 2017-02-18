@@ -16,7 +16,9 @@
             android:theme="@style/DinnerWiseTheme_noActionBar">
         </activity>
 
-        <activity android:name=".activity.login.LoginActivity">
+        <activity
+            android:name=".activity.login.LoginActivity"
+            android:theme="@style/DinnerWiseTheme_noActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +26,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.createaccount.CreateAccountActivity">
+        <activity
+            android:name=".activity.createaccount.CreateAccountActivity"
+            android:theme="@style/DinnerWiseTheme_noActionBar">
         </activity>
     </application>
 
