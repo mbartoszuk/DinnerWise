@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "246370982092",
+    "project_id": "dinnerwise"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246370982092:android:17e9e5d085352bcc",
+        "android_client_info": {
+          "package_name": "com.bartoszuk.dinnerwise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "246370982092-ubaei2lchaisei2i8hpubj6rf9m052q6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bartoszuk.dinnerwise",
+            "certificate_hash": "CD75B167198E2E27FD77A9B2DD5012BF54FDF927"
+          }
+        },
+        {
+          "client_id": "246370982092-48ksse1es4rt5j2t1a2opj3729lsi42h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAXQvTDUOTn86GW13VKEe34ax3TNYPGX4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
