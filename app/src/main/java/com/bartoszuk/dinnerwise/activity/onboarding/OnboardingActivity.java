@@ -1,6 +1,7 @@
 package com.bartoszuk.dinnerwise.activity.onboarding;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -81,8 +82,30 @@ public class OnboardingActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (hasGoneThroughOnboarding()) {
+            openWeekActivity();
+        }
+    }
+
+    private boolean hasGoneThroughOnboarding() {
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        return preferences.getBoolean(getString(R.string.preference_key_went_through_onboarding),
+                false);
+    }
+
+    private void markOnboardingDone() {
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor edit = preferences.edit();
+        edit.putBoolean(getString(R.string.preference_key_went_through_onboarding), true);
+        edit.apply();
+    }
+
     // Opens the Week Activity after the last Onboarding Screen.
     private void openWeekActivity() {
+        markOnboardingDone();
         startActivity(new Intent(this, WeekActivity.class));
         finish();
     }

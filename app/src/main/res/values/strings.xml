@@ -1,14 +1,17 @@
 <resources>
     <string name="app_name">DinnerWise</string>
 
-    // Activity titles
+    <!-- Shared preferences keys -->
+    <string name="preference_key_went_through_onboarding">preference_onboarding</string>
+
+    <!-- Activity titles -->
     <string name="homeScreen_title">Menu this week</string>
 
-    // Action bar icon buttons
+    <!-- Action bar icon buttons -->
     <string name="action_calendar"></string>
     <string name="action_secondarymenu"></string>
 
-    // Secondary menu options
+    <!-- Secondary menu options -->
     <string name="action_dietaryPreferences">Dietary preferences</string>
     <string name="action_accountSettings">Account settings</string>
     <string name="action_aboutDinnerWise">About DinnerWise</string>
@@ -16,13 +19,13 @@
     <string name="action_signOut">Sign out</string>
     <string name="week_activity_title">Menu this week</string>
 
-    // Onboarding titles
+    <!-- Onboarding titles -->
     <string name="onboarding_title_one">Dietary preferences</string>
     <string name="onboarding_title_two">Recipe options</string>
     <string name="onboarding_title_three">Grocery list</string>
     <string name="onboarding_title_four">Own recipes</string>
 
-    // Onboarding tips
+    <!-- Onboarding tips -->
     <string name="onboarding_tip_one">Set up your dietary preferences to tailor recipes to your needs.</string>
     <string name="onboarding_tip_two">Choose one of two suggested recipes for each day.</string>
     <string name="onboarding_tip_three">Quickly synchronise recipe ingredients with your grocery list.</string>
