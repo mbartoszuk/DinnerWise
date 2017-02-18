@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.login.LoginActivity">
+    tools:context=".activity.createaccount.CreateAccountActivity">
 
     <include layout="@layout/login_background"></include>
 
@@ -22,7 +22,7 @@
             android:layout_marginTop="16dp" >
 
             <EditText
-                android:id="@+id/input_email_login"
+                android:id="@+id/input_email_createAccount"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:textSize="16sp"
@@ -35,19 +35,33 @@
             android:layout_marginTop="8dp" >
 
             <EditText
-                android:id="@+id/input_password_login"
+                android:id="@+id/input_password_createAccount"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:textSize="16sp"
                 android:password="true"
                 android:hint="Password" />
         </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" >
+
+            <EditText
+                android:id="@+id/input_repeatpassword_createAccount"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:textSize="16sp"
+                android:password="true"
+                android:hint="Repeat password" />
+        </android.support.design.widget.TextInputLayout>
         
         <Button
-            android:id="@+id/button_login"
+            android:id="@+id/button_createAccount"
             android:layout_width="match_parent"
             android:layout_height="36dp"
-            android:text="Login"
+            android:text="Create Account"
             android:textAllCaps="true"
             android:textSize="16sp"
             android:textColor="@color/white"
@@ -56,11 +70,11 @@
             android:layout_marginBottom="8dp" />
 
         <TextView
-            android:id="@+id/input_linkToCreateAccount"
+            android:id="@+id/input_linkToSignIn"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="8dp"
-            android:text="Create an account here"
+            android:text="Already have an account? Sign in here"
             android:textSize="16sp"
             android:textColor="@color/primary"
             android:textAlignment="center" />

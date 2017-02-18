@@ -1,4 +1,4 @@
-package com.bartoszuk.dinnerwise.activity.login;
+package com.bartoszuk.dinnerwise.activity.createaccount;
 
 /**
  * Created by Maria Bartoszuk on 18/02/2017.
@@ -9,11 +9,11 @@ import android.os.Bundle;
 
 import com.bartoszuk.dinnerwise.R;
 
-public class LoginActivity extends Activity {
+public class CreateAccountActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_create_account);
     }
 }
