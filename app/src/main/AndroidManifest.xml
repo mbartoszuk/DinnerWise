@@ -9,16 +9,16 @@
         android:supportsRtl="true"
         android:theme="@style/DinnerWiseTheme">
 
-        <activity android:name=".activity.week.WeekActivity"></activity>
+        <activity android:name=".activity.week.WeekActivity" />
 
         <activity
             android:name=".activity.onboarding.OnboardingActivity"
-            android:theme="@style/DinnerWiseTheme_noActionBar">
-        </activity>
+            android:theme="@style/DinnerWiseTheme_noActionBar"/>
 
         <activity
             android:name=".activity.login.LoginActivity"
             android:theme="@style/DinnerWiseTheme_noActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,8 +28,11 @@
 
         <activity
             android:name=".activity.createaccount.CreateAccountActivity"
-            android:theme="@style/DinnerWiseTheme_noActionBar">
-        </activity>
+            android:theme="@style/DinnerWiseTheme_noActionBar"/>
+
+        <activity
+            android:name=".activity.fullrecipe.FullRecipeActivity"
+            android:label="@string/fullRecipe_title"/>
     </application>
 
 </manifest>

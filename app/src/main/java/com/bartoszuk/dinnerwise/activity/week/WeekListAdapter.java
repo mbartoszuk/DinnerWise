@@ -7,6 +7,7 @@ package com.bartoszuk.dinnerwise.activity.week;
  */
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.CardView;
@@ -16,11 +17,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bartoszuk.dinnerwise.R;
+import com.bartoszuk.dinnerwise.activity.fullrecipe.FullRecipeActivity;
 import com.bartoszuk.dinnerwise.model.Date;
 import com.bartoszuk.dinnerwise.model.Recipe;
 import com.bartoszuk.dinnerwise.model.RecipeChoice;
@@ -35,8 +38,10 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
     private final Week week = new Week();
     private final RecipesDB recipesDB = new RecipesDB();
     private final RecipeChoiceDB recipeChoiceDB = new RecipeChoiceDB();
+    private final WeekActivity weekActivity;
 
-    WeekListAdapter(Context context, LayoutInflater layoutInflater) {
+    WeekListAdapter(WeekActivity weekActivity, Context context, LayoutInflater layoutInflater) {
+        this.weekActivity = weekActivity;
         this.context = context;
         this.layoutInflater = layoutInflater;
     }
@@ -71,29 +76,38 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
 
         RecipeChoice recipeChoice = recipeChoiceDB.findRecipeChoiceByDate(date);
         Recipe leftRecipe = recipesDB.findRecipeById(recipeChoice.getRecipeOneId());
-        CardView left = (CardView) convertView.findViewById(R.id.recipe_option_left);
-        ImageView leftImage = (ImageView) left.findViewById(R.id.recipe_photo);
+        CardView leftCard = (CardView) convertView.findViewById(R.id.recipe_option_left);
+        ImageView leftImage = (ImageView) leftCard.findViewById(R.id.recipe_photo);
         leftRecipe.renderInto(leftImage);
 
-        TextView leftTitle = (TextView) left.findViewById(R.id.recipe_title);
+        TextView leftTitle = (TextView) leftCard.findViewById(R.id.recipe_title);
         leftTitle.setText(leftRecipe.getTitle());
 
         Recipe rightRecipe = recipesDB.findRecipeById(recipeChoice.getRecipeTwoId());
-        CardView right = (CardView) convertView.findViewById(R.id.recipe_option_right);
-        ImageView rightImage = (ImageView) right.findViewById(R.id.recipe_photo);
+        CardView rightCard = (CardView) convertView.findViewById(R.id.recipe_option_right);
+        ImageView rightImage = (ImageView) rightCard.findViewById(R.id.recipe_photo);
         rightRecipe.renderInto(rightImage);
 
-        TextView rightTitle = (TextView) right.findViewById(R.id.recipe_title);
+        ImageButton arrowButton = (ImageButton) leftCard.findViewById(R.id.arrow_forward_icon);
+        arrowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), FullRecipeActivity.class);
+                weekActivity.startActivity(intent);
+            }
+        });
+
+        TextView rightTitle = (TextView) rightCard.findViewById(R.id.recipe_title);
         rightTitle.setText(rightRecipe.getTitle());
 
         final AppCompatCheckBox leftCheckbox =
-                (AppCompatCheckBox) left.findViewById(R.id.checkbox_icon);
+                (AppCompatCheckBox) leftCard.findViewById(R.id.checkbox_icon);
         final AppCompatCheckBox rightCheckbox =
-                (AppCompatCheckBox) right.findViewById(R.id.checkbox_icon);
+                (AppCompatCheckBox) rightCard.findViewById(R.id.checkbox_icon);
         rightCheckbox.setOnCheckedChangeListener(IfChecked.thenUncheck(leftCheckbox));
         leftCheckbox.setOnCheckedChangeListener(IfChecked.thenUncheck(rightCheckbox));
 
-        equalizeWidth(left, right);
+        equalizeWidth(leftCard, rightCard);
 
         // Remove the divider from the last expandable tab.
         View divider = convertView.findViewById(R.id.divider_expandable_child);

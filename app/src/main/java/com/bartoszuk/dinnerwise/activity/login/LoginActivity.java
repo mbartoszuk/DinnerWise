@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity
             startActivity(new Intent(this, OnboardingActivity.class));
             finish();
         }
-        // TODO: Should we display failure message?
+        // TODO: Display failure message?
     }
 
     private void signIn() {

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    tools:context="com.bartoszuk.dinnerwise.activity.fullrecipe.FullRecipeActivity">
+
+    <ImageView
+        android:id="@+id/full_recipe_image"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/full_recipe_image_placeholder"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:id="@+id/preparation_time_servings_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="30 mins | 2 servings"
+        android:textSize="14sp"
+        android:layout_alignParentRight="true"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_below="@id/full_recipe_image" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        android:layout_alignBottom="@+id/preparation_time_servings_text" />
+
+    <TextView
+        android:id="@+id/description_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp"
+        android:text="Description:"
+        android:textColor="@color/primary"
+        android:layout_below="@id/preparation_time_servings_text" />
+
+    <TextView
+        android:id="@+id/description_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp"
+        android:text="Description text goes here."
+        android:layout_below="@id/description_title" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        android:layout_alignBottom="@+id/description_text" />
+
+    <TextView
+        android:id="@+id/ingredients_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp"
+        android:text="Ingredients:"
+        android:textColor="@color/primary"
+        android:layout_below="@id/description_text" />
+
+    <TextView
+        android:id="@+id/ingredients_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp"
+        android:text="• ingredient \n• ingredient"
+        android:layout_below="@id/ingredients_title" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        android:layout_alignBottom="@+id/ingredients_text" />
+
+    <TextView
+        android:id="@+id/directions_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp"
+        android:text="Directions:"
+        android:textColor="@color/primary"
+        android:layout_below="@id/ingredients_text" />
+
+    <TextView
+        android:id="@+id/directions_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp"
+        android:text="Directions go here."
+        android:layout_below="@id/directions_title" />
+
+</RelativeLayout>

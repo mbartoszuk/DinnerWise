@@ -6,10 +6,12 @@
 
     <!-- Activity titles -->
     <string name="homeScreen_title">Menu this week</string>
+    <string name="fullRecipe_title">Aubergine and Couscous Salad</string>
 
     <!-- Action bar icon buttons -->
-    <string name="action_calendar"></string>
-    <string name="action_secondarymenu"></string>
+    <string name="action_calendar">Calendar</string>
+    <string name="action_secondarymenu">Secondary menu</string>
+    <string name="action_addtofavorites">Add to favorites</string>
 
     <!-- Secondary menu options -->
     <string name="action_dietaryPreferences">Dietary preferences</string>
@@ -30,4 +32,5 @@
     <string name="onboarding_tip_two">Choose one of two suggested recipes for each day.</string>
     <string name="onboarding_tip_three">Quickly synchronise recipe ingredients with your grocery list.</string>
     <string name="onboarding_tip_four">Add your own recipes to use them along the provided ones.</string>
+
 </resources>
