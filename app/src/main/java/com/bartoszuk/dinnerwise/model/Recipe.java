@@ -29,4 +29,19 @@ public class Recipe {
     public String getTitle() {
         return this.title;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof Recipe)) {
+            return false;
+        }
+        Recipe that = (Recipe) other;
+        return this.getId().equals(that.getId());
+
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
 }
