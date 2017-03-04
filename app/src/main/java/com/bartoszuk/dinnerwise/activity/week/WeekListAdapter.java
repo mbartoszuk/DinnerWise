@@ -78,7 +78,7 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
         Recipe leftRecipe = recipesDB.findRecipeById(recipeChoice.getRecipeOneId());
         CardView leftCard = (CardView) convertView.findViewById(R.id.recipe_option_left);
         ImageView leftImage = (ImageView) leftCard.findViewById(R.id.recipe_photo);
-        leftRecipe.renderInto(leftImage);
+        leftRecipe.renderThumbnailInto(leftImage);
 
         TextView leftTitle = (TextView) leftCard.findViewById(R.id.recipe_title);
         leftTitle.setText(leftRecipe.getTitle());
@@ -86,7 +86,7 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
         Recipe rightRecipe = recipesDB.findRecipeById(recipeChoice.getRecipeTwoId());
         CardView rightCard = (CardView) convertView.findViewById(R.id.recipe_option_right);
         ImageView rightImage = (ImageView) rightCard.findViewById(R.id.recipe_photo);
-        rightRecipe.renderInto(rightImage);
+        rightRecipe.renderThumbnailInto(rightImage);
 
         ImageButton arrowButton = (ImageButton) leftCard.findViewById(R.id.arrow_forward_icon);
         arrowButton.setOnClickListener(new View.OnClickListener() {
