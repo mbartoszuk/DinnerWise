@@ -21,7 +21,6 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -32,7 +31,15 @@
 
         <activity
             android:name=".activity.fullrecipe.FullRecipeActivity"
-            android:label="@string/fullRecipe_title"/>
+            android:label="@string/fullRecipe_title" />
+
+        <activity
+            android:name=".activity.ownrecipes.OwnRecipesActivity"
+            android:label="@string/ownRecipes_title" />
+
+        <activity
+            android:name=".activity.managingownrecipe.AddRecipeActivity"
+            android:label="@string/manageRecipe_title" />
     </application>
 
 </manifest>

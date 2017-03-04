@@ -6,12 +6,16 @@
 
     <!-- Activity titles -->
     <string name="homeScreen_title">Menu this week</string>
-    <string name="fullRecipe_title">Aubergine and Couscous Salad</string>
+    <string name="fullRecipe_title">Recipe title here</string>
+    <string name="ownRecipes_title">Own recipes</string>
+    <string name="manageRecipe_title">Create a recipe</string>
 
     <!-- Action bar icon buttons -->
-    <string name="action_calendar">Calendar</string>
     <string name="action_secondarymenu">Secondary menu</string>
+    <string name="action_calendar">Calendar</string>
     <string name="action_addtofavorites">Add to favorites</string>
+    <string name="action_search">Search</string>
+    <string name="action_delete">Delete</string>
 
     <!-- Secondary menu options -->
     <string name="action_dietaryPreferences">Dietary preferences</string>

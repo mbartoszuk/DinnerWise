@@ -8,17 +8,13 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.ImageButton;
 
 import com.bartoszuk.dinnerwise.R;
-import com.bartoszuk.dinnerwise.activity.fullrecipe.FullRecipeActivity;
-import com.bartoszuk.dinnerwise.activity.onboarding.OnboardingActivity;
-import com.roughike.bottombar.BottomBar;
+import com.bartoszuk.dinnerwise.activity.ownrecipes.OwnRecipesActivity;
 import com.roughike.bottombar.BottomBarTab;
 
 public class WeekActivity extends AppCompatActivity {
@@ -33,6 +29,15 @@ public class WeekActivity extends AppCompatActivity {
         listView = (ExpandableListView) findViewById(R.id.weeklyListView);
         listView.setAdapter(new WeekListAdapter(this, getBaseContext(), getLayoutInflater()));
         setExpandArrowPosition();
+
+        BottomBarTab ownRecipesButton = (BottomBarTab) findViewById(R.id.tab_ownrecipes);
+        ownRecipesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), OwnRecipesActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

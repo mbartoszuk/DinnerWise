@@ -51,7 +51,7 @@
             android:textAllCaps="true"
             android:textSize="16sp"
             android:textColor="@color/white"
-            android:background="@drawable/button_shape"
+            android:background="@drawable/button_shape_teal"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp" />
 

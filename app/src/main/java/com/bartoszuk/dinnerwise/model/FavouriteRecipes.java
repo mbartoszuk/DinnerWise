@@ -1,6 +1,8 @@
 package com.bartoszuk.dinnerwise.model;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -9,7 +11,7 @@ import java.util.Set;
 
 public class FavouriteRecipes {
 
-    private static final Set<Recipe> favouriteRecipesCollection = new HashSet<>();
+    private static final List<Recipe> favouriteRecipesCollection = new LinkedList<>();
 
     public boolean contains(Recipe recipe) {
         return favouriteRecipesCollection.contains(recipe);
