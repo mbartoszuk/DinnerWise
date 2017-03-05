@@ -20,7 +20,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         setTitle(getString(R.string.manageRecipe_title));
         setContentView(R.layout.activity_manage_recipe);
     }
-    
+
     // References:
     // - https://github.com/svenwiegand/time-duration-picker#timedurationpickerdialog-and-timedurationpickerdialogfragment
     // - https://developer.android.com/guide/topics/ui/controls/pickers.html

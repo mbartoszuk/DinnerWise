@@ -13,10 +13,23 @@ import com.bartoszuk.dinnerwise.R;
 import com.bartoszuk.dinnerwise.model.FavouriteRecipes;
 import com.bartoszuk.dinnerwise.model.Recipe;
 
+import org.w3c.dom.Text;
+
+import java.util.Arrays;
+
 public class FullRecipeActivity extends AppCompatActivity {
 
-    private Recipe recipeModel = new Recipe("id", "title", 1, 1, "description", "directions");
+    private Recipe recipeModel = new Recipe("id");
     private FavouriteRecipes favouriteRecipes = new FavouriteRecipes();
+
+    public FullRecipeActivity() {
+        recipeModel.setTitle("title");
+        recipeModel.setPreparationTimeInMinutes(30);
+        recipeModel.setNumberOfServings(2);
+        recipeModel.setDescription("description");
+        recipeModel.setIngredients(Arrays.asList("1 cup of flour", "3 eggs"));
+        recipeModel.setDirections("first do this, then do that");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +42,13 @@ public class FullRecipeActivity extends AppCompatActivity {
 
         TextView preparationTimeServings = (TextView) findViewById(R.id.preparation_time_servings_text);
         preparationTimeServings.setText(recipeModel.getPreparationTimeInMinutes() + " minutes  |  " + recipeModel.getNumberOfServings() + " servings");
+
+        TextView ingredients = (TextView) findViewById(R.id.ingredients_text);
+        StringBuilder ingredientsContent = new StringBuilder();
+        for (String ingredient : recipeModel.getIngredients()) {
+            ingredientsContent.append("• " + ingredient + "\n");
+        }
+        ingredients.setText(ingredientsContent.toString());
 
         TextView description = (TextView) findViewById(R.id.description_text);
         description.setText(recipeModel.getDescription());

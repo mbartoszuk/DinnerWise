@@ -4,6 +4,9 @@ import android.widget.ImageView;
 
 import com.bartoszuk.dinnerwise.R;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by Maria Bartoszuk on 12/02/2017.
  */
@@ -11,19 +14,15 @@ import com.bartoszuk.dinnerwise.R;
 public class Recipe {
 
     private final String id;
-    private final String title;
-    private final int preparationTimeInMinutes;
-    private final int numberOfServings;
-    private final String description;
-    private final String directions;
+    private String title = "";
+    private int preparationTimeInMinutes = 0;
+    private int numberOfServings = 0;
+    private String description = "";
+    private List<String> ingredients = Collections.emptyList();
+    private String directions = "";
 
-    public Recipe(String id, String title, int preparationTimeInMinutes, int numberOfServings, String description, String directions) {
+    public Recipe(String id) {
         this.id = id;
-        this.title = title;
-        this.preparationTimeInMinutes = preparationTimeInMinutes;
-        this.numberOfServings = numberOfServings;
-        this.description = description;
-        this.directions = directions;
     }
 
     public String getId() {
@@ -46,6 +45,10 @@ public class Recipe {
         return description;
     }
 
+    public List<String> getIngredients() {
+        return ingredients;
+    }
+
     public String getDirections() {
         return directions;
     }
@@ -56,6 +59,30 @@ public class Recipe {
 
     public int getPreparationTimeInMinutes() {
         return preparationTimeInMinutes;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDirections(String directions) {
+        this.directions = directions;
+    }
+
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public void setNumberOfServings(int numberOfServings) {
+        this.numberOfServings = numberOfServings;
+    }
+
+    public void setPreparationTimeInMinutes(int preparationTimeInMinutes) {
+        this.preparationTimeInMinutes = preparationTimeInMinutes;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override

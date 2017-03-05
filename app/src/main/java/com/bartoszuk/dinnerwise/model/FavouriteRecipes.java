@@ -1,9 +1,7 @@
 package com.bartoszuk.dinnerwise.model;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Maria Bartoszuk on 04/03/2017.
