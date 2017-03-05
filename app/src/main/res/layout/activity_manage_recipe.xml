@@ -64,6 +64,8 @@
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:hint="Prep time in mins"
+                android:focusable="false"
+                android:onClick="showPreparationTimePicker"
                 android:maxLength="3" />
 
         </android.support.design.widget.TextInputLayout>
@@ -79,6 +81,7 @@
                 android:id="@+id/recipe_servings_input"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:inputType="number"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:hint="Servings"

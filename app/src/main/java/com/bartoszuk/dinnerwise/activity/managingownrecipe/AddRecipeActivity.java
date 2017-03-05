@@ -3,6 +3,8 @@ package com.bartoszuk.dinnerwise.activity.managingownrecipe;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.View;
+import android.widget.EditText;
 
 import com.bartoszuk.dinnerwise.R;
 
@@ -17,6 +19,13 @@ public class AddRecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTitle(getString(R.string.manageRecipe_title));
         setContentView(R.layout.activity_manage_recipe);
+    }
+    
+    // References:
+    // - https://github.com/svenwiegand/time-duration-picker#timedurationpickerdialog-and-timedurationpickerdialogfragment
+    // - https://developer.android.com/guide/topics/ui/controls/pickers.html
+    public void showPreparationTimePicker(View v) {
+        new PreparationTimePicker().show(getFragmentManager(), "dialog");
     }
 
     @Override
