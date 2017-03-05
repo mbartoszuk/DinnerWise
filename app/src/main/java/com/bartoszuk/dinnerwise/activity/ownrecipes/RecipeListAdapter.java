@@ -5,17 +5,21 @@ import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.bartoszuk.dinnerwise.R;
+import com.bartoszuk.dinnerwise.model.Recipe;
+import com.bartoszuk.dinnerwise.model.RecipeSet;
 
 /**
  * Created by Maria Bartoszuk on 04/03/2017.
  */
 
-public class RecipeListAdapter implements ListAdapter {
+public class RecipeListAdapter extends BaseAdapter {
 
+    private final RecipeSet ownRecipes = RecipeSet.own();
     private final Context context;
     private final LayoutInflater layoutInflater;
 
@@ -25,33 +29,13 @@ public class RecipeListAdapter implements ListAdapter {
     }
 
     @Override
-    public boolean areAllItemsEnabled() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled(int position) {
-        return true;
-    }
-
-    @Override
-    public void registerDataSetObserver(DataSetObserver observer) {
-    }
-
-    @Override
-    public void unregisterDataSetObserver(DataSetObserver observer) {
-    }
-
-    @Override
     public int getCount() {
-        // TODO
-        return 3;
+        return ownRecipes.size();
     }
 
     @Override
-    public Object getItem(int position) {
-        // TODO
-        return null;
+    public Recipe getItem(int position) {
+        return ownRecipes.nth(position);
     }
 
     @Override
@@ -60,31 +44,18 @@ public class RecipeListAdapter implements ListAdapter {
     }
 
     @Override
-    public boolean hasStableIds() {
-        return false;
-    }
-
-    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // TODO
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.recipe_list_item, null);
         }
+        Recipe recipe = getItem(position);
+
+        TextView title = (TextView) convertView.findViewById(R.id.recipe_list_item_title);
+        title.setText(recipe.getTitle());
+
+        TextView description = (TextView) convertView.findViewById(R.id.recipe_list_item_description);
+        description.setText(recipe.getDescription());
+
         return convertView;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return 0;
-    }
-
-    @Override
-    public int getViewTypeCount() {
-        return 1;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return false;
     }
 }

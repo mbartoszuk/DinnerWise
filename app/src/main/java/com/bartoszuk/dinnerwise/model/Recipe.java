@@ -13,13 +13,15 @@ import java.util.List;
 
 public class Recipe {
 
-    private final String id;
+    private String id;
     private String title = "";
     private int preparationTimeInMinutes = 0;
     private int numberOfServings = 0;
     private String description = "";
     private List<String> ingredients = Collections.emptyList();
     private String directions = "";
+
+    public Recipe() {}
 
     public Recipe(String id) {
         this.id = id;
@@ -59,6 +61,10 @@ public class Recipe {
 
     public int getPreparationTimeInMinutes() {
         return preparationTimeInMinutes;
+    }
+
+    void setId(String id) {
+        this.id = id;
     }
 
     public void setDescription(String description) {

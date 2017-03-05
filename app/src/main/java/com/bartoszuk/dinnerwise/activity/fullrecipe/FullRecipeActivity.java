@@ -1,26 +1,22 @@
 package com.bartoszuk.dinnerwise.activity.fullrecipe;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bartoszuk.dinnerwise.R;
-import com.bartoszuk.dinnerwise.model.FavouriteRecipes;
+import com.bartoszuk.dinnerwise.model.RecipeSet;
 import com.bartoszuk.dinnerwise.model.Recipe;
-
-import org.w3c.dom.Text;
 
 import java.util.Arrays;
 
 public class FullRecipeActivity extends AppCompatActivity {
 
     private Recipe recipeModel = new Recipe("id");
-    private FavouriteRecipes favouriteRecipes = new FavouriteRecipes();
+    private RecipeSet favouriteRecipes = RecipeSet.favourites();
 
     public FullRecipeActivity() {
         recipeModel.setTitle("title");

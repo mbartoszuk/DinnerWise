@@ -37,4 +37,8 @@
     <string name="onboarding_tip_three">Quickly synchronise recipe ingredients with your grocery list.</string>
     <string name="onboarding_tip_four">Add your own recipes to use them along the provided ones.</string>
 
+    <!-- Toasts -->
+    <string name="recipe_saved_toast">Your recipe has been saved.</string>
+    <string name="recipe_discarded_toast">Recipe discarded.</string>
+
 </resources>
