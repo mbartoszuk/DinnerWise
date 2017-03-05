@@ -35,7 +35,7 @@ public class OwnRecipesActivity extends AppCompatActivity {
         recipesCount.setText(own.size() + " recipes");
 
         ListView recipeList = (ListView) findViewById(R.id.own_recipes_list);
-        adapter = new RecipeListAdapter(getBaseContext(), getLayoutInflater());
+        adapter = new RecipeListAdapter(this, getLayoutInflater());
         recipeList.setAdapter(adapter);
 
         FloatingActionButton addRecipeButton = (FloatingActionButton) findViewById(R.id.add_recipe_button);

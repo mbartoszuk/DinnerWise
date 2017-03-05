@@ -1,15 +1,16 @@
 package com.bartoszuk.dinnerwise.activity.ownrecipes;
 
-import android.content.Context;
-import android.database.DataSetObserver;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bartoszuk.dinnerwise.R;
+import com.bartoszuk.dinnerwise.activity.fullrecipe.FullRecipeActivity;
 import com.bartoszuk.dinnerwise.model.Recipe;
 import com.bartoszuk.dinnerwise.model.RecipeSet;
 
@@ -20,11 +21,12 @@ import com.bartoszuk.dinnerwise.model.RecipeSet;
 public class RecipeListAdapter extends BaseAdapter {
 
     private final RecipeSet ownRecipes = RecipeSet.own();
-    private final Context context;
+
+    private final OwnRecipesActivity activity;
     private final LayoutInflater layoutInflater;
 
-    RecipeListAdapter(Context context, LayoutInflater layoutInflater) {
-        this.context = context;
+    RecipeListAdapter(OwnRecipesActivity activity, LayoutInflater layoutInflater) {
+        this.activity = activity;
         this.layoutInflater = layoutInflater;
     }
 
@@ -48,13 +50,23 @@ public class RecipeListAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.recipe_list_item, null);
         }
-        Recipe recipe = getItem(position);
+        final Recipe recipe = getItem(position);
 
         TextView title = (TextView) convertView.findViewById(R.id.recipe_list_item_title);
         title.setText(recipe.getTitle());
 
         TextView description = (TextView) convertView.findViewById(R.id.recipe_list_item_description);
         description.setText(recipe.getDescription());
+
+        ImageButton arrowForward = (ImageButton) convertView.findViewById(R.id.arrow_forward_icon);
+        arrowForward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), FullRecipeActivity.class);
+                intent.putExtra(FullRecipeActivity.RECIPE_ID_TO_OPEN, recipe.getId());
+                activity.startActivity(intent);
+            }
+        });
 
         return convertView;
     }

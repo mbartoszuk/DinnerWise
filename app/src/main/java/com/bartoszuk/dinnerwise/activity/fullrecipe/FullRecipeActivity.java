@@ -15,8 +15,11 @@ import java.util.Arrays;
 
 public class FullRecipeActivity extends AppCompatActivity {
 
-    private Recipe recipeModel = new Recipe("id");
+    public static final String RECIPE_ID_TO_OPEN = "recipe_id_to_open";
+
+    private Recipe recipeModel = new Recipe(4);
     private RecipeSet favouriteRecipes = RecipeSet.favourites();
+    private RecipeSet own = RecipeSet.own();
 
     public FullRecipeActivity() {
         recipeModel.setTitle("title");
@@ -30,6 +33,12 @@ public class FullRecipeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        int id = getIntent().getIntExtra(RECIPE_ID_TO_OPEN, 0);
+        if (id != 0) {
+            recipeModel = own.byId(id);
+        }
+
         setContentView(R.layout.activity_full_recipe);
 
         setTitle(recipeModel.getTitle());
@@ -37,7 +46,8 @@ public class FullRecipeActivity extends AppCompatActivity {
         recipeModel.renderFullInto((ImageView) findViewById(R.id.full_recipe_image));
 
         TextView preparationTimeServings = (TextView) findViewById(R.id.preparation_time_servings_text);
-        preparationTimeServings.setText(recipeModel.getPreparationTimeInMinutes() + " minutes  |  " + recipeModel.getNumberOfServings() + " servings");
+        preparationTimeServings.setText(recipeModel.getPreparationTimeInMinutes() + " minutes  |  "
+                + recipeModel.getNumberOfServings() + " servings");
 
         TextView ingredients = (TextView) findViewById(R.id.ingredients_text);
         StringBuilder ingredientsContent = new StringBuilder();

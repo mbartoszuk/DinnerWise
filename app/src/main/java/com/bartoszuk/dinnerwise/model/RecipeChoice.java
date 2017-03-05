@@ -6,19 +6,19 @@ package com.bartoszuk.dinnerwise.model;
 
 public class RecipeChoice {
 
-    final private String recipeOneId;
-    final private String recipeTwoId;
+    final private int recipeOneId;
+    final private int recipeTwoId;
 
-    public RecipeChoice(String recipeOneId, String recipeTwoId) {
+    public RecipeChoice(int recipeOneId, int recipeTwoId) {
         this.recipeOneId = recipeOneId;
         this.recipeTwoId = recipeTwoId;
     }
 
-    public String getRecipeOneId() {
+    public int getRecipeOneId() {
         return recipeOneId;
     }
 
-    public String getRecipeTwoId() {
+    public int getRecipeTwoId() {
         return recipeTwoId;
     }
 }

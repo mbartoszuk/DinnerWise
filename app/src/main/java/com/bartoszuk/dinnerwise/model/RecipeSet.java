@@ -3,7 +3,6 @@ package com.bartoszuk.dinnerwise.model;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by Maria Bartoszuk on 04/03/2017.
@@ -16,7 +15,7 @@ public class RecipeSet {
 
     // Some data to present
     static {
-        Recipe first = new Recipe("1");
+        Recipe first = new Recipe(1);
         first.setTitle("Aubergine and Couscous");
         first.setDescription("Amazing salad and so easy to make.");
         first.setNumberOfServings(2);
@@ -25,7 +24,7 @@ public class RecipeSet {
         first.setDirections("Mix the aubergine and couscous.");
         own.add(first);
 
-        Recipe second = new Recipe("2");
+        Recipe second = new Recipe(2);
         second.setTitle("Cauliflower Soup");
         second.setDescription("Great tasting, natural and so quick.");
         second.setNumberOfServings(2);
@@ -52,8 +51,8 @@ public class RecipeSet {
     }
 
     public void add(Recipe recipe) {
-        if (recipe.getId() == null) {
-            recipe.setId(UUID.randomUUID().toString());
+        if (recipe.getId() == 0) {
+            recipe.setId(size() + 1);
         }
         recipesCollection.add(recipe);
     }
@@ -68,5 +67,14 @@ public class RecipeSet {
 
     public Recipe nth(int n) {
         return recipesCollection.get(n);
+    }
+
+    public Recipe byId(int id) {
+        for (Recipe recipe : recipesCollection) {
+            if (recipe.getId() == id) {
+                return recipe;
+            }
+        }
+        return null;
     }
 }

@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class RecipesDB {
 
-    public Recipe findRecipeById(String id) {
+    public Recipe findRecipeById(int id) {
         Recipe recipe = new Recipe(id);
         recipe.setTitle("Aubergine & Couscous");
         recipe.setDescription("an awesome salad");

@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Recipe {
 
-    private String id;
+    private int id = 0;
     private String title = "";
     private int preparationTimeInMinutes = 0;
     private int numberOfServings = 0;
@@ -23,11 +23,11 @@ public class Recipe {
 
     public Recipe() {}
 
-    public Recipe(String id) {
+    public Recipe(int id) {
         this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return this.id;
     }
 
@@ -63,7 +63,7 @@ public class Recipe {
         return preparationTimeInMinutes;
     }
 
-    void setId(String id) {
+    void setId(int id) {
         this.id = id;
     }
 
@@ -97,12 +97,12 @@ public class Recipe {
             return false;
         }
         Recipe that = (Recipe) other;
-        return this.getId().equals(that.getId());
+        return this.getId() == that.getId();
 
     }
 
     @Override
     public int hashCode() {
-        return getId().hashCode();
+        return getId();
     }
 }
