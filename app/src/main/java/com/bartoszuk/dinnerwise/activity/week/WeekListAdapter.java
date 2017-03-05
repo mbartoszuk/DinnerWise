@@ -37,7 +37,7 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
     private final Context context;
     private final LayoutInflater layoutInflater;
     private final Week week = new Week();
-    private final RecipesDB recipesDB = new RecipesDB();
+    private final RecipesDB recipesDB = RecipesDB.db();
     private final RecipeChoiceDB recipeChoiceDB = new RecipeChoiceDB();
     private final WeekActivity weekActivity;
 
@@ -76,7 +76,7 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
         Date date = getGroup(groupPosition);
 
         RecipeChoice recipeChoice = recipeChoiceDB.findRecipeChoiceByDate(date);
-        Recipe leftRecipe = recipesDB.findRecipeById(recipeChoice.getRecipeOneId());
+        final Recipe leftRecipe = recipesDB.findRecipeById(recipeChoice.getRecipeOneId());
         CardView leftCard = (CardView) convertView.findViewById(R.id.recipe_option_left);
         ImageView leftImage = (ImageView) leftCard.findViewById(R.id.recipe_photo);
         leftRecipe.renderThumbnailInto(leftImage);
@@ -84,22 +84,33 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
         TextView leftTitle = (TextView) leftCard.findViewById(R.id.recipe_title);
         leftTitle.setText(leftRecipe.getTitle());
 
-        Recipe rightRecipe = recipesDB.findRecipeById(recipeChoice.getRecipeTwoId());
-        CardView rightCard = (CardView) convertView.findViewById(R.id.recipe_option_right);
-        ImageView rightImage = (ImageView) rightCard.findViewById(R.id.recipe_photo);
-        rightRecipe.renderThumbnailInto(rightImage);
-
-        ImageButton arrowButton = (ImageButton) leftCard.findViewById(R.id.arrow_forward_icon);
-        arrowButton.setOnClickListener(new View.OnClickListener() {
+        ImageButton leftArrowButton = (ImageButton) leftCard.findViewById(R.id.arrow_forward_icon);
+        leftArrowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), FullRecipeActivity.class);
+                intent.putExtra(FullRecipeActivity.RECIPE_ID_TO_OPEN, leftRecipe.getId());
                 weekActivity.startActivity(intent);
             }
         });
 
+        final Recipe rightRecipe = recipesDB.findRecipeById(recipeChoice.getRecipeTwoId());
+        CardView rightCard = (CardView) convertView.findViewById(R.id.recipe_option_right);
+        ImageView rightImage = (ImageView) rightCard.findViewById(R.id.recipe_photo);
+        rightRecipe.renderThumbnailInto(rightImage);
+
         TextView rightTitle = (TextView) rightCard.findViewById(R.id.recipe_title);
         rightTitle.setText(rightRecipe.getTitle());
+
+        ImageButton rightArrowButton = (ImageButton) rightCard.findViewById(R.id.arrow_forward_icon);
+        rightArrowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), FullRecipeActivity.class);
+                intent.putExtra(FullRecipeActivity.RECIPE_ID_TO_OPEN, rightRecipe.getId());
+                weekActivity.startActivity(intent);
+            }
+        });
 
         final AppCompatCheckBox leftCheckbox =
                 (AppCompatCheckBox) leftCard.findViewById(R.id.checkbox_icon);

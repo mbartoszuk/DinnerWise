@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.bartoszuk.dinnerwise.R;
 import com.bartoszuk.dinnerwise.model.Recipe;
 import com.bartoszuk.dinnerwise.model.RecipeSet;
+import com.bartoszuk.dinnerwise.model.RecipesDB;
 
 /**
  * Created by Maria Bartoszuk on 04/03/2017.
@@ -18,38 +19,58 @@ import com.bartoszuk.dinnerwise.model.RecipeSet;
 
 public class AddRecipeActivity extends AppCompatActivity {
 
+    public static final String RECIPE_ID_TO_EDIT = "recipe_id_to_edit";
+
+    private final RecipesDB db = RecipesDB.db();
     private final RecipeSet own = RecipeSet.own();
-    private final Recipe newRecipe = new Recipe();
+    private Recipe newRecipe = new Recipe();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        int id = getIntent().getIntExtra(RECIPE_ID_TO_EDIT, 0);
+        if (id != 0) {
+            newRecipe = db.findRecipeById(id);
+        }
+
         setTitle(getString(R.string.manageRecipe_title));
         setContentView(R.layout.activity_manage_recipe);
 
         EditText title = (EditText) findViewById(R.id.recipe_title_input);
+        title.setText(newRecipe.getTitle());
         title.addTextChangedListener(new RecipeFormWatcher(newRecipe, R.id.recipe_title_input));
 
         EditText description = (EditText) findViewById(R.id.recipe_description_input);
+        description.setText(newRecipe.getDescription());
         description.addTextChangedListener(new RecipeFormWatcher(newRecipe, R.id.recipe_description_input));
 
         EditText prepTime = (EditText) findViewById(R.id.recipe_preparation_time_input);
+        prepTime.setText(Integer.toString(newRecipe.getPreparationTimeInMinutes()));
         prepTime.addTextChangedListener(new RecipeFormWatcher(newRecipe, R.id.recipe_preparation_time_input));
 
         EditText servings = (EditText) findViewById(R.id.recipe_servings_input);
+        servings.setText(Integer.toString(newRecipe.getNumberOfServings()));
         servings.addTextChangedListener(new RecipeFormWatcher(newRecipe, R.id.recipe_servings_input));
 
         EditText ingredients = (EditText) findViewById(R.id.recipe_ingredients_input);
+        StringBuilder ingredientLines = new StringBuilder();
+        for (String ingredient : newRecipe.getIngredients()) {
+            ingredientLines.append(ingredient + "\n");
+        }
+        ingredients.setText(ingredientLines.toString());
         ingredients.addTextChangedListener(new RecipeFormWatcher(newRecipe, R.id.recipe_ingredients_input));
 
         EditText directions = (EditText) findViewById(R.id.recipe_directions_input);
+        directions.setText(newRecipe.getDirections());
         directions.addTextChangedListener(new RecipeFormWatcher(newRecipe, R.id.recipe_directions_input));
 
         Button saveRecipe = (Button) findViewById(R.id.button_save_recipe);
         saveRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                own.add(newRecipe);
+                db.add(newRecipe);
+                own.add(newRecipe.getId());
                 setResult(RESULT_OK);
                 finish();
             }

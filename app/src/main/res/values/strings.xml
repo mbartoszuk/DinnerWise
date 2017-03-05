@@ -40,5 +40,6 @@
     <!-- Toasts -->
     <string name="recipe_saved_toast">Your recipe has been saved.</string>
     <string name="recipe_discarded_toast">Recipe discarded.</string>
+    <string name="action_editRecipe">Edit recipe</string>
 
 </resources>

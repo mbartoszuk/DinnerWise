@@ -1,6 +1,5 @@
 package com.bartoszuk.dinnerwise.model;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,26 +14,10 @@ public class RecipeSet {
 
     // Some data to present
     static {
-        Recipe first = new Recipe(1);
-        first.setTitle("Aubergine and Couscous");
-        first.setDescription("Amazing salad and so easy to make.");
-        first.setNumberOfServings(2);
-        first.setPreparationTimeInMinutes(30);
-        first.setIngredients(Arrays.asList("aubergine", "couscous"));
-        first.setDirections("Mix the aubergine and couscous.");
-        own.add(first);
-
-        Recipe second = new Recipe(2);
-        second.setTitle("Cauliflower Soup");
-        second.setDescription("Great tasting, natural and so quick.");
-        second.setNumberOfServings(2);
-        second.setPreparationTimeInMinutes(20);
-        second.setIngredients(Arrays.asList("onion", "cauliflower", "potatoes"));
-        second.setDirections("Chop, fry, add boulion and blend.");
-        own.add(second);
+        own.add(3);
     }
 
-    private final List<Recipe> recipesCollection = new LinkedList<>();
+    private final List<Integer> recipesCollection = new LinkedList<>();
 
     public static RecipeSet favourites() {
         return favourites;
@@ -46,35 +29,25 @@ public class RecipeSet {
 
     private RecipeSet() {}
 
-    public boolean contains(Recipe recipe) {
+    public boolean contains(int recipe) {
         return recipesCollection.contains(recipe);
     }
 
-    public void add(Recipe recipe) {
-        if (recipe.getId() == 0) {
-            recipe.setId(size() + 1);
-        }
-        recipesCollection.add(recipe);
+    public void remove(int recipe) {
+        recipesCollection.remove(new Integer(recipe));
     }
 
-    public void remove(Recipe recipe) {
-        recipesCollection.remove(recipe);
+    public void add(int recipe) {
+        if (!contains(recipe)) {
+            recipesCollection.add(recipe);
+        }
     }
 
     public int size() {
         return recipesCollection.size();
     }
 
-    public Recipe nth(int n) {
+    public int nth(int n) {
         return recipesCollection.get(n);
-    }
-
-    public Recipe byId(int id) {
-        for (Recipe recipe : recipesCollection) {
-            if (recipe.getId() == id) {
-                return recipe;
-            }
-        }
-        return null;
     }
 }

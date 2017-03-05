@@ -1,5 +1,6 @@
 package com.bartoszuk.dinnerwise.activity.fullrecipe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -8,8 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bartoszuk.dinnerwise.R;
+import com.bartoszuk.dinnerwise.activity.managingownrecipe.AddRecipeActivity;
 import com.bartoszuk.dinnerwise.model.RecipeSet;
 import com.bartoszuk.dinnerwise.model.Recipe;
+import com.bartoszuk.dinnerwise.model.RecipesDB;
 
 import java.util.Arrays;
 
@@ -17,9 +20,12 @@ public class FullRecipeActivity extends AppCompatActivity {
 
     public static final String RECIPE_ID_TO_OPEN = "recipe_id_to_open";
 
+    private static final int EDIT_REQUEST_CODE = 241;
+
     private Recipe recipeModel = new Recipe(4);
-    private RecipeSet favouriteRecipes = RecipeSet.favourites();
+    private RecipesDB db = RecipesDB.db();
     private RecipeSet own = RecipeSet.own();
+    private RecipeSet favouriteRecipes = RecipeSet.favourites();
 
     public FullRecipeActivity() {
         recipeModel.setTitle("title");
@@ -36,7 +42,7 @@ public class FullRecipeActivity extends AppCompatActivity {
 
         int id = getIntent().getIntExtra(RECIPE_ID_TO_OPEN, 0);
         if (id != 0) {
-            recipeModel = own.byId(id);
+            recipeModel = db.findRecipeById(id);
         }
 
         setContentView(R.layout.activity_full_recipe);
@@ -66,9 +72,13 @@ public class FullRecipeActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.full_recipe_secondary_menu, menu);
-        displayFavouritesIcon(menu.findItem(R.id.action_addToFavorites));
+        if (own.contains(recipeModel.getId())) {
+            getMenuInflater().inflate(R.menu.own_recipe_secondary_menu, menu);
+        } else {
+            // Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.full_recipe_secondary_menu, menu);
+            displayFavouritesIcon(menu.findItem(R.id.action_addToFavorites));
+        }
         return true;
     }
 
@@ -77,21 +87,33 @@ public class FullRecipeActivity extends AppCompatActivity {
         // Handle favourites icon selection
         switch (item.getItemId()) {
             case R.id.action_addToFavorites:
-                if (favouriteRecipes.contains(recipeModel)) {
-                    favouriteRecipes.remove(recipeModel);
+                if (favouriteRecipes.contains(recipeModel.getId())) {
+                    favouriteRecipes.remove(recipeModel.getId());
                 } else {
-                    favouriteRecipes.add(recipeModel);
+                    favouriteRecipes.add(recipeModel.getId());
                 }
                 displayFavouritesIcon(item);
                 return true;
+            case R.id.action_edit:
+                Intent intent = new Intent(this, AddRecipeActivity.class);
+                intent.putExtra(AddRecipeActivity.RECIPE_ID_TO_EDIT, recipeModel.getId());
+                startActivityForResult(intent, EDIT_REQUEST_CODE);
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Was edited successfully.
+        if (requestCode == EDIT_REQUEST_CODE && resultCode == RESULT_OK) {
+            setResult(RESULT_OK);
+        }
+    }
+
     // Displays the filled / empty favourites icon based on the belonging to the list.
     public void displayFavouritesIcon(MenuItem item) {
-        if (favouriteRecipes.contains(recipeModel)) {
+        if (favouriteRecipes.contains(recipeModel.getId())) {
             item.setIcon(R.drawable.ic_favorite_24dp);
         } else {
             item.setIcon(R.drawable.ic_favorite_outline_24dp);

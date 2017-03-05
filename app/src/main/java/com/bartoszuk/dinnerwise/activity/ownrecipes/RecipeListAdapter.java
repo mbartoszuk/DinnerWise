@@ -1,7 +1,6 @@
 package com.bartoszuk.dinnerwise.activity.ownrecipes;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import com.bartoszuk.dinnerwise.R;
 import com.bartoszuk.dinnerwise.activity.fullrecipe.FullRecipeActivity;
 import com.bartoszuk.dinnerwise.model.Recipe;
 import com.bartoszuk.dinnerwise.model.RecipeSet;
+import com.bartoszuk.dinnerwise.model.RecipesDB;
 
 /**
  * Created by Maria Bartoszuk on 04/03/2017.
@@ -20,6 +20,7 @@ import com.bartoszuk.dinnerwise.model.RecipeSet;
 
 public class RecipeListAdapter extends BaseAdapter {
 
+    private final RecipesDB db = RecipesDB.db();
     private final RecipeSet ownRecipes = RecipeSet.own();
 
     private final OwnRecipesActivity activity;
@@ -37,7 +38,8 @@ public class RecipeListAdapter extends BaseAdapter {
 
     @Override
     public Recipe getItem(int position) {
-        return ownRecipes.nth(position);
+        int id = ownRecipes.nth(position);
+        return db.findRecipeById(id);
     }
 
     @Override
@@ -64,7 +66,7 @@ public class RecipeListAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), FullRecipeActivity.class);
                 intent.putExtra(FullRecipeActivity.RECIPE_ID_TO_OPEN, recipe.getId());
-                activity.startActivity(intent);
+                activity.startActivityForResult(intent, OwnRecipesActivity.SHOW_RECIPE_REQUEST);
             }
         });
 

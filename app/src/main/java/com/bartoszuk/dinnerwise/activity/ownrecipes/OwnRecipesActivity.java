@@ -21,6 +21,7 @@ import com.bartoszuk.dinnerwise.model.RecipeSet;
 public class OwnRecipesActivity extends AppCompatActivity {
 
     private static final int ADD_RECIPE_REQUEST = 561;
+    static final int SHOW_RECIPE_REQUEST = 562;
 
     private final RecipeSet own = RecipeSet.own();
     private RecipeListAdapter adapter;
@@ -59,6 +60,10 @@ public class OwnRecipesActivity extends AppCompatActivity {
         if (requestCode == ADD_RECIPE_REQUEST && resultCode == RESULT_CANCELED) {
             Toast.makeText(getApplicationContext(), R.string.recipe_discarded_toast, Toast.LENGTH_SHORT)
                     .show();
+        }
+        // Was edited successfully.
+        if (requestCode == SHOW_RECIPE_REQUEST && resultCode == RESULT_OK) {
+            adapter.notifyDataSetChanged();
         }
     }
 
