@@ -38,6 +38,18 @@
         android:layout_below="@+id/recipe_count_label"
         android:divider="@null"/>
 
+    <TextView
+        android:id="@+id/zero_own_recipes_message_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/zero_own_recipes_message_text"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:paddingTop="32dp"
+        android:lineSpacingExtra="8dp"
+        android:layout_below="@+id/recipe_count_label"
+        android:visibility="gone" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_recipe_button"
         android:src="@drawable/ic_add_24dp"

@@ -1,12 +1,15 @@
 package com.bartoszuk.dinnerwise.activity.fullrecipe;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bartoszuk.dinnerwise.R;
 import com.bartoszuk.dinnerwise.activity.managingownrecipe.AddRecipeActivity;
@@ -19,6 +22,10 @@ import java.util.Arrays;
 public class FullRecipeActivity extends AppCompatActivity {
 
     public static final String RECIPE_ID_TO_OPEN = "recipe_id_to_open";
+
+    public static final String RECIPE_EDITING_RESULT = "recipe_editing_result";
+    public static final int RECIPE_EDITED = 1;
+    public static final int RECIPE_DELETED = 2;
 
     private static final int EDIT_REQUEST_CODE = 241;
 
@@ -46,7 +53,15 @@ public class FullRecipeActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_full_recipe);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        renderModel();
+    }
+
+    private void renderModel() {
         setTitle(recipeModel.getTitle());
 
         recipeModel.renderFullInto((ImageView) findViewById(R.id.full_recipe_image));
@@ -67,7 +82,6 @@ public class FullRecipeActivity extends AppCompatActivity {
 
         TextView directions = (TextView) findViewById(R.id.directions_text);
         directions.setText(recipeModel.getDirections());
-
     }
 
     @Override
@@ -98,6 +112,29 @@ public class FullRecipeActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, AddRecipeActivity.class);
                 intent.putExtra(AddRecipeActivity.RECIPE_ID_TO_EDIT, recipeModel.getId());
                 startActivityForResult(intent, EDIT_REQUEST_CODE);
+                return true;
+            case R.id.action_delete:
+                // Create the confirmation dialog to delete the own recipe.
+                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(R.string.delete_own_recipe_confirmation)
+                        .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // Delete the chosen recipe.
+                                RecipeSet.own().remove(recipeModel.getId());
+                                Intent resultData = new Intent();
+                                resultData.putExtra(RECIPE_EDITING_RESULT, RECIPE_DELETED);
+                                setResult(RESULT_OK, resultData);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // Nothing happens.
+                            }
+                        });
+                // Display the confirmation dialog to delete the own recipe.
+                builder.show();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -107,7 +144,15 @@ public class FullRecipeActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Was edited successfully.
         if (requestCode == EDIT_REQUEST_CODE && resultCode == RESULT_OK) {
-            setResult(RESULT_OK);
+            renderModel();
+            Toast.makeText(getApplicationContext(), R.string.recipe_edited_toast, Toast.LENGTH_SHORT).show();
+            Intent resultData = new Intent();
+            resultData.putExtra(RECIPE_EDITING_RESULT, RECIPE_EDITED);
+            setResult(RESULT_OK, resultData);
+        }
+
+        if (requestCode == EDIT_REQUEST_CODE && resultCode == RESULT_CANCELED) {
+            Toast.makeText(getApplicationContext(), R.string.recipe_discarded_toast, Toast.LENGTH_SHORT).show();
         }
     }
 

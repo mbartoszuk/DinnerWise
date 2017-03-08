@@ -14,7 +14,7 @@ public class RecipeSet {
 
     // Some data to present
     static {
-        own.add(3);
+        //own.add(3);
     }
 
     private final List<Integer> recipesCollection = new LinkedList<>();

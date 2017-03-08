@@ -9,6 +9,7 @@
     <string name="fullRecipe_title">Recipe title here</string>
     <string name="ownRecipes_title">Own recipes</string>
     <string name="manageRecipe_title">Create a recipe</string>
+    <string name="editRecipe_title">Edit the recipe</string>
 
     <!-- Action bar icon buttons -->
     <string name="action_secondarymenu">Secondary menu</string>
@@ -16,6 +17,7 @@
     <string name="action_addtofavorites">Add to favorites</string>
     <string name="action_search">Search</string>
     <string name="action_delete">Delete</string>
+    <string name="action_editRecipe">Edit recipe</string>
 
     <!-- Secondary menu options -->
     <string name="action_dietaryPreferences">Dietary preferences</string>
@@ -40,6 +42,18 @@
     <!-- Toasts -->
     <string name="recipe_saved_toast">Your recipe has been saved.</string>
     <string name="recipe_discarded_toast">Recipe discarded.</string>
-    <string name="action_editRecipe">Edit recipe</string>
+    <string name="recipe_edited_toast">Recipe edited.</string>
+    <string name="recipe_deleted_toast">Recipe deleted.</string>
+
+    <!-- Empty lists messages -->
+    <string name="zero_own_recipes_message_text">You have not created any recipes yet. The recipes you create are private and you are the only person who will see them.
+        \n\nPsst! Create your own recipe by clicking the “+” button below.</string>
+
+    <!-- Dialog messages -->
+    <string name="delete_own_recipe_confirmation">Are you sure you want to delete this recipe?</string>
+
+    <!-- Dialog button actions -->
+    <string name="delete">DELETE</string>
+    <string name="cancel">CANCEL</string>
 
 </resources>
