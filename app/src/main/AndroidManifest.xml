@@ -9,25 +9,25 @@
         android:supportsRtl="true"
         android:theme="@style/DinnerWiseTheme">
 
-        <activity android:name=".activity.week.WeekActivity" />
-
-        <activity
-            android:name=".activity.onboarding.OnboardingActivity"
-            android:theme="@style/DinnerWiseTheme_noActionBar"/>
-
         <activity
             android:name=".activity.login.LoginActivity"
             android:theme="@style/DinnerWiseTheme_noActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
             android:name=".activity.createaccount.CreateAccountActivity"
-            android:theme="@style/DinnerWiseTheme_noActionBar"/>
+            android:theme="@style/DinnerWiseTheme_noActionBar" />
+
+        <activity
+            android:name=".activity.onboarding.OnboardingActivity"
+            android:theme="@style/DinnerWiseTheme_noActionBar" />
+
+        <activity android:name=".activity.week.WeekActivity" />
 
         <activity
             android:name=".activity.fullrecipe.FullRecipeActivity"
@@ -40,6 +40,10 @@
         <activity
             android:name=".activity.managingownrecipe.AddRecipeActivity"
             android:label="@string/manageRecipe_title" />
+
+        <activity
+            android:name=".activity.favourites.FavouritesActivity"
+            android:label="@string/favourites_title" />
     </application>
 
 </manifest>

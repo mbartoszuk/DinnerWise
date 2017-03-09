@@ -1,10 +1,13 @@
 package com.bartoszuk.dinnerwise.activity.ownrecipes;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -18,27 +21,32 @@ import com.bartoszuk.dinnerwise.model.RecipesDB;
  * Created by Maria Bartoszuk on 04/03/2017.
  */
 
-public class RecipeListAdapter extends BaseAdapter {
+public class RecipeListAdapter extends BaseAdapter implements Filterable {
+
+    public static final int SHOW_RECIPE_REQUEST = 401;
 
     private final RecipesDB db = RecipesDB.db();
-    private final RecipeSet ownRecipes = RecipeSet.own();
+    private final RecipeSet recipeSet;
+    private String query = null;
 
-    private final OwnRecipesActivity activity;
+    private final Activity activity;
     private final LayoutInflater layoutInflater;
 
-    RecipeListAdapter(OwnRecipesActivity activity, LayoutInflater layoutInflater) {
+    public RecipeListAdapter(RecipeSet recipeSet, Activity activity, LayoutInflater layoutInflater) {
+        this.recipeSet = recipeSet;
+
         this.activity = activity;
         this.layoutInflater = layoutInflater;
     }
 
     @Override
     public int getCount() {
-        return ownRecipes.size();
+        return recipeSet.size(query);
     }
 
     @Override
     public Recipe getItem(int position) {
-        int id = ownRecipes.nth(position);
+        int id = recipeSet.nth(query, position);
         return db.findRecipeById(id);
     }
 
@@ -66,10 +74,29 @@ public class RecipeListAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), FullRecipeActivity.class);
                 intent.putExtra(FullRecipeActivity.RECIPE_ID_TO_OPEN, recipe.getId());
-                activity.startActivityForResult(intent, OwnRecipesActivity.SHOW_RECIPE_REQUEST);
+                activity.startActivityForResult(intent, SHOW_RECIPE_REQUEST);
             }
         });
 
         return convertView;
+    }
+
+    //To use for search.
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults results = new FilterResults();
+                results.count = recipeSet.size(constraint.toString());
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                query = constraint.toString();
+                notifyDataSetChanged();
+            }
+        };
     }
 }

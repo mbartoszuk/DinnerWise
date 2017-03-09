@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ExpandableListView;
 
 import com.bartoszuk.dinnerwise.R;
+import com.bartoszuk.dinnerwise.activity.favourites.FavouritesActivity;
 import com.bartoszuk.dinnerwise.activity.ownrecipes.OwnRecipesActivity;
 import com.roughike.bottombar.BottomBarTab;
 
@@ -35,6 +36,15 @@ public class WeekActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), OwnRecipesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        BottomBarTab favouritesButton = (BottomBarTab) findViewById(R.id.tab_favourites);
+        favouritesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), FavouritesActivity.class);
                 startActivity(intent);
             }
         });

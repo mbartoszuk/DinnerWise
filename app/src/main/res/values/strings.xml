@@ -10,6 +10,7 @@
     <string name="ownRecipes_title">Own recipes</string>
     <string name="manageRecipe_title">Create a recipe</string>
     <string name="editRecipe_title">Edit the recipe</string>
+    <string name="favourites_title">Favourites</string>
 
     <!-- Action bar icon buttons -->
     <string name="action_secondarymenu">Secondary menu</string>
@@ -44,10 +45,13 @@
     <string name="recipe_discarded_toast">Recipe discarded.</string>
     <string name="recipe_edited_toast">Recipe edited.</string>
     <string name="recipe_deleted_toast">Recipe deleted.</string>
+    <string name="recipe_unfavourited_toast">Recipe removed from favourites.</string>
 
     <!-- Empty lists messages -->
     <string name="zero_own_recipes_message_text">You have not created any recipes yet. The recipes you create are private and you are the only person who will see them.
         \n\nPsst! Create your own recipe by clicking the “+” button below.</string>
+    <string name="zero_favourites_message_text">You have not added any favourite recipes yet. \n\nPsst! When viewing a recipe, you can mark it as favourite by clicking the “♥“ icon in the top right corner.</string>
+    <string name="no_search_results_found">No matching recipes found.</string>
 
     <!-- Dialog messages -->
     <string name="delete_own_recipe_confirmation">Are you sure you want to delete this recipe?</string>

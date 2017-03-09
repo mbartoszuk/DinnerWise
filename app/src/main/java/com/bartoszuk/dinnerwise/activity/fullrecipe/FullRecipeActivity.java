@@ -27,12 +27,18 @@ public class FullRecipeActivity extends AppCompatActivity {
     public static final int RECIPE_EDITED = 1;
     public static final int RECIPE_DELETED = 2;
 
+    public static final String RECIPE_FAVOURITE_RESULT = "recipe_favourite_result";
+    public static final int RECIPE_ADDDED_TO_FAVOURITES = 1;
+    public static final int RECIPE_REMOVED_FROM_FAVOURITES = 2;
+
     private static final int EDIT_REQUEST_CODE = 241;
 
     private Recipe recipeModel = new Recipe(4);
     private RecipesDB db = RecipesDB.db();
     private RecipeSet own = RecipeSet.own();
     private RecipeSet favouriteRecipes = RecipeSet.favourites();
+
+    private Intent resultData;
 
     public FullRecipeActivity() {
         recipeModel.setTitle("title");
@@ -59,6 +65,8 @@ public class FullRecipeActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         renderModel();
+        resultData = new Intent();
+        setResult(RESULT_CANCELED, resultData);
     }
 
     private void renderModel() {
@@ -103,8 +111,10 @@ public class FullRecipeActivity extends AppCompatActivity {
             case R.id.action_addToFavorites:
                 if (favouriteRecipes.contains(recipeModel.getId())) {
                     favouriteRecipes.remove(recipeModel.getId());
+                    resultData.putExtra(RECIPE_FAVOURITE_RESULT, RECIPE_REMOVED_FROM_FAVOURITES);
                 } else {
                     favouriteRecipes.add(recipeModel.getId());
+                    resultData.putExtra(RECIPE_FAVOURITE_RESULT, RECIPE_ADDDED_TO_FAVOURITES);
                 }
                 displayFavouritesIcon(item);
                 return true;
@@ -146,7 +156,6 @@ public class FullRecipeActivity extends AppCompatActivity {
         if (requestCode == EDIT_REQUEST_CODE && resultCode == RESULT_OK) {
             renderModel();
             Toast.makeText(getApplicationContext(), R.string.recipe_edited_toast, Toast.LENGTH_SHORT).show();
-            Intent resultData = new Intent();
             resultData.putExtra(RECIPE_EDITING_RESULT, RECIPE_EDITED);
             setResult(RESULT_OK, resultData);
         }

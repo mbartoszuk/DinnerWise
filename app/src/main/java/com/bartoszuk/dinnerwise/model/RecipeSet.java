@@ -43,11 +43,34 @@ public class RecipeSet {
         }
     }
 
-    public int size() {
-        return recipesCollection.size();
+    public int size(String query) {
+        if (query == null) {
+            return recipesCollection.size();
+        }
+        int count = 0;
+        for (int recipeId : recipesCollection) {
+            Recipe recipe = RecipesDB.db().findRecipeById(recipeId);
+            if (recipe.getTitle().toLowerCase().contains(query.toLowerCase())) {
+                count++;
+            }
+        }
+        return count;
     }
 
-    public int nth(int n) {
-        return recipesCollection.get(n);
+    public int nth(String query, int n) {
+        if (query == null) {
+            return recipesCollection.get(n);
+        }
+        int numberOfMatchingResultsSeen = 0;
+        for (int recipeId : recipesCollection) {
+            Recipe recipe = RecipesDB.db().findRecipeById(recipeId);
+            if (recipe.getTitle().toLowerCase().contains(query.toLowerCase())) {
+                numberOfMatchingResultsSeen++;
+            }
+            if (n == numberOfMatchingResultsSeen - 1) {
+                return recipeId;
+            }
+        }
+        throw new RuntimeException("recipe not found");
     }
 }
