@@ -16,15 +16,20 @@ import com.bartoszuk.dinnerwise.R;
 import com.bartoszuk.dinnerwise.activity.fullrecipe.FullRecipeActivity;
 import com.bartoszuk.dinnerwise.activity.ownrecipes.RecipeListAdapter;
 import com.bartoszuk.dinnerwise.model.RecipeSet;
+import com.bartoszuk.dinnerwise.model.RecipesDB;
 
 public class FavouritesActivity extends AppCompatActivity {
 
-    private final RecipeSet favourites = RecipeSet.favourites();
+    private RecipeSet favourites;
     private RecipeListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        RecipesDB db = RecipesDB.db(getApplicationContext());
+        favourites = RecipeSet.favourites(db);
+
         setTitle(getString(R.string.favourites_title));
         setContentView(R.layout.activity_favourites);
 
@@ -33,7 +38,7 @@ public class FavouritesActivity extends AppCompatActivity {
         recipesCount.setText(favourites.size(null) + " recipes");
 
         ListView recipeList = (ListView) findViewById(R.id.favourites_list);
-        adapter = new RecipeListAdapter(favourites, this, getLayoutInflater());
+        adapter = new RecipeListAdapter(db, favourites, this, getLayoutInflater());
         adapter.registerDataSetObserver(new DataSetObserver() {
             @Override
             public void onChanged() {

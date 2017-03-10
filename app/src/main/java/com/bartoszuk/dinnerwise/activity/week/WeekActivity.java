@@ -16,6 +16,7 @@ import android.widget.ExpandableListView;
 import com.bartoszuk.dinnerwise.R;
 import com.bartoszuk.dinnerwise.activity.favourites.FavouritesActivity;
 import com.bartoszuk.dinnerwise.activity.ownrecipes.OwnRecipesActivity;
+import com.bartoszuk.dinnerwise.model.RecipesDB;
 import com.roughike.bottombar.BottomBarTab;
 
 public class WeekActivity extends AppCompatActivity {
@@ -28,7 +29,7 @@ public class WeekActivity extends AppCompatActivity {
         setTitle(getString(R.string.week_activity_title));
         setContentView(R.layout.week_activity);
         listView = (ExpandableListView) findViewById(R.id.weeklyListView);
-        listView.setAdapter(new WeekListAdapter(this, getBaseContext(), getLayoutInflater()));
+        listView.setAdapter(new WeekListAdapter(RecipesDB.db(getApplicationContext()), this, getBaseContext(), getLayoutInflater()));
         setExpandArrowPosition();
 
         BottomBarTab ownRecipesButton = (BottomBarTab) findViewById(R.id.tab_ownrecipes);

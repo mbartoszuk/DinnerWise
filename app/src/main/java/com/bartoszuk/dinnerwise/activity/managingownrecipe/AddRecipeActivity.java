@@ -23,16 +23,20 @@ public class AddRecipeActivity extends AppCompatActivity {
 
     public static final String RECIPE_ID_TO_EDIT = "recipe_id_to_edit";
 
-    private final RecipesDB db = RecipesDB.db();
-    private final RecipeSet own = RecipeSet.own();
+    private RecipesDB db;
+    private RecipeSet own;
     private Recipe newRecipe = new Recipe();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        db = RecipesDB.db(getApplicationContext());
+        own = RecipeSet.own(db);
+
         setContentView(R.layout.activity_manage_recipe);
 
-        int id = getIntent().getIntExtra(RECIPE_ID_TO_EDIT, 0);
+        long id = getIntent().getLongExtra(RECIPE_ID_TO_EDIT, 0);
         if (id != 0) {
             newRecipe = db.findRecipeById(id);
         }

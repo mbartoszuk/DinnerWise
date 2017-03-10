@@ -33,27 +33,25 @@ public class FullRecipeActivity extends AppCompatActivity {
 
     private static final int EDIT_REQUEST_CODE = 241;
 
-    private Recipe recipeModel = new Recipe(4);
-    private RecipesDB db = RecipesDB.db();
-    private RecipeSet own = RecipeSet.own();
-    private RecipeSet favouriteRecipes = RecipeSet.favourites();
+    private Recipe recipeModel = new Recipe();
+    private RecipesDB db;
+    private RecipeSet own;
+    private RecipeSet favouriteRecipes;
 
     private Intent resultData;
 
     public FullRecipeActivity() {
-        recipeModel.setTitle("title");
-        recipeModel.setPreparationTimeInMinutes(30);
-        recipeModel.setNumberOfServings(2);
-        recipeModel.setDescription("description");
-        recipeModel.setIngredients(Arrays.asList("1 cup of flour", "3 eggs"));
-        recipeModel.setDirections("first do this, then do that");
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int id = getIntent().getIntExtra(RECIPE_ID_TO_OPEN, 0);
+        db = RecipesDB.db(getApplicationContext());
+        own = RecipeSet.own(db);
+        favouriteRecipes = RecipeSet.favourites(db);
+
+        long id = getIntent().getLongExtra(RECIPE_ID_TO_OPEN, 0);
         if (id != 0) {
             recipeModel = db.findRecipeById(id);
         }
@@ -130,7 +128,7 @@ public class FullRecipeActivity extends AppCompatActivity {
                         .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // Delete the chosen recipe.
-                                RecipeSet.own().remove(recipeModel.getId());
+                                own.remove(recipeModel.getId());
                                 Intent resultData = new Intent();
                                 resultData.putExtra(RECIPE_EDITING_RESULT, RECIPE_DELETED);
                                 setResult(RESULT_OK, resultData);

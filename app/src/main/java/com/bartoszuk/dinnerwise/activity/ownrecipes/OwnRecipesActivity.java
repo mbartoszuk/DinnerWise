@@ -17,6 +17,7 @@ import com.bartoszuk.dinnerwise.R;
 import com.bartoszuk.dinnerwise.activity.fullrecipe.FullRecipeActivity;
 import com.bartoszuk.dinnerwise.activity.managingownrecipe.AddRecipeActivity;
 import com.bartoszuk.dinnerwise.model.RecipeSet;
+import com.bartoszuk.dinnerwise.model.RecipesDB;
 
 /**
  * Created by Maria Bartoszuk on 04/03/2017.
@@ -26,12 +27,16 @@ public class OwnRecipesActivity extends AppCompatActivity {
 
     private static final int ADD_RECIPE_REQUEST = 501;
 
-    private final RecipeSet own = RecipeSet.own();
+    private RecipeSet own;
     private RecipeListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        RecipesDB db = RecipesDB.db(getApplicationContext());
+        own = RecipeSet.own(db);
+
         setTitle(getString(R.string.ownRecipes_title));
         setContentView(R.layout.activity_own_recipes);
 
@@ -40,7 +45,7 @@ public class OwnRecipesActivity extends AppCompatActivity {
         recipesCount.setText(own.size(null) + " recipes");
 
         ListView recipeList = (ListView) findViewById(R.id.own_recipes_list);
-        adapter = new RecipeListAdapter(RecipeSet.own(), this, getLayoutInflater());
+        adapter = new RecipeListAdapter(db, own, this, getLayoutInflater());
         adapter.registerDataSetObserver(new DataSetObserver() {
             @Override
             public void onChanged() {

@@ -37,11 +37,12 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
     private final Context context;
     private final LayoutInflater layoutInflater;
     private final Week week = new Week();
-    private final RecipesDB recipesDB = RecipesDB.db();
+    private final RecipesDB recipesDB;
     private final RecipeChoiceDB recipeChoiceDB = new RecipeChoiceDB();
     private final WeekActivity weekActivity;
 
-    WeekListAdapter(WeekActivity weekActivity, Context context, LayoutInflater layoutInflater) {
+    WeekListAdapter(RecipesDB recipesDB, WeekActivity weekActivity, Context context, LayoutInflater layoutInflater) {
+        this.recipesDB = recipesDB;
         this.weekActivity = weekActivity;
         this.context = context;
         this.layoutInflater = layoutInflater;

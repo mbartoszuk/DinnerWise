@@ -25,14 +25,15 @@ public class RecipeListAdapter extends BaseAdapter implements Filterable {
 
     public static final int SHOW_RECIPE_REQUEST = 401;
 
-    private final RecipesDB db = RecipesDB.db();
+    private final RecipesDB db;
     private final RecipeSet recipeSet;
     private String query = null;
 
     private final Activity activity;
     private final LayoutInflater layoutInflater;
 
-    public RecipeListAdapter(RecipeSet recipeSet, Activity activity, LayoutInflater layoutInflater) {
+    public RecipeListAdapter(RecipesDB db, RecipeSet recipeSet, Activity activity, LayoutInflater layoutInflater) {
+        this.db = db;
         this.recipeSet = recipeSet;
 
         this.activity = activity;
@@ -46,7 +47,7 @@ public class RecipeListAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public Recipe getItem(int position) {
-        int id = recipeSet.nth(query, position);
+        long id = recipeSet.nth(query, position);
         return db.findRecipeById(id);
     }
 

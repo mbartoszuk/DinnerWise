@@ -1,62 +1,102 @@
 package com.bartoszuk.dinnerwise.model;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
+
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Maria Bartoszuk on 12/02/2017.
+ *
+ * Tutorial source: https://developer.android.com/training/basics/data-storage/databases.html
  */
 
 public class RecipesDB {
 
-    private static final RecipesDB db = new RecipesDB();
+    private final RecipeDBHelper helper;
 
-    private int nextId = 1;
-    private final Map<Integer, Recipe> allRecipes = new HashMap<>();
-
-    public static RecipesDB db() {
-        return db;
+    public static RecipesDB db(Context context) {
+        return new RecipesDB(new RecipeDBHelper(context));
     }
 
-    private RecipesDB() {
-        Recipe first = new Recipe();
-        first.setTitle("Aubergine & Couscous");
-        first.setDescription("an awesome salad");
-        first.setNumberOfServings(1);
-        first.setPreparationTimeInMinutes(30);
-        first.setIngredients(Arrays.asList("aubergine", "couscous"));
-        first.setDirections("mix aubergine and couscous");
-        add(first);
-
-        Recipe second = new Recipe();
-        second.setTitle("Cauliflower Soup");
-        second.setDescription("Great tasting, natural and so quick.");
-        second.setNumberOfServings(2);
-        second.setPreparationTimeInMinutes(20);
-        second.setIngredients(Arrays.asList("onion", "cauliflower", "potatoes"));
-        second.setDirections("Chop, fry, add boulion and blend.");
-        add(second);
-
-        Recipe third = new Recipe();
-        third.setTitle("Veggie stir fry");
-        third.setDescription("Marvelous wok-fried veggies with rice noodles");
-        third.setNumberOfServings(2);
-        third.setPreparationTimeInMinutes(40);
-        third.setIngredients(Arrays.asList("rice", "pepper", "egg", "mushroom"));
-        third.setDirections("Chop, fry on a wok, add soy sauce.");
-        add(third);
+    private RecipesDB(RecipeDBHelper helper) {
+        this.helper = helper;
     }
 
-    public Recipe findRecipeById(int id) {
-        return allRecipes.get(id);
-    }
+    public Recipe findRecipeById(long id) {
+        SQLiteDatabase db = helper.getReadableDatabase();
 
-    public void add(Recipe recipe) {
-        if (recipe.getId() == 0) {
-            recipe.setId(nextId);
-            nextId++;
+        // SQL Query: SELECT * FROM Recipes WHERE Recipies.id = id (from parameter)
+        String[] columns = {
+                Recipe.RecipeEntry.COLUMN_NAME_TITLE,
+                Recipe.RecipeEntry.COLUMN_NAME_DESCRIPTION,
+                Recipe.RecipeEntry.COLUMN_NAME_PREPARATION_TIME_MINS,
+                Recipe.RecipeEntry.COLUMN_NAME_SERVINGS,
+                Recipe.RecipeEntry.COLUMN_NAME_INGREDIENTS,
+                Recipe.RecipeEntry.COLUMN_NAME_DIRECTIONS
+        };
+        String selection = Recipe.RecipeEntry._ID + " = ?";
+        String[] selectionArgs = { Long.toString(id) };
+        Cursor query = db.query(Recipe.RecipeEntry.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+        // END of SQL Query.
+
+        if (query == null) {
+            throw new RuntimeException("Failed to find recipe id = " + id);
         }
-        allRecipes.put(recipe.getId(), recipe);
+        query.moveToFirst();
+        Recipe recipe = new Recipe(this);
+
+        // Setting the values in the Object based on the query result.
+        recipe.setId(id);
+        recipe.setTitle(query.getString(0));
+        recipe.setDescription(query.getString(1));
+        recipe.setPreparationTimeInMinutes(query.getInt(2));
+        recipe.setNumberOfServings(query.getInt(3));
+        String ingredients = query.getString(4);
+        recipe.setIngredients(Arrays.asList(ingredients.split("\n")));
+        recipe.setDirections(query.getString(5));
+        return recipe;
+    }
+
+    // Adds new Recipe to the DB that was not there before.
+    public void add(Recipe recipe) {
+        if (recipe.getId() != 0) {
+            return;
+        }
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues values = valuesOf(recipe);
+        recipe.setId(db.insert(Recipe.RecipeEntry.TABLE_NAME, null, values));
+    }
+
+    // Update the already existing Recipe in the DB. Called from every Recipe setter after it has been added to the DB first time.
+    void update(Recipe recipe) {
+        if (recipe.getId() == 0) {
+            return;
+        }
+        SQLiteDatabase db = helper.getReadableDatabase();
+        ContentValues values = valuesOf(recipe);
+        String selection = Recipe.RecipeEntry._ID + " = ?";
+        String[] selectionArgs = { Long.toString(recipe.getId()) };
+        db.update(Recipe.RecipeEntry.TABLE_NAME, values, selection, selectionArgs);
+    }
+
+    // Saving the recipe data from Recipe to ContentValues (Android SQL DB Row).
+    @NonNull
+    private ContentValues valuesOf(Recipe recipe) {
+        ContentValues values = new ContentValues();
+        values.put(Recipe.RecipeEntry.COLUMN_NAME_TITLE, recipe.getTitle());
+        values.put(Recipe.RecipeEntry.COLUMN_NAME_DESCRIPTION, recipe.getDescription());
+        values.put(Recipe.RecipeEntry.COLUMN_NAME_PREPARATION_TIME_MINS, recipe.getPreparationTimeInMinutes());
+        values.put(Recipe.RecipeEntry.COLUMN_NAME_SERVINGS, recipe.getNumberOfServings());
+        StringBuilder ingredients = new StringBuilder();
+        for (String ingredient : recipe.getIngredients()) {
+            ingredients.append(ingredient + "\n");
+        }
+        values.put(Recipe.RecipeEntry.COLUMN_NAME_INGREDIENTS, ingredients.toString());
+        values.put(Recipe.RecipeEntry.COLUMN_NAME_DIRECTIONS, recipe.getDirections());
+        return values;
     }
 }
