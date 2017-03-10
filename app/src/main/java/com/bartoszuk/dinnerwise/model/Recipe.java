@@ -34,6 +34,8 @@ public class Recipe {
         public static final String COLUMN_NAME_SERVINGS = "servings";
         public static final String COLUMN_NAME_INGREDIENTS = "ingredients";
         public static final String COLUMN_NAME_DIRECTIONS = "directions";
+        public static final String COLUMN_NAME_FAVOURITES = "favourites";
+        public static final String COLUMN_NAME_OWN = "own";
     }
 
     public Recipe() {}

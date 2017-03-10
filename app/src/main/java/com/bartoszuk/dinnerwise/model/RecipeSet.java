@@ -1,5 +1,8 @@
 package com.bartoszuk.dinnerwise.model;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,67 +13,94 @@ import java.util.List;
 
 public class RecipeSet {
 
-    private static final List<Long> own = new ArrayList<>();
-    private static final List<Long> favourites = new ArrayList<>();
-
     private final RecipesDB db;
-    private final List<Long> recipesCollection;
+    private final String columnName;
 
+    // Saving all the favourites.
     public static RecipeSet favourites(RecipesDB db) {
-        return new RecipeSet(db, favourites);
+        return new RecipeSet(db, Recipe.RecipeEntry.COLUMN_NAME_FAVOURITES);
     }
 
+    // Saving all the own recipes.
     public static RecipeSet own(RecipesDB db) {
-        return new RecipeSet(db, own);
+        return new RecipeSet(db, Recipe.RecipeEntry.COLUMN_NAME_OWN);
     }
 
-    private RecipeSet(RecipesDB db, List<Long> recipesCollection) {
+    private RecipeSet(RecipesDB db, String columnName) {
         this.db = db;
-        this.recipesCollection = recipesCollection;
+        this.columnName = columnName;
     }
 
-    public boolean contains(long recipe) {
-        return recipesCollection.contains(recipe);
-    }
-
-    public void remove(long recipe) {
-        recipesCollection.remove(new Long(recipe));
-    }
-
-    public void add(long recipe) {
-        if (!contains(recipe)) {
-            recipesCollection.add(recipe);
+    // Asks if RecipeSet contains the recipe (specified by ID).
+    public boolean contains(long recipeID) {
+        Cursor query = db.helper.getReadableDatabase().rawQuery("SELECT 1 "
+                + "FROM " + Recipe.RecipeEntry.TABLE_NAME + " "
+                + "WHERE " + Recipe.RecipeEntry._ID + " = ? AND " + columnName + " = 1",
+                new String[]{Long.toString(recipeID)});
+        try {
+            return query.moveToFirst();
+        } finally {
+            query.close();
         }
     }
 
-    public int size(String query) {
-        if (query == null) {
-            return recipesCollection.size();
-        }
-        int count = 0;
-        for (long recipeId : recipesCollection) {
-            Recipe recipe = db.findRecipeById(recipeId);
-            if (recipe.getTitle().toLowerCase().contains(query.toLowerCase())) {
-                count++;
-            }
-        }
-        return count;
+    // Removes the recipe (specified by ID) from Recipe Set's column (favourites or own recipes).
+    public void remove(long recipeID) {
+        ContentValues values = new ContentValues();
+        values.put(columnName, 0);
+        String selection = Recipe.RecipeEntry._ID + " = ?";
+        String[] args = new String[]{ Long.toString(recipeID) };
+        db.helper.getReadableDatabase().update(Recipe.RecipeEntry.TABLE_NAME, values, selection, args);
     }
 
-    public long nth(String query, int n) {
-        if (query == null) {
-            return recipesCollection.get(n);
+    // Adds the recipe (specified by ID) to Recipe Set's column (favourites or own recipes).
+    public void add(long recipeID) {
+        ContentValues values = new ContentValues();
+        values.put(columnName, 1);
+        String selection = Recipe.RecipeEntry._ID + " = ?";
+        String[] args = new String[]{ Long.toString(recipeID) };
+        db.helper.getReadableDatabase().update(Recipe.RecipeEntry.TABLE_NAME, values, selection, args);
+    }
+
+    // Counts the number of recipes in the list - favourites, own recipes or their searches.
+    public int size(String title) {
+        String titleQuery = " ";
+        String[] args = new String[]{};
+        if (title != null) {
+            titleQuery = " AND " + Recipe.RecipeEntry.COLUMN_NAME_TITLE + " LIKE ? ";
+            args = new String[]{"%" + title + "%"};
         }
-        int numberOfMatchingResultsSeen = 0;
-        for (long recipeId : recipesCollection) {
-            Recipe recipe = db.findRecipeById(recipeId);
-            if (recipe.getTitle().toLowerCase().contains(query.toLowerCase())) {
-                numberOfMatchingResultsSeen++;
-            }
-            if (n == numberOfMatchingResultsSeen - 1) {
-                return recipeId;
-            }
+        Cursor query = db.helper.getReadableDatabase().rawQuery("SELECT COUNT(*) "
+                        + "FROM " + Recipe.RecipeEntry.TABLE_NAME + " "
+                        + "WHERE " + columnName + " = 1"  + titleQuery,
+                args);
+        try {
+            query.moveToFirst();
+            return query.getInt(0);
+        } finally {
+            query.close();
         }
-        throw new RuntimeException("recipe not found");
+    }
+
+    // Specifies the ID of a selected element, ex. in a list.
+    public long nth(String title, int n) {
+        String titleQuery = " ";
+        String[] args = new String[]{Integer.toString(n)};
+        if (title != null) {
+            titleQuery = " AND " + Recipe.RecipeEntry.COLUMN_NAME_TITLE + " LIKE ?";
+            args = new String[]{"%" + title + "%", Integer.toString(n)};
+        }
+        Cursor query = db.helper.getReadableDatabase().rawQuery("SELECT " + Recipe.RecipeEntry._ID + " "
+                        + "FROM " + Recipe.RecipeEntry.TABLE_NAME + " "
+                        + "WHERE " + columnName + " = 1" + titleQuery
+                        + "ORDER BY " + Recipe.RecipeEntry._ID + " ASC "
+                        + "LIMIT 1 OFFSET ?",
+                args);
+        try {
+            query.moveToFirst();
+            return query.getLong(0);
+        } finally {
+            query.close();
+        }
     }
 }

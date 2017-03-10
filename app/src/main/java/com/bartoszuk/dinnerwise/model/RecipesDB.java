@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 public class RecipesDB {
 
-    private final RecipeDBHelper helper;
+    final RecipeDBHelper helper;
 
     public static RecipesDB db(Context context) {
         return new RecipesDB(new RecipeDBHelper(context));
@@ -36,7 +36,7 @@ public class RecipesDB {
                 Recipe.RecipeEntry.COLUMN_NAME_PREPARATION_TIME_MINS,
                 Recipe.RecipeEntry.COLUMN_NAME_SERVINGS,
                 Recipe.RecipeEntry.COLUMN_NAME_INGREDIENTS,
-                Recipe.RecipeEntry.COLUMN_NAME_DIRECTIONS
+                Recipe.RecipeEntry.COLUMN_NAME_DIRECTIONS,
         };
         String selection = Recipe.RecipeEntry._ID + " = ?";
         String[] selectionArgs = { Long.toString(id) };
@@ -85,7 +85,7 @@ public class RecipesDB {
 
     // Saving the recipe data from Recipe to ContentValues (Android SQL DB Row).
     @NonNull
-    private ContentValues valuesOf(Recipe recipe) {
+    static ContentValues valuesOf(Recipe recipe) {
         ContentValues values = new ContentValues();
         values.put(Recipe.RecipeEntry.COLUMN_NAME_TITLE, recipe.getTitle());
         values.put(Recipe.RecipeEntry.COLUMN_NAME_DESCRIPTION, recipe.getDescription());

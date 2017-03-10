@@ -1,8 +1,11 @@
 package com.bartoszuk.dinnerwise.model;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.Arrays;
 
 /**
  * Created by Maria Bartoszuk on 10/03/2017.
@@ -11,7 +14,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class RecipeDBHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "Recipes.db";
 
     public RecipeDBHelper(Context context) {
@@ -28,7 +31,13 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
                 + Recipe.RecipeEntry.COLUMN_NAME_PREPARATION_TIME_MINS + " INTEGER, "
                 + Recipe.RecipeEntry.COLUMN_NAME_SERVINGS + " INTEGER, "
                 + Recipe.RecipeEntry.COLUMN_NAME_INGREDIENTS + " TEXT, "
-                + Recipe.RecipeEntry.COLUMN_NAME_DIRECTIONS + " TEXT);");
+                + Recipe.RecipeEntry.COLUMN_NAME_DIRECTIONS + " TEXT,"
+                + Recipe.RecipeEntry.COLUMN_NAME_FAVOURITES + " INTEGER, "
+                + Recipe.RecipeEntry.COLUMN_NAME_OWN + " INTEGER);");
+        insert(db, "Aubergine & Couscous", "an awesome salad", 30, 1,
+                new String[]{"aubergine", "cous cous"}, "mix");
+        insert(db, "Cauliflower soup", "Great tasting, natural and so quick.", 20, 2,
+                new String[]{"onion", "cauliflower"}, "Chop, fry, add boulion and blend.");
     }
 
     // Delete the previous table and add an updated one.
@@ -43,5 +52,18 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
+    }
+
+    private void insert(SQLiteDatabase db, String title, String description, int preparationTimeMin,
+                        int servings, String[] ingredients, String directions) {
+        Recipe recipe = new Recipe();
+        recipe.setTitle(title);
+        recipe.setDescription(description);
+        recipe.setPreparationTimeInMinutes(preparationTimeMin);
+        recipe.setNumberOfServings(servings);
+        recipe.setIngredients(Arrays.asList(ingredients));
+        recipe.setDirections(directions);
+        ContentValues values = RecipesDB.valuesOf(recipe);
+        db.insert(Recipe.RecipeEntry.TABLE_NAME, null, values);
     }
 }
