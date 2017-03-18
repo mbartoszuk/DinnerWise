@@ -1,0 +1,36 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.week.WeekActivity" >
+
+    <item
+        android:id="@+id/action_dietaryPreferences"
+        android:orderInCategory="100"
+        android:title="@string/action_dietaryPreferences"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_accountSettings"
+        android:orderInCategory="200"
+        android:title="@string/action_accountSettings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_aboutDinnerWise"
+        android:orderInCategory="300"
+        android:title="@string/action_aboutDinnerWise"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_feedback"
+        android:orderInCategory="400"
+        android:title="@string/action_feedback"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_signOut"
+        android:orderInCategory="500"
+        android:title="@string/action_signOut"
+        app:showAsAction="never" />
+
+</menu>

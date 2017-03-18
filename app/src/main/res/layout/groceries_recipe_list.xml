@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/recipe_title"
+        android:text="Recipe Title Here"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:textStyle="bold"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp" />
+
+    <ImageButton
+        android:id="@+id/collapse_recipe_list"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignRight="@id/recipe_title"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
+        android:background="@null"
+        android:clickable="true"
+        android:src="@drawable/groceries_recipe_selector"
+        android:tint="@color/secondary_text" />
+
+</RelativeLayout>

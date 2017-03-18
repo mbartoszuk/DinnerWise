@@ -44,6 +44,10 @@
         <activity
             android:name=".activity.favourites.FavouritesActivity"
             android:label="@string/favourites_title" />
+
+        <activity
+            android:name=".activity.groceries.GroceriesActivity"
+            android:label="@string/groceries_title" />
     </application>
 
 </manifest>

@@ -15,6 +15,7 @@ import android.widget.ExpandableListView;
 
 import com.bartoszuk.dinnerwise.R;
 import com.bartoszuk.dinnerwise.activity.favourites.FavouritesActivity;
+import com.bartoszuk.dinnerwise.activity.groceries.GroceriesActivity;
 import com.bartoszuk.dinnerwise.activity.ownrecipes.OwnRecipesActivity;
 import com.bartoszuk.dinnerwise.model.RecipesDB;
 import com.roughike.bottombar.BottomBarTab;
@@ -28,6 +29,7 @@ public class WeekActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTitle(getString(R.string.week_activity_title));
         setContentView(R.layout.week_activity);
+
         listView = (ExpandableListView) findViewById(R.id.weeklyListView);
         listView.setAdapter(new WeekListAdapter(RecipesDB.db(getApplicationContext()), this, getBaseContext(), getLayoutInflater()));
         setExpandArrowPosition();
@@ -46,6 +48,15 @@ public class WeekActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), FavouritesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        BottomBarTab groceriesButton = (BottomBarTab) findViewById(R.id.tab_groceries);
+        groceriesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), GroceriesActivity.class);
                 startActivity(intent);
             }
         });
@@ -76,6 +87,7 @@ public class WeekActivity extends AppCompatActivity {
                 / DisplayMetrics.DENSITY_DEFAULT;
     }
 
+    /** Adding the menu to the top of the activity. */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

@@ -11,6 +11,7 @@
     <string name="manageRecipe_title">Create a recipe</string>
     <string name="editRecipe_title">Edit the recipe</string>
     <string name="favourites_title">Favourites</string>
+    <string name="groceries_title">Groceries</string>
 
     <!-- Action bar icon buttons -->
     <string name="action_secondarymenu">Secondary menu</string>

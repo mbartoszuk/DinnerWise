@@ -11,4 +11,9 @@
         <item name="android:textColorSecondary">@color/accent</item>
     </style>
 
+    <style name="ingredient_option_checkbox" parent="AppTheme">
+        <item name="colorAccent">@color/secondary_text</item>
+        <item name="android:textColorSecondary">@color/secondary_text</item>
+    </style>
+
 </resources>

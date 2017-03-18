@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/ingredient_title"
+        android:text="Ingredient name here"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="48dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/checkbox_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/ingredient_title"
+        android:layout_marginLeft="12dp"
+        android:layout_centerVertical="true"
+        android:theme="@style/ingredient_option_checkbox"/>
+</RelativeLayout>
