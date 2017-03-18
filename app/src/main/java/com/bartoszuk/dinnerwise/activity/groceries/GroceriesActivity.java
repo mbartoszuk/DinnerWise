@@ -1,5 +1,6 @@
 package com.bartoszuk.dinnerwise.activity.groceries;
 
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -28,17 +29,31 @@ public class GroceriesActivity extends AppCompatActivity {
         getSupportActionBar().setElevation(0);
 
         listView = (ExpandableListView) findViewById(R.id.recipe_groceries_list_view);
-        listAdapter = new GroceriesListAdapter(this, getLayoutInflater(), listView, getResources());
+        listAdapter = new GroceriesListAdapter(this, getLayoutInflater(), listView);
+        listAdapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                collapseDisabledGroupsAndExpandOthers();
+            }
+        });
         listView.setAdapter(listAdapter);
         ignoreClicksOnGroupItems();
-        expandAllGroups();
+        collapseDisabledGroupsAndExpandOthers();
     }
 
-    // All recipe ingredients are immediately visible. The list only collapses if the recipe
-    // is dismissed from groceries.
-    private void expandAllGroups() {
+    // All recipe ingredients are immediately visible for all groups that are not dismissed.
+    // The list only collapses if the recipe is dismissed from groceries.
+    private void collapseDisabledGroupsAndExpandOthers() {
         for (int groupPosition = 0; groupPosition < listAdapter.getGroupCount(); groupPosition++) {
-            listView.expandGroup(groupPosition, false);
+            boolean discarded = listAdapter.getGroup(groupPosition).isDiscarded();
+            // if discarded but expanded (incorrect) or not discarded but collapsed (incorrect)
+            if (discarded == listView.isGroupExpanded(groupPosition)) {
+                if (discarded) {
+                    listView.collapseGroup(groupPosition);
+                } else {
+                    listView.expandGroup(groupPosition, false);
+                }
+            }
         }
     }
 
