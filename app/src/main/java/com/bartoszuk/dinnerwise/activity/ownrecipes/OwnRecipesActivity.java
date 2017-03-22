@@ -14,16 +14,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bartoszuk.dinnerwise.R;
+import com.bartoszuk.dinnerwise.activity.LogOut;
+import com.bartoszuk.dinnerwise.activity.favourites.FavouritesActivity;
 import com.bartoszuk.dinnerwise.activity.fullrecipe.FullRecipeActivity;
+import com.bartoszuk.dinnerwise.activity.groceries.GroceriesActivity;
 import com.bartoszuk.dinnerwise.activity.managingownrecipe.AddRecipeActivity;
+import com.bartoszuk.dinnerwise.activity.week.WeekActivity;
 import com.bartoszuk.dinnerwise.model.RecipeSet;
 import com.bartoszuk.dinnerwise.model.RecipesDB;
+import com.roughike.bottombar.BottomBarTab;
 
 /**
  * Created by Maria Bartoszuk on 04/03/2017.
  */
 
-public class OwnRecipesActivity extends AppCompatActivity {
+public class OwnRecipesActivity extends LogOut {
 
     private static final int ADD_RECIPE_REQUEST = 501;
 
@@ -66,6 +71,32 @@ public class OwnRecipesActivity extends AppCompatActivity {
                 startActivityForResult(intent, ADD_RECIPE_REQUEST);
             }
         });
+
+        BottomBarTab favouritesButton = (BottomBarTab) findViewById(R.id.tab_favourites);
+        favouritesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), FavouritesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        BottomBarTab groceriesButton = (BottomBarTab) findViewById(R.id.tab_groceries);
+        groceriesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), GroceriesActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    // Find the Week Activity on the stack and goes back to it (to the beginning of the tack).
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, WeekActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     @Override

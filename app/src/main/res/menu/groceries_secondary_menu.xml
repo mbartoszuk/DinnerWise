@@ -31,6 +31,7 @@
         android:id="@+id/action_signOut"
         android:orderInCategory="500"
         android:title="@string/action_signOut"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:onClick="signOutLoggedUser" />
 
 </menu>

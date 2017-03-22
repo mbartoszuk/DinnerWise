@@ -3,6 +3,9 @@ package com.bartoszuk.dinnerwise.activity.week;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.widget.CompoundButton;
 
+import com.bartoszuk.dinnerwise.model.Recipe;
+import com.bartoszuk.dinnerwise.model.RecipeChoice;
+
 /**
  * Created by Maria Bartoszuk on 12/02/2017.
  *
@@ -10,20 +13,21 @@ import android.widget.CompoundButton;
  */
 final class IfChecked implements CompoundButton.OnCheckedChangeListener {
 
-    private final AppCompatCheckBox checkbox;
+    private final AppCompatCheckBox otherCheckbox;
+    private final RecipeChoice choice;
+    private final Recipe recipe;
 
-    static CompoundButton.OnCheckedChangeListener thenUncheck(AppCompatCheckBox checkbox) {
-        return new IfChecked(checkbox);
-    }
-
-    private IfChecked(AppCompatCheckBox checkbox) {
-        this.checkbox = checkbox;
+    IfChecked(AppCompatCheckBox otherCheckbox, RecipeChoice choice, Recipe recipe) {
+        this.otherCheckbox = otherCheckbox;
+        this.choice = choice;
+        this.recipe = recipe;
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
-            checkbox.setChecked(false);
+            otherCheckbox.setChecked(false);
+            choice.setChosenRecipeId(recipe.getId());
         }
     }
 }

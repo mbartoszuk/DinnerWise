@@ -13,12 +13,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bartoszuk.dinnerwise.R;
+import com.bartoszuk.dinnerwise.activity.LogOut;
 import com.bartoszuk.dinnerwise.activity.fullrecipe.FullRecipeActivity;
+import com.bartoszuk.dinnerwise.activity.groceries.GroceriesActivity;
+import com.bartoszuk.dinnerwise.activity.ownrecipes.OwnRecipesActivity;
 import com.bartoszuk.dinnerwise.activity.ownrecipes.RecipeListAdapter;
+import com.bartoszuk.dinnerwise.activity.week.WeekActivity;
 import com.bartoszuk.dinnerwise.model.RecipeSet;
 import com.bartoszuk.dinnerwise.model.RecipesDB;
+import com.roughike.bottombar.BottomBarTab;
 
-public class FavouritesActivity extends AppCompatActivity {
+public class FavouritesActivity extends LogOut {
 
     private RecipeSet favourites;
     private RecipeListAdapter adapter;
@@ -50,6 +55,32 @@ public class FavouritesActivity extends AppCompatActivity {
 
         // Setting the message for the empty list.
         recipeList.setEmptyView(findViewById(R.id.zero_favourites_message_text));
+
+        BottomBarTab ownRecipesButton = (BottomBarTab) findViewById(R.id.tab_ownrecipes);
+        ownRecipesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), OwnRecipesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        BottomBarTab groceriesButton = (BottomBarTab) findViewById(R.id.tab_groceries);
+        groceriesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), GroceriesActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    // Find the Week Activity on the stack and goes back to it (to the beginning of the tack).
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, WeekActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     @Override

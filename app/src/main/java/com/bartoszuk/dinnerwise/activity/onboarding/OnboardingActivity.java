@@ -3,6 +3,7 @@ package com.bartoszuk.dinnerwise.activity.onboarding;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -91,13 +92,12 @@ public class OnboardingActivity extends AppCompatActivity {
     }
 
     private boolean hasGoneThroughOnboarding() {
-        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
-        return preferences.getBoolean(getString(R.string.preference_key_went_through_onboarding),
-                false);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        return preferences.getBoolean(getString(R.string.preference_key_went_through_onboarding), false);
     }
 
     private void markOnboardingDone() {
-        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor edit = preferences.edit();
         edit.putBoolean(getString(R.string.preference_key_went_through_onboarding), true);
         edit.apply();

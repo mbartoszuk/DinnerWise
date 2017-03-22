@@ -52,7 +52,7 @@ public class GroceriesListAdapter extends BaseExpandableListAdapter {
         return groceryListModel.size();
     }
 
-    // Finds the number of ingredients of a recipe at a given position on the grocery list.
+    // Finds the number of ingredients of a recipe based on its position on the grocery list.
     @Override
     public int getChildrenCount(int groupPosition) {
         GroceryListRecipe recipeItem = getGroup(groupPosition);
@@ -60,16 +60,18 @@ public class GroceriesListAdapter extends BaseExpandableListAdapter {
         return recipe.getIngredients().size();
     }
 
+    // Gets a single recipe, adds it to the list and sorts all selected recipes.
     @Override
     public GroceryListRecipe getGroup(int groupPosition) {
         ArrayList<DayOfWeek> days = new ArrayList<>();
         for (DayOfWeek selected : groceryListModel.selectedDays()) {
             days.add(selected);
         }
-        Collections.sort(days);  // Make sure the days of week are in timely order.
+        Collections.sort(days);  // Sorting the recipes to be in the week-days order.
         return groceryListModel.recipeOn(days.get(groupPosition));
     }
 
+    // Gets the single ingredients of a recipe.
     @Override
     public String getChild(int groupPosition, int childPosition) {
         GroceryListRecipe recipeItem = getGroup(groupPosition);
@@ -92,6 +94,7 @@ public class GroceriesListAdapter extends BaseExpandableListAdapter {
         return false;
     }
 
+    // Manages the view of a recipe in the grocery list.
     @Override
     public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -106,6 +109,7 @@ public class GroceriesListAdapter extends BaseExpandableListAdapter {
             isExpanded = false;
         }
 
+        // Strike through the text on its whole length.
         recipeTitleView.setText(recipe.getTitle(), TextView.BufferType.SPANNABLE);
         if (!isExpanded) {
             Spannable text = (Spannable) recipeTitleView.getText();
@@ -136,6 +140,7 @@ public class GroceriesListAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
+    // Manages the view of an ingredient in a recipe.
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -151,6 +156,8 @@ public class GroceriesListAdapter extends BaseExpandableListAdapter {
         checkbox.setOnCheckedChangeListener(null);  // So that the onCheckedChanged does not fire.
         boolean ingredientChecked = recipeItem.isIngredientChecked(ingredientName);
         checkbox.setChecked(ingredientChecked);
+
+        // Strike through the text on its whole length.
         Spannable text = (Spannable) ingredientTitleView.getText();
         if (ingredientChecked) {
             text.setSpan(STRIKETHROUGH_SPAN, 0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

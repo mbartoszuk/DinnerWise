@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="0dp"
     android:background="@color/white" >
 
     <android.support.design.widget.TabLayout
@@ -32,8 +28,8 @@
     </android.support.design.widget.TabLayout>
 
     <TextView
-        android:id="@+id/from_timeline_label"
-        android:layout_width="wrap_content"
+        android:id="@+id/header_text"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/secondary_text"
         android:paddingLeft="16dp"
@@ -46,49 +42,23 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/divider"
-        android:layout_alignBottom="@+id/from_timeline_label" />
+        android:background="@color/divider" />
 
     <ExpandableListView
         android:id="@+id/recipe_groceries_list_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/from_timeline_label"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:clickable="false"
         android:groupIndicator="@null" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/divider"
-        android:layout_alignTop="@+id/from_others_label" />
-
-    <TextView
-        android:id="@+id/from_others_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/secondary_text"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:text="Chosen from the favourites and own recipes"
-        android:layout_below="@+id/recipe_groceries_list_view" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/divider"
-        android:layout_alignBottom="@+id/from_others_label" />
 
     <com.roughike.bottombar.BottomBar
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
         android:background="@color/primary"
         app:bb_tabXmlResource="@xml/bottombar"
         app:bb_activeTabColor="@color/white"
         app:bb_inActiveTabColor="@color/white" />
 
-</RelativeLayout>
+</LinearLayout>

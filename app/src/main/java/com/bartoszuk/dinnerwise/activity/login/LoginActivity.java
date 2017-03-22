@@ -5,11 +5,14 @@ package com.bartoszuk.dinnerwise.activity.login;
  */
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.bartoszuk.dinnerwise.R;
+import com.bartoszuk.dinnerwise.activity.LogOut;
 import com.bartoszuk.dinnerwise.activity.createaccount.CreateAccountActivity;
 import com.bartoszuk.dinnerwise.activity.onboarding.OnboardingActivity;
 import com.google.android.gms.auth.api.Auth;
@@ -22,12 +25,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 
-public class LoginActivity extends AppCompatActivity
-        implements GoogleApiClient.OnConnectionFailedListener {
+public class LoginActivity extends LogOut {
 
     private static final int RC_SIGN_IN = 9001;
-
-    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +36,6 @@ public class LoginActivity extends AppCompatActivity
 
         SignInButton signInWithGoogleButton = (SignInButton) findViewById(R.id.sign_in_button);
         signInWithGoogleButton.setSize(SignInButton.SIZE_WIDE);
-
-        // Collect the email address of the user logging in.
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        // Build a GoogleApiClient with access to the Google Sign-In API and the options specified by gso.
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-
         signInWithGoogleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,8 +76,17 @@ public class LoginActivity extends AppCompatActivity
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            goThroughOnboarding();
             handleSignInResult(result);
         }
+    }
+
+    // Force the user to go through onboarding for presentation purposes.
+    private void goThroughOnboarding() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor edit = preferences.edit();
+        edit.putBoolean(getString(R.string.preference_key_went_through_onboarding), false);
+        edit.apply();
     }
 
     private void handleSignInResult(GoogleSignInResult result) {
@@ -105,11 +102,6 @@ public class LoginActivity extends AppCompatActivity
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-        // TODO: Display error message?
     }
 
     private void showProgressDialog() {

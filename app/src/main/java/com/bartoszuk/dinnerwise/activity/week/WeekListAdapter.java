@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,7 +25,6 @@ import android.widget.TextView;
 
 import com.bartoszuk.dinnerwise.R;
 import com.bartoszuk.dinnerwise.activity.fullrecipe.FullRecipeActivity;
-import com.bartoszuk.dinnerwise.activity.ownrecipes.OwnRecipesActivity;
 import com.bartoszuk.dinnerwise.model.Date;
 import com.bartoszuk.dinnerwise.model.Recipe;
 import com.bartoszuk.dinnerwise.model.RecipeChoice;
@@ -38,13 +38,14 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
     private final LayoutInflater layoutInflater;
     private final Week week = new Week();
     private final RecipesDB recipesDB;
-    private final RecipeChoiceDB recipeChoiceDB = new RecipeChoiceDB();
+    private final RecipeChoiceDB recipeChoiceDB;
     private final WeekActivity weekActivity;
 
     WeekListAdapter(RecipesDB recipesDB, WeekActivity weekActivity, Context context, LayoutInflater layoutInflater) {
         this.recipesDB = recipesDB;
         this.weekActivity = weekActivity;
         this.context = context;
+        this.recipeChoiceDB = new RecipeChoiceDB(context);
         this.layoutInflater = layoutInflater;
     }
 
@@ -54,8 +55,10 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public Object getChild(int groupPosition, int childPosition) {
-        return "Placeholder for the choice between two recipes.";
+    public RecipeChoice getChild(int groupPosition, int childPosition) {
+        Date date = getGroup(groupPosition);
+        RecipeChoice choice = recipeChoiceDB.findRecipeChoiceByDate(date);
+        return choice;
     }
 
     @Override
@@ -74,9 +77,7 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.recipe_daily_options, null);
         }
 
-        Date date = getGroup(groupPosition);
-
-        RecipeChoice recipeChoice = recipeChoiceDB.findRecipeChoiceByDate(date);
+        RecipeChoice recipeChoice = getChild(groupPosition, childPosition);
         final Recipe leftRecipe = recipesDB.findRecipeById(recipeChoice.getRecipeOneId());
         CardView leftCard = (CardView) convertView.findViewById(R.id.recipe_option_left);
         ImageView leftImage = (ImageView) leftCard.findViewById(R.id.recipe_photo);
@@ -115,10 +116,22 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
 
         final AppCompatCheckBox leftCheckbox =
                 (AppCompatCheckBox) leftCard.findViewById(R.id.checkbox_icon);
+        leftCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            }
+        });
+        leftCheckbox.setChecked(leftRecipe.getId() == recipeChoice.getChosenRecipeId());
         final AppCompatCheckBox rightCheckbox =
                 (AppCompatCheckBox) rightCard.findViewById(R.id.checkbox_icon);
-        rightCheckbox.setOnCheckedChangeListener(IfChecked.thenUncheck(leftCheckbox));
-        leftCheckbox.setOnCheckedChangeListener(IfChecked.thenUncheck(rightCheckbox));
+        rightCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            }
+        });
+        rightCheckbox.setChecked(rightRecipe.getId() == recipeChoice.getChosenRecipeId());
+        rightCheckbox.setOnCheckedChangeListener(new IfChecked(leftCheckbox, recipeChoice, rightRecipe));
+        leftCheckbox.setOnCheckedChangeListener(new IfChecked(rightCheckbox, recipeChoice, leftRecipe));
 
         equalizeWidth(leftCard, rightCard);
 

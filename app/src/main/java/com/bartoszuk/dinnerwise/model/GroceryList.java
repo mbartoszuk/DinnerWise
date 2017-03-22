@@ -10,15 +10,10 @@ import java.util.HashMap;
 
 public class GroceryList {
 
-    private static final GroceryList theOnlyOne = new GroceryList();
-
-    static {
-        theOnlyOne.setRecipeOn(DayOfWeek.MONDAY, 1);
-        theOnlyOne.setRecipeOn(DayOfWeek.TUESDAY, 2);
-    }
+    private static final GroceryList currentGroceryList = new GroceryList();
 
     public static GroceryList forCurrentWeek(Context context) {
-        return theOnlyOne;
+        return currentGroceryList;
     }
 
     private final HashMap<DayOfWeek, GroceryListRecipe> recipes = new HashMap<>();
