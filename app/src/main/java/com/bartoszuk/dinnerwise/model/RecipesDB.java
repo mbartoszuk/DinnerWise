@@ -6,7 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Maria Bartoszuk on 12/02/2017.
@@ -55,8 +57,13 @@ public class RecipesDB {
         recipe.setDescription(query.getString(1));
         recipe.setPreparationTimeInMinutes(query.getInt(2));
         recipe.setNumberOfServings(query.getInt(3));
-        String ingredients = query.getString(4);
-        recipe.setIngredients(Arrays.asList(ingredients.split("\n")));
+        List<Ingredient> ingredients = new ArrayList<>();
+        for (String encoded : query.getString(4).split("\n")) {
+            if (!encoded.trim().equals("")) {
+                ingredients.add(Ingredient.fromDb(encoded));
+            }
+        }
+        recipe.setIngredients(ingredients);
         recipe.setDirections(query.getString(5));
         return recipe;
     }
@@ -92,8 +99,8 @@ public class RecipesDB {
         values.put(Recipe.RecipeEntry.COLUMN_NAME_PREPARATION_TIME_MINS, recipe.getPreparationTimeInMinutes());
         values.put(Recipe.RecipeEntry.COLUMN_NAME_SERVINGS, recipe.getNumberOfServings());
         StringBuilder ingredients = new StringBuilder();
-        for (String ingredient : recipe.getIngredients()) {
-            ingredients.append(ingredient + "\n");
+        for (Ingredient ingredient : recipe.getIngredients()) {
+            ingredients.append(ingredient.dbFormat() + "\n");
         }
         values.put(Recipe.RecipeEntry.COLUMN_NAME_INGREDIENTS, ingredients.toString());
         values.put(Recipe.RecipeEntry.COLUMN_NAME_DIRECTIONS, recipe.getDirections());

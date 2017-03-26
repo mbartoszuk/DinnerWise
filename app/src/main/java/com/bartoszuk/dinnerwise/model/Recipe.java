@@ -23,7 +23,7 @@ public class Recipe {
     private String description = "";
     private int preparationTimeInMinutes = 0;
     private int numberOfServings = 0;
-    private List<String> ingredients = Collections.emptyList();
+    private List<Ingredient> ingredients = Collections.emptyList();
     private String directions = "";
 
     public static class RecipeEntry implements BaseColumns {
@@ -66,7 +66,7 @@ public class Recipe {
         return description;
     }
 
-    public List<String> getIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
@@ -107,7 +107,7 @@ public class Recipe {
         }
     }
 
-    public void setIngredients(List<String> ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
         if (db != null) {
             db.update(this);

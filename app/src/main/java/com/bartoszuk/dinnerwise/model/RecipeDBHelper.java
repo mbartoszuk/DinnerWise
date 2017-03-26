@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class RecipeDBHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "Recipes.db";
 
     public RecipeDBHelper(Context context) {
@@ -34,10 +34,13 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
                 + Recipe.RecipeEntry.COLUMN_NAME_DIRECTIONS + " TEXT,"
                 + Recipe.RecipeEntry.COLUMN_NAME_FAVOURITES + " INTEGER, "
                 + Recipe.RecipeEntry.COLUMN_NAME_OWN + " INTEGER);");
-        insert(db, "Aubergine & Couscous", "an awesome salad", 30, 1,
-                new String[]{"aubergine", "cous cous"}, "mix");
+        insert(db, "Aubergine & Couscous", "an awesome salad", 30, 1, "mix",
+                Ingredient.vegetable("aubergine", Quantity.pieces(1)),
+                Ingredient.grain("cous cous", Quantity.pieces(2)));
         insert(db, "Cauliflower soup", "Great tasting, natural and so quick.", 20, 2,
-                new String[]{"onion", "cauliflower"}, "Chop, fry, add boulion and blend.");
+                "Chop, fry, add boulion and blend.",
+                Ingredient.vegetable("onion", Quantity.pieces(1)),
+                Ingredient.vegetable("cauliflower", Quantity.pieces(1)));
     }
 
     // Delete the previous table and add an updated one.
@@ -55,7 +58,7 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
     }
 
     private void insert(SQLiteDatabase db, String title, String description, int preparationTimeMin,
-                        int servings, String[] ingredients, String directions) {
+                        int servings, String directions, Ingredient... ingredients) {
         Recipe recipe = new Recipe();
         recipe.setTitle(title);
         recipe.setDescription(description);

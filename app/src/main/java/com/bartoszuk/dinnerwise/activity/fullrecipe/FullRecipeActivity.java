@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.bartoszuk.dinnerwise.R;
 import com.bartoszuk.dinnerwise.activity.managingownrecipe.AddRecipeActivity;
+import com.bartoszuk.dinnerwise.model.Ingredient;
 import com.bartoszuk.dinnerwise.model.RecipeSet;
 import com.bartoszuk.dinnerwise.model.Recipe;
 import com.bartoszuk.dinnerwise.model.RecipesDB;
@@ -78,7 +79,7 @@ public class FullRecipeActivity extends AppCompatActivity {
 
         TextView ingredients = (TextView) findViewById(R.id.ingredients_text);
         StringBuilder ingredientsContent = new StringBuilder();
-        for (String ingredient : recipeModel.getIngredients()) {
+        for (Ingredient ingredient : recipeModel.getIngredients()) {
             ingredientsContent.append("• " + ingredient + "\n");
         }
         ingredients.setText(ingredientsContent.toString());

@@ -17,6 +17,7 @@ import com.bartoszuk.dinnerwise.R;
 import com.bartoszuk.dinnerwise.model.DayOfWeek;
 import com.bartoszuk.dinnerwise.model.GroceryList;
 import com.bartoszuk.dinnerwise.model.GroceryListRecipe;
+import com.bartoszuk.dinnerwise.model.Ingredient;
 import com.bartoszuk.dinnerwise.model.Recipe;
 import com.bartoszuk.dinnerwise.model.RecipesDB;
 
@@ -71,7 +72,7 @@ public class GroceriesByRecipeAdapter extends BaseExpandableListAdapter {
 
     // Gets the single ingredients of a recipe.
     @Override
-    public String getChild(int groupPosition, int childPosition) {
+    public Ingredient getChild(int groupPosition, int childPosition) {
         GroceryListRecipe recipeItem = getGroup(groupPosition);
         Recipe recipe = recipesDB.findRecipeById(recipeItem.getRecipeId());
         return recipe.getIngredients().get(childPosition);
@@ -146,13 +147,13 @@ public class GroceriesByRecipeAdapter extends BaseExpandableListAdapter {
         }
         final TextView ingredientTitleView = (TextView) convertView.findViewById(R.id.ingredient_title);
         final GroceryListRecipe recipeItem = getGroup(groupPosition);
-        final String ingredientName = getChild(groupPosition, childPosition);
-        ingredientTitleView.setText(ingredientName, TextView.BufferType.SPANNABLE);
+        final Ingredient ingredient = getChild(groupPosition, childPosition);
+        ingredientTitleView.setText(ingredient.toString(), TextView.BufferType.SPANNABLE);
 
         // Check the item if model says so.
         AppCompatCheckBox checkbox = (AppCompatCheckBox) convertView.findViewById(R.id.checkbox_icon);
         checkbox.setOnCheckedChangeListener(null);  // So that the onCheckedChanged does not fire.
-        boolean ingredientChecked = recipeItem.isIngredientChecked(ingredientName);
+        boolean ingredientChecked = recipeItem.isIngredientChecked(ingredient.toString());
         checkbox.setChecked(ingredientChecked);
 
         // Strike through the text on its whole length.
@@ -169,10 +170,10 @@ public class GroceriesByRecipeAdapter extends BaseExpandableListAdapter {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Spannable text = (Spannable) ingredientTitleView.getText();
                 if (isChecked) {
-                    recipeItem.checkIngredient(ingredientName);
+                    recipeItem.checkIngredient(ingredient.toString());
                     text.setSpan(STRIKETHROUGH_SPAN, 0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 } else {
-                    recipeItem.uncheckIngredient(ingredientName);
+                    recipeItem.uncheckIngredient(ingredient.toString());
                     text.removeSpan(STRIKETHROUGH_SPAN);
                 }
             }

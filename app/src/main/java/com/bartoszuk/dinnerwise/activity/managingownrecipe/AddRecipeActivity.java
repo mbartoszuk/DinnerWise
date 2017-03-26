@@ -9,11 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.bartoszuk.dinnerwise.R;
+import com.bartoszuk.dinnerwise.model.Ingredient;
 import com.bartoszuk.dinnerwise.model.Recipe;
 import com.bartoszuk.dinnerwise.model.RecipeSet;
 import com.bartoszuk.dinnerwise.model.RecipesDB;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Maria Bartoszuk on 04/03/2017.
@@ -86,7 +89,7 @@ public class AddRecipeActivity extends AppCompatActivity {
 
         EditText ingredients = (EditText) findViewById(R.id.recipe_ingredients_input);
         StringBuilder ingredientLines = new StringBuilder();
-        for (String ingredient : newRecipe.getIngredients()) {
+        for (Ingredient ingredient : newRecipe.getIngredients()) {
             ingredientLines.append(ingredient + "\n");
         }
         ingredients.setText(ingredientLines.toString());
@@ -115,8 +118,11 @@ public class AddRecipeActivity extends AppCompatActivity {
         } catch (NumberFormatException e) {}
 
         EditText ingredients = (EditText) findViewById(R.id.recipe_ingredients_input);
-        String[] ingredientList = ingredients.getText().toString().split("\n");
-        newRecipe.setIngredients(Arrays.asList(ingredientList));
+        List<Ingredient> ingredientList = new ArrayList<>();
+        for (String ingredientText : ingredients.getText().toString().split("\n")) {
+            ingredientList.add(Ingredient.userInput(ingredientText));
+        }
+        newRecipe.setIngredients(ingredientList);
 
         EditText directions = (EditText) findViewById(R.id.recipe_directions_input);
         newRecipe.setDirections(directions.getText().toString());
