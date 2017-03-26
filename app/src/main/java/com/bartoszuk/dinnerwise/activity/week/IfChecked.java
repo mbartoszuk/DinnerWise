@@ -28,6 +28,8 @@ final class IfChecked implements CompoundButton.OnCheckedChangeListener {
         if (isChecked) {
             otherCheckbox.setChecked(false);
             choice.setChosenRecipeId(recipe.getId());
+        } else if (choice.getChosenRecipeId() == recipe.getId()) {
+            choice.setChosenRecipeId(RecipeChoice.NO_RECIPE_CHOSEN);
         }
     }
 }

@@ -10,7 +10,7 @@ import java.util.Calendar;
 
 public class RecipeChoice {
 
-    public final long NO_RECIPE_CHOSEN = 0;
+    public static final long NO_RECIPE_CHOSEN = 0;
 
     private final Context context;
     private final Date date;
@@ -34,7 +34,11 @@ public class RecipeChoice {
         this.chosenRecipeId = chosenRecipeId;
 
         GroceryList currentList = GroceryList.forCurrentWeek(context);
-        currentList.setRecipeOn(date.getDayOfWeek(), chosenRecipeId);
+        if (chosenRecipeId != NO_RECIPE_CHOSEN) {
+            currentList.setRecipeOn(date.getDayOfWeek(), chosenRecipeId);
+        } else {
+            currentList.clearRecipeOn(date.getDayOfWeek());
+        }
     }
 
     public long getRecipeOneId() {
