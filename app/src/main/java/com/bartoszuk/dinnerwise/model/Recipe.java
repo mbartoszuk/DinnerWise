@@ -82,6 +82,15 @@ public class Recipe {
         return preparationTimeInMinutes;
     }
 
+    public boolean hasIngredientsIn(String category) {
+        for (Ingredient ingredient : ingredients) {
+            if (ingredient.getCategory().equals(category)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     void setId(long id) {
         this.id = id;
     }

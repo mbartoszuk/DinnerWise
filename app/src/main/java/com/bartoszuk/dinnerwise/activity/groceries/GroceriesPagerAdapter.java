@@ -13,16 +13,16 @@ import java.util.Arrays;
 
 public class GroceriesPagerAdapter extends FragmentPagerAdapter {
 
-    private GroceriesActivity activity;
+    private Fragment[] fragments;
 
-    public GroceriesPagerAdapter(FragmentManager fm, GroceriesActivity activity) {
+    public GroceriesPagerAdapter(FragmentManager fm, Fragment... fragments) {
         super(fm);
-        this.activity = activity;
+        this.fragments = fragments;
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return fragments.length;
     }
 
     @Override
@@ -32,16 +32,6 @@ public class GroceriesPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                ByRecipeFragment byRecipe = new ByRecipeFragment();
-                byRecipe.setActivity(activity);
-                return byRecipe;
-            case 1:
-                ByRecipeFragment byGroceries = new ByRecipeFragment();
-                byGroceries.setActivity(activity);
-                return byGroceries;
-            default: throw new IllegalArgumentException("Invalid position " + position);
-        }
+        return fragments[position];
     }
 }

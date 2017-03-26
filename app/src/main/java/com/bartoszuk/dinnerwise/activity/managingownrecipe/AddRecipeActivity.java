@@ -134,5 +134,4 @@ public class AddRecipeActivity extends AppCompatActivity {
     public void showPreparationTimePicker(View v) {
         new PreparationTimePicker().show(getFragmentManager(), "dialog");
     }
-
 }

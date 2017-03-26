@@ -44,4 +44,18 @@ public class GroceryListRecipe {
     public void uncheckIngredient(String ingredient) {
         checkedIngredients.remove(ingredient);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof GroceryListRecipe)) {
+            return false;
+        }
+        GroceryListRecipe that = (GroceryListRecipe) other;
+        return this.recipeId == that.recipeId;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (recipeId % 100000007L);
+    }
 }

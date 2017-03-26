@@ -3,6 +3,8 @@ package com.bartoszuk.dinnerwise.model;
 import android.content.Context;
 
 import java.util.HashMap;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * Created by Maria Bartoszuk on 18/03/2017.

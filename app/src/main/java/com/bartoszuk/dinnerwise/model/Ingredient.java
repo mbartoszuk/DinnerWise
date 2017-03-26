@@ -2,6 +2,8 @@ package com.bartoszuk.dinnerwise.model;
 
 import android.content.Intent;
 
+import java.util.Objects;
+
 /**
  * Created by Maria Bartoszuk on 26/03/2017.
  */
@@ -41,6 +43,10 @@ public class Ingredient {
         this.quantity = quantity;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
     public String getName() {
         return name;
     }
@@ -52,5 +58,21 @@ public class Ingredient {
 
     public String dbFormat() {
         return String.format("%1$20s%2$20s%3$s", category, quantity.dbFormat(), name);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof Ingredient)) {
+            return false;
+        }
+        Ingredient that = (Ingredient) other;
+        return this.category.equals(that.category)
+                && this.name.equals(that.name)
+                && this.quantity.equals(that.quantity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(category, name, quantity);
     }
 }

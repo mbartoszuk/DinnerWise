@@ -14,7 +14,7 @@ import com.bartoszuk.dinnerwise.R;
  * Created by Maria Bartoszuk on 26/03/2017.
  */
 
-public class ByRecipeFragment extends Fragment {
+public class ByRecipeFragment extends Fragment implements Refresh {
 
     private GroceriesActivity activity;
     private ExpandableListView listView;
@@ -42,6 +42,11 @@ public class ByRecipeFragment extends Fragment {
         collapseDisabledGroupsAndExpandOthers();
 
         return layout;
+    }
+
+    @Override
+    public void refresh() {
+        listAdapter.notifyDataSetInvalidated();
     }
 
     @Override

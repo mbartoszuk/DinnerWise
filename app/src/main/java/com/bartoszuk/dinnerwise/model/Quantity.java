@@ -36,4 +36,18 @@ public class Quantity {
     public String dbFormat() {
         return Integer.toString(howMany);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof Quantity)) {
+            return false;
+        }
+        Quantity that = (Quantity) other;
+        return this.howMany == that.howMany;
+    }
+
+    @Override
+    public int hashCode() {
+        return howMany;
+    }
 }

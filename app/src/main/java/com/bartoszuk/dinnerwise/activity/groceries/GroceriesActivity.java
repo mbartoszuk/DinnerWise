@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.View;
@@ -33,9 +34,31 @@ public class GroceriesActivity extends LogOut {
         getSupportActionBar().setElevation(0);
 
         TabLayout tabs = (TabLayout) findViewById(R.id.groceries_sorting_tabs);
+        ByRecipeFragment byRecipe = new ByRecipeFragment();
+        byRecipe.setActivity(this);
+        ByCategoryFragment byCategory = new ByCategoryFragment();
+        byCategory.setActivity(this);
+        final Fragment[] fragments = {byRecipe, byCategory};
         ViewPager viewPager = (ViewPager) findViewById(R.id.groceries_view_pager);
-        viewPager.setAdapter(new GroceriesPagerAdapter(getSupportFragmentManager(), this));
+        viewPager.setAdapter(new GroceriesPagerAdapter(getSupportFragmentManager(), byRecipe, byCategory));
         tabs.setupWithViewPager(viewPager);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Refresh fragment = (Refresh) fragments[position];
+                fragment.refresh();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         BottomBarTab ownRecipesButton = (BottomBarTab) findViewById(R.id.tab_ownrecipes);
         ownRecipesButton.setOnClickListener(new View.OnClickListener() {
@@ -63,8 +86,6 @@ public class GroceriesActivity extends LogOut {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
-
 
     /** Adding the menu to the top of the activity. */
     @Override
