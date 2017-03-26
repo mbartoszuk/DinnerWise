@@ -27,22 +27,20 @@ import java.util.Collections;
  * Created by Maria Bartoszuk on 15/03/2017.
  */
 
-public class GroceriesListAdapter extends BaseExpandableListAdapter {
+public class GroceriesByRecipeAdapter extends BaseExpandableListAdapter {
 
     private static final StrikethroughSpan STRIKETHROUGH_SPAN = new StrikethroughSpan();
 
     private final GroceryList groceryListModel;
     private final RecipesDB recipesDB;
 
-    private final GroceriesActivity activity;
     private final LayoutInflater inflater;
     private final ExpandableListView listView;
 
-    GroceriesListAdapter(GroceriesActivity activity, LayoutInflater inflater,
-                         ExpandableListView listView) {
+    GroceriesByRecipeAdapter(GroceriesActivity activity, LayoutInflater inflater,
+                             ExpandableListView listView) {
         this.groceryListModel = GroceryList.forCurrentWeek(activity);
         this.recipesDB = RecipesDB.db(activity);
-        this.activity = activity;
         this.inflater = inflater;
         this.listView = listView;
     }
