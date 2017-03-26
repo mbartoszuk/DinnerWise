@@ -2,8 +2,6 @@ package com.bartoszuk.dinnerwise.model;
 
 import android.content.Context;
 
-import java.util.Calendar;
-
 /**
  * Created by Maria Bartoszuk on 12/02/2017.
  */
@@ -16,7 +14,6 @@ public class RecipeChoice {
     private final Date date;
     final private long recipeOneId;
     final private long recipeTwoId;
-    private long chosenRecipeId = NO_RECIPE_CHOSEN;
 
     RecipeChoice(Context context, Date date, long recipeOneId, long recipeTwoId) {
         this.context = context;
@@ -27,12 +24,16 @@ public class RecipeChoice {
 
     // Returns getRecipeOneId(), getRecipeTwoId() or NO_RECIPE_CHOSEN.
     public long getChosenRecipeId() {
-        return chosenRecipeId;
+        GroceryList groceryList = GroceryList.forCurrentWeek(context);
+        GroceryListRecipe recipe = groceryList.recipeOn(date.getDayOfWeek());
+        if (recipe == null) {
+            return NO_RECIPE_CHOSEN;
+        } else {
+            return recipe.getRecipeId();
+        }
     }
 
     public void setChosenRecipeId(long chosenRecipeId) {
-        this.chosenRecipeId = chosenRecipeId;
-
         GroceryList currentList = GroceryList.forCurrentWeek(context);
         if (chosenRecipeId != NO_RECIPE_CHOSEN) {
             currentList.setRecipeOn(date.getDayOfWeek(), chosenRecipeId);

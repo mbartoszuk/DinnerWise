@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class RecipeDBHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 4;
     public static final String DATABASE_NAME = "Recipes.db";
 
     public RecipeDBHelper(Context context) {
@@ -41,6 +41,12 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
                 "Chop, fry, add boulion and blend.",
                 Ingredient.vegetable("onion", Quantity.pieces(1)),
                 Ingredient.vegetable("cauliflower", Quantity.pieces(1)));
+        db.execSQL("CREATE TABLE " + GroceryList.RecipeEntry.TABLE_NAME + " ("
+                + GroceryList.RecipeEntry._ID + " INTEGER PRIMARY KEY, "
+                + GroceryList.RecipeEntry.COLUMN_NAME_RECIPE_ID + " INTEGER, "
+                + GroceryList.RecipeEntry.COLUMN_NAME_DAY_OF_WEEK + " INTEGER, "
+                + GroceryList.RecipeEntry.COLUMN_NAME_DISCARDED + " INTEGER, "
+                + GroceryList.RecipeEntry.COLUMN_NAME_CHECKED_INGREDIENTS + " TEXT);");
     }
 
     // Delete the previous table and add an updated one.

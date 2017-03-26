@@ -9,12 +9,21 @@ import java.util.Set;
 
 public class GroceryListRecipe {
 
+    private final DayOfWeek dayOfWeek;
     private final long recipeId;
     private boolean discarded = false;
     private final Set<String> checkedIngredients = new HashSet<>();
 
-    GroceryListRecipe(long recipeId) {
+    // For saving into the database.
+    private GroceryList list;
+
+    GroceryListRecipe(DayOfWeek dayOfWeek, long recipeId) {
+        this.dayOfWeek = dayOfWeek;
         this.recipeId = recipeId;
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
     }
 
     public long getRecipeId() {
@@ -27,10 +36,16 @@ public class GroceryListRecipe {
 
     public void discard() {
         discarded = true;
+        if (list != null) {
+            list.update(this);
+        }
     }
 
     public void include() {
         discarded = false;
+        if (list != null) {
+            list.update(this);
+        }
     }
 
     public boolean isIngredientChecked(String ingredient) {
@@ -39,10 +54,41 @@ public class GroceryListRecipe {
 
     public void checkIngredient(String ingredient) {
         checkedIngredients.add(ingredient);
+        if (list != null) {
+            list.update(this);
+        }
     }
 
     public void uncheckIngredient(String ingredient) {
         checkedIngredients.remove(ingredient);
+        if (list != null) {
+            list.update(this);
+        }
+    }
+
+    void setList(GroceryList list) {
+        this.list = list;
+    }
+
+    String dbCheckedIngredients() {
+        StringBuilder builder = new StringBuilder();
+        boolean first = true;
+        for (String ingredient : checkedIngredients) {
+            if (!first) {
+                builder.append("|");
+            }
+            builder.append(ingredient);
+            first = false;
+        }
+
+        return builder.toString();
+    }
+
+    void loadCheckIngredientsFromDb(String encoded) {
+        for (String ingredient : encoded.split("\\|")) {
+            checkedIngredients.add(ingredient);
+        }
+
     }
 
     @Override
