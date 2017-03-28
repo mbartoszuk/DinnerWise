@@ -102,8 +102,8 @@ public class OwnRecipesActivity extends LogOut {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        adapter.notifyDataSetChanged();
         if (requestCode == ADD_RECIPE_REQUEST && resultCode == RESULT_OK) {
-            adapter.notifyDataSetChanged();
             Toast.makeText(getApplicationContext(), R.string.recipe_saved_toast, Toast.LENGTH_SHORT)
                     .show();
         }
@@ -115,10 +115,8 @@ public class OwnRecipesActivity extends LogOut {
             switch (data.getIntExtra(FullRecipeActivity.RECIPE_EDITING_RESULT, 0)) {
                 case FullRecipeActivity.RECIPE_DELETED:
                     Toast.makeText(getApplicationContext(), R.string.recipe_deleted_toast, Toast.LENGTH_SHORT).show();
-                    adapter.notifyDataSetChanged();
                     break;
                 case FullRecipeActivity.RECIPE_EDITED:
-                    adapter.notifyDataSetChanged();
                     break;
                 default:
             }

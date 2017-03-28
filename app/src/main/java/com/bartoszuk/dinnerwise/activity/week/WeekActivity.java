@@ -6,12 +6,9 @@ package com.bartoszuk.dinnerwise.activity.week;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 
@@ -21,10 +18,6 @@ import com.bartoszuk.dinnerwise.activity.favourites.FavouritesActivity;
 import com.bartoszuk.dinnerwise.activity.groceries.GroceriesActivity;
 import com.bartoszuk.dinnerwise.activity.ownrecipes.OwnRecipesActivity;
 import com.bartoszuk.dinnerwise.model.RecipesDB;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.roughike.bottombar.BottomBarTab;
 
 public class WeekActivity extends LogOut {

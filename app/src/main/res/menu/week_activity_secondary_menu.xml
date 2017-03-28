@@ -50,7 +50,8 @@
         android:id="@+id/action_feedback"
         android:orderInCategory="400"
         android:title="@string/action_feedback"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:onClick="openFeedbackActivity" />
 
     <item
         android:id="@+id/action_signOut"

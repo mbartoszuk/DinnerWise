@@ -67,6 +67,7 @@ public class AddRecipeActivity extends AppCompatActivity {
             setTitle(getString(R.string.manageRecipe_title));
         } else {
             setTitle(getString(R.string.editRecipe_title));
+            newRecipe = db.findRecipeById(newRecipe.getId());
         }
 
         EditText title = (EditText) findViewById(R.id.recipe_title_input);

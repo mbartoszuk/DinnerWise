@@ -69,6 +69,11 @@ public class FullRecipeActivity extends AppCompatActivity {
     }
 
     private void renderModel() {
+        // Refresh.
+        if (recipeModel.getId() != 0) {
+            recipeModel = db.findRecipeById(recipeModel.getId());
+        }
+
         setTitle(recipeModel.getTitle());
 
         recipeModel.renderFullInto((ImageView) findViewById(R.id.full_recipe_image));
@@ -151,9 +156,9 @@ public class FullRecipeActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        renderModel();
         // Was edited successfully.
         if (requestCode == EDIT_REQUEST_CODE && resultCode == RESULT_OK) {
-            renderModel();
             Toast.makeText(getApplicationContext(), R.string.recipe_edited_toast, Toast.LENGTH_SHORT).show();
             resultData.putExtra(RECIPE_EDITING_RESULT, RECIPE_EDITED);
             setResult(RESULT_OK, resultData);

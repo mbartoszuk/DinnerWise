@@ -8,7 +8,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/DinnerWiseTheme">
-
         <activity
             android:name=".activity.login.LoginActivity"
             android:theme="@style/DinnerWiseTheme_noActionBar">
@@ -18,36 +17,32 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.createaccount.CreateAccountActivity"
             android:theme="@style/DinnerWiseTheme_noActionBar" />
-
         <activity
             android:name=".activity.onboarding.OnboardingActivity"
             android:theme="@style/DinnerWiseTheme_noActionBar" />
-
         <activity android:name=".activity.week.WeekActivity" />
-
         <activity
             android:name=".activity.fullrecipe.FullRecipeActivity"
             android:label="@string/fullRecipe_title" />
-
         <activity
             android:name=".activity.ownrecipes.OwnRecipesActivity"
             android:label="@string/ownRecipes_title" />
-
         <activity
             android:name=".activity.managingownrecipe.AddRecipeActivity"
             android:label="@string/manageRecipe_title" />
-
         <activity
             android:name=".activity.favourites.FavouritesActivity"
             android:label="@string/favourites_title" />
-
         <activity
             android:name=".activity.groceries.GroceriesActivity"
             android:label="@string/groceries_title" />
+
+        <activity
+            android:name=".activity.secondarymenu.FeedbackActivity"
+            android:label="@string/feedback_title" />
     </application>
 
 </manifest>
