@@ -39,10 +39,12 @@
         <activity
             android:name=".activity.groceries.GroceriesActivity"
             android:label="@string/groceries_title" />
-
         <activity
             android:name=".activity.secondarymenu.FeedbackActivity"
             android:label="@string/feedback_title" />
+        <activity
+            android:name=".activity.secondarymenu.PreferencesActivity"
+            android:label="@string/preferences_title"></activity>
     </application>
 
 </manifest>

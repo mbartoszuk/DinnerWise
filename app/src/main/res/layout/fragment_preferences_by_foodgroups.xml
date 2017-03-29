@@ -1,0 +1,140 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    tools:context=".activity.secondarymenu.PreferencesActivity$PlaceholderFragment">
+
+    <TextView
+        android:id="@+id/foodgroups_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/foodgroups_label"
+        android:textColor="@color/secondary_text"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:background="@color/white" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        android:layout_alignBottom="@+id/foodgroups_label" />
+
+    <Button
+        android:id="@+id/button_foodgroup_meat"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:drawableLeft="@drawable/ic_check_circle_24dp"
+        android:text="  Meat"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:textColor="@color/white"
+        android:background="@drawable/button_shape_preferences"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="16dp"
+        android:padding="8dp"
+        android:layout_below="@+id/foodgroups_label" />
+
+    <Button
+        android:id="@+id/button_foodgroup_fish"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:drawableLeft="@drawable/ic_check_circle_24dp"
+        android:text="  Fish"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:textColor="@color/white"
+        android:background="@drawable/button_shape_preferences"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="8dp"
+        android:padding="8dp"
+        android:layout_below="@+id/foodgroups_label"
+        android:layout_toRightOf="@+id/button_foodgroup_meat" />
+
+    <Button
+        android:id="@+id/button_foodgroup_eggs"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:drawableLeft="@drawable/ic_check_circle_24dp"
+        android:text="  Eggs"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:textColor="@color/white"
+        android:background="@drawable/button_shape_preferences"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="16dp"
+        android:padding="8dp"
+        android:layout_below="@+id/button_foodgroup_meat" />
+
+    <Button
+        android:id="@+id/button_foodgroup_dairy"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:drawableLeft="@drawable/ic_check_circle_24dp"
+        android:text="  Dairy"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:textColor="@color/white"
+        android:background="@drawable/button_shape_preferences"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="8dp"
+        android:padding="8dp"
+        android:layout_below="@+id/button_foodgroup_fish"
+        android:layout_toRightOf="@+id/button_foodgroup_eggs" />
+
+    <Button
+        android:id="@+id/button_foodgroup_grains"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:drawableLeft="@drawable/ic_check_circle_24dp"
+        android:text="  Grains"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:textColor="@color/white"
+        android:background="@drawable/button_shape_preferences"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="16dp"
+        android:padding="8dp"
+        android:layout_below="@+id/button_foodgroup_eggs" />
+
+    <Button
+        android:id="@+id/button_foodgroup_nuts"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:drawableLeft="@drawable/ic_check_circle_24dp"
+        android:text="  Nuts"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:textColor="@color/white"
+        android:background="@drawable/button_shape_preferences"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="8dp"
+        android:padding="8dp"
+        android:layout_below="@+id/button_foodgroup_dairy"
+        android:layout_toRightOf="@+id/button_foodgroup_grains" />
+
+</RelativeLayout>

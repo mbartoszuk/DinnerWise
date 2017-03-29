@@ -1,0 +1,103 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    tools:context=".activity.secondarymenu.PreferencesActivity$PlaceholderFragment">
+
+    <TextView
+        android:id="@+id/allergies_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/allergies_label"
+        android:textColor="@color/secondary_text"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:background="@color/white" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        android:layout_alignBottom="@+id/allergies_label" />
+
+    <Button
+        android:id="@+id/button_allergies_gluten"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:drawableLeft="@drawable/ic_check_circle_24dp"
+        android:text="  Gluten"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:textColor="@color/white"
+        android:background="@drawable/button_shape_preferences"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="16dp"
+        android:padding="8dp"
+        android:layout_below="@+id/allergies_label" />
+
+    <Button
+        android:id="@+id/button_allergies_peanuts"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:drawableLeft="@drawable/ic_check_circle_24dp"
+        android:text="  Peanuts"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:textColor="@color/white"
+        android:background="@drawable/button_shape_preferences"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="8dp"
+        android:padding="8dp"
+        android:layout_below="@+id/allergies_label"
+        android:layout_toRightOf="@+id/button_allergies_gluten" />
+
+    <Button
+        android:id="@+id/button_allergies_citruses"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:drawableLeft="@drawable/ic_check_circle_24dp"
+        android:text="  Citruses"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:textColor="@color/white"
+        android:background="@drawable/button_shape_preferences"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="16dp"
+        android:padding="8dp"
+        android:layout_below="@+id/button_allergies_gluten" />
+
+    <Button
+        android:id="@+id/button_allergies_cowsmilk"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:drawableLeft="@drawable/ic_check_circle_24dp"
+        android:text="  Cow's milk"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:textColor="@color/white"
+        android:background="@drawable/button_shape_preferences"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="8dp"
+        android:padding="8dp"
+        android:layout_below="@+id/button_allergies_peanuts"
+        android:layout_toRightOf="@+id/button_allergies_citruses" />
+
+</RelativeLayout>
