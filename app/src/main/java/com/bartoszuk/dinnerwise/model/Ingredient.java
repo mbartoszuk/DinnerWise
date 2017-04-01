@@ -15,15 +15,27 @@ public class Ingredient {
     private final Quantity quantity;
 
     public static Ingredient vegetable(String name, Quantity quantity) {
-        return new Ingredient("vegetable", name, quantity);
+        return new Ingredient("vegetables", name, quantity);
+    }
+
+    public static Ingredient fruit(String name, Quantity quantity) {
+        return new Ingredient("fruits", name, quantity);
+    }
+
+    public static Ingredient spice(String name, Quantity quantity) {
+        return new Ingredient("spices", name, quantity);
     }
 
     public static Ingredient grain(String name, Quantity quantity) {
-        return new Ingredient("grain", name, quantity);
+        return new Ingredient("grains", name, quantity);
     }
 
-    public static Ingredient diary(String name, Quantity quantity) {
-        return new Ingredient("diary", name, quantity);
+    public static Ingredient nutsandseeds(String name, Quantity quantity) {
+        return new Ingredient("nuts and seeds", name, quantity);
+    }
+
+    public static Ingredient dairy(String name, Quantity quantity) {
+        return new Ingredient("dairy", name, quantity);
     }
 
     public static Ingredient userInput(String name) {

@@ -9,8 +9,10 @@ import android.widget.Button;
 
 import com.bartoszuk.dinnerwise.R;
 import com.bartoszuk.dinnerwise.activity.login.LoginActivity;
+import com.bartoszuk.dinnerwise.activity.secondarymenu.AboutActivity;
 import com.bartoszuk.dinnerwise.activity.secondarymenu.FeedbackActivity;
 import com.bartoszuk.dinnerwise.activity.secondarymenu.PreferencesActivity;
+import com.bartoszuk.dinnerwise.activity.secondarymenu.SettingsActivity;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
@@ -58,6 +60,18 @@ public abstract class LogOut extends AppCompatActivity
     // Implement Preferences opening here because of the inheritance of other activities from LogOut.
     public void openPreferencesActivity(MenuItem item) {
         Intent intent = new Intent(this, PreferencesActivity.class);
+        startActivity(intent);
+    }
+
+    // Implement Settings opening here because of the inheritance of other activities from LogOut.
+    public void openSettingsActivity(MenuItem item) {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    // Implement About opening here because of the inheritance of other activities from LogOut.
+    public void openAboutActivity(MenuItem item) {
+        Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
     }
 

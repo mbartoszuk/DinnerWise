@@ -14,6 +14,8 @@
     <string name="groceries_title">Groceries</string>
     <string name="feedback_title">Feedback</string>
     <string name="preferences_title">Dietary preferences</string>
+    <string name="about_title">About DinnerWise</string>
+    <string name="settings_title">Account settings</string>
 
     <!-- Action bar icon buttons -->
     <string name="action_secondarymenu">Secondary menu</string>
@@ -60,6 +62,9 @@
     <string name="feedback_message_text">In case you encounter any problems with the application, or you want to make a suggestion, do not hesitate to write to us!</string>
     <string name="foodgroups_label">Checked items will be included in your diet.</string>
     <string name="allergies_label">Select items you are allergic to.</string>
+    <string name="about_tagline">Simple daily \ndinner decisions</string>
+    <string name="about_text">DinnerWise was created from the need of daily meals that can be both healthy and simple to prepare. We understand that ideas for exciting everyday dinners can be tough to come up with. While keeping track of all the necessary ingredients can become a chore. We hope that our recipes can bring you delicious meals and spark the joy of daily cooking, by offering delicious meal suggestions for you to choose from. \n\nThank you and enjoy!</string>
+    <string name="settings_label">Change the current password.</string>
 
     <!-- Dialog messages -->
     <string name="delete_own_recipe_confirmation">Are you sure you want to delete this recipe?</string>

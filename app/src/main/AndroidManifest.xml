@@ -40,11 +40,17 @@
             android:name=".activity.groceries.GroceriesActivity"
             android:label="@string/groceries_title" />
         <activity
+            android:name=".activity.secondarymenu.PreferencesActivity"
+            android:label="@string/preferences_title" />
+        <activity
+            android:name=".activity.secondarymenu.SettingsActivity"
+            android:label="@string/settings_title" />
+        <activity
+            android:name=".activity.secondarymenu.AboutActivity"
+            android:label="@string/about_title" />
+        <activity
             android:name=".activity.secondarymenu.FeedbackActivity"
             android:label="@string/feedback_title" />
-        <activity
-            android:name=".activity.secondarymenu.PreferencesActivity"
-            android:label="@string/preferences_title"></activity>
     </application>
 
 </manifest>

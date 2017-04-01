@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.bartoszuk.dinnerwise.R;
 
@@ -93,6 +94,13 @@ public class PreferencesActivity extends AppCompatActivity {
             switch (sectionNumber) {
                 case 0:
                     rootView = inflater.inflate(R.layout.fragment_preferences_by_foodgroups, container, false);
+                    // Setting the default of the food groups buttons to be checked.
+                    ((ToggleButton) rootView.findViewById(R.id.button_foodgroup_meat)).setChecked(true);
+                    ((ToggleButton) rootView.findViewById(R.id.button_foodgroup_fish)).setChecked(true);
+                    ((ToggleButton) rootView.findViewById(R.id.button_foodgroup_eggs)).setChecked(true);
+                    ((ToggleButton) rootView.findViewById(R.id.button_foodgroup_dairy)).setChecked(true);
+                    ((ToggleButton) rootView.findViewById(R.id.button_foodgroup_grains)).setChecked(true);
+                    ((ToggleButton) rootView.findViewById(R.id.button_foodgroup_nuts)).setChecked(true);
                     return rootView;
                 case 1:
                     rootView = inflater.inflate(R.layout.fragment_preferences_by_allergies, container, false);

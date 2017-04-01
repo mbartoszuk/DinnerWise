@@ -26,17 +26,18 @@
         android:background="@color/divider"
         android:layout_alignBottom="@+id/allergies_label" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/button_allergies_gluten"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:drawableLeft="@drawable/ic_check_circle_24dp"
-        android:text="  Gluten"
+        android:drawableLeft="@drawable/button_toggle_preference"
+        android:textOn="  Gluten"
+        android:textOff="  Gluten"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textAlignment="textStart"
         android:textColor="@color/white"
-        android:background="@drawable/button_shape_preferences"
+        android:background="@drawable/button_toggle_background"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:layout_marginRight="8dp"
@@ -44,17 +45,18 @@
         android:padding="8dp"
         android:layout_below="@+id/allergies_label" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/button_allergies_peanuts"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:drawableLeft="@drawable/ic_check_circle_24dp"
-        android:text="  Peanuts"
+        android:drawableLeft="@drawable/button_toggle_preference"
+        android:textOn="  Peanuts"
+        android:textOff="  Peanuts"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textAlignment="textStart"
         android:textColor="@color/white"
-        android:background="@drawable/button_shape_preferences"
+        android:background="@drawable/button_toggle_background"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:layout_marginRight="16dp"
@@ -63,17 +65,18 @@
         android:layout_below="@+id/allergies_label"
         android:layout_toRightOf="@+id/button_allergies_gluten" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/button_allergies_citruses"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:drawableLeft="@drawable/ic_check_circle_24dp"
-        android:text="  Citruses"
+        android:drawableLeft="@drawable/button_toggle_preference"
+        android:textOn="  Citruses"
+        android:textOff="  Citruses"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textAlignment="textStart"
         android:textColor="@color/white"
-        android:background="@drawable/button_shape_preferences"
+        android:background="@drawable/button_toggle_background"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:layout_marginRight="8dp"
@@ -81,17 +84,18 @@
         android:padding="8dp"
         android:layout_below="@+id/button_allergies_gluten" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/button_allergies_cowsmilk"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:drawableLeft="@drawable/ic_check_circle_24dp"
-        android:text="  Cow's milk"
+        android:drawableLeft="@drawable/button_toggle_preference"
+        android:textOn="  Cow's milk"
+        android:textOff="  Cow's milk"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textAlignment="textStart"
         android:textColor="@color/white"
-        android:background="@drawable/button_shape_preferences"
+        android:background="@drawable/button_toggle_background"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:layout_marginRight="16dp"

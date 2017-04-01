@@ -7,31 +7,35 @@
         android:id="@+id/action_dietaryPreferences"
         android:orderInCategory="100"
         android:title="@string/action_dietaryPreferences"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:onClick="openPreferencesActivity" />
 
     <item
         android:id="@+id/action_accountSettings"
         android:orderInCategory="200"
         android:title="@string/action_accountSettings"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:onClick="openSettingsActivity" />
 
     <item
         android:id="@+id/action_aboutDinnerWise"
         android:orderInCategory="300"
         android:title="@string/action_aboutDinnerWise"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:onClick="openAboutActivity" />
 
     <item
         android:id="@+id/action_feedback"
         android:orderInCategory="400"
         android:title="@string/action_feedback"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:onClick="openFeedbackActivity" />
 
     <item
         android:id="@+id/action_signOut"
         android:orderInCategory="500"
         android:title="@string/action_signOut"
         app:showAsAction="never"
-        android:onClick="signOutLoggedUser" />
+        android:onClick="signOutLoggedUser"/>
 
 </menu>

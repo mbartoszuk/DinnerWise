@@ -21,7 +21,7 @@ public class RecipeChoiceDB {
 
     public RecipeChoice findRecipeChoiceByDate (Date date) {
         if (!choiceByDate.containsKey(date)) {
-            choiceByDate.put(date, new RecipeChoice(context, date, 1, 2));
+            choiceByDate.put(date, new RecipeChoice(context, date, date.getDayOfWeek().ordinal() * 2 + 1, date.getDayOfWeek().ordinal() * 2 + 2));
         }
         return choiceByDate.get(date);
     }

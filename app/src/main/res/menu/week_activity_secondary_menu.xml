@@ -39,13 +39,15 @@
         android:id="@+id/action_accountSettings"
         android:orderInCategory="200"
         android:title="@string/action_accountSettings"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:onClick="openSettingsActivity" />
 
     <item
         android:id="@+id/action_aboutDinnerWise"
         android:orderInCategory="300"
         android:title="@string/action_aboutDinnerWise"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        android:onClick="openAboutActivity" />
 
     <item
         android:id="@+id/action_feedback"

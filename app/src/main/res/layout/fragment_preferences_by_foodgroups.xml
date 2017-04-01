@@ -26,17 +26,18 @@
         android:background="@color/divider"
         android:layout_alignBottom="@+id/foodgroups_label" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/button_foodgroup_meat"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:drawableLeft="@drawable/ic_check_circle_24dp"
-        android:text="  Meat"
+        android:drawableLeft="@drawable/button_toggle_preference"
+        android:textOn="  Meat"
+        android:textOff="  No meat"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textAlignment="textStart"
         android:textColor="@color/white"
-        android:background="@drawable/button_shape_preferences"
+        android:background="@drawable/button_toggle_background"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:layout_marginRight="8dp"
@@ -44,17 +45,18 @@
         android:padding="8dp"
         android:layout_below="@+id/foodgroups_label" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/button_foodgroup_fish"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:drawableLeft="@drawable/ic_check_circle_24dp"
-        android:text="  Fish"
+        android:drawableLeft="@drawable/button_toggle_preference"
+        android:textOn="  Fish"
+        android:textOff="  No fish"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textAlignment="textStart"
         android:textColor="@color/white"
-        android:background="@drawable/button_shape_preferences"
+        android:background="@drawable/button_toggle_background"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:layout_marginRight="16dp"
@@ -63,17 +65,18 @@
         android:layout_below="@+id/foodgroups_label"
         android:layout_toRightOf="@+id/button_foodgroup_meat" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/button_foodgroup_eggs"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:drawableLeft="@drawable/ic_check_circle_24dp"
-        android:text="  Eggs"
+        android:drawableLeft="@drawable/button_toggle_preference"
+        android:textOn="  Eggs"
+        android:textOff="  No eggs"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textAlignment="textStart"
         android:textColor="@color/white"
-        android:background="@drawable/button_shape_preferences"
+        android:background="@drawable/button_toggle_background"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:layout_marginRight="8dp"
@@ -81,17 +84,18 @@
         android:padding="8dp"
         android:layout_below="@+id/button_foodgroup_meat" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/button_foodgroup_dairy"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:drawableLeft="@drawable/ic_check_circle_24dp"
-        android:text="  Dairy"
+        android:drawableLeft="@drawable/button_toggle_preference"
+        android:textOn="  Dairy"
+        android:textOff="  No dairy"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textAlignment="textStart"
         android:textColor="@color/white"
-        android:background="@drawable/button_shape_preferences"
+        android:background="@drawable/button_toggle_background"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:layout_marginRight="16dp"
@@ -100,17 +104,18 @@
         android:layout_below="@+id/button_foodgroup_fish"
         android:layout_toRightOf="@+id/button_foodgroup_eggs" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/button_foodgroup_grains"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:drawableLeft="@drawable/ic_check_circle_24dp"
-        android:text="  Grains"
+        android:drawableLeft="@drawable/button_toggle_preference"
+        android:textOn="  Grains"
+        android:textOff="  No grains"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textAlignment="textStart"
         android:textColor="@color/white"
-        android:background="@drawable/button_shape_preferences"
+        android:background="@drawable/button_toggle_background"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:layout_marginRight="8dp"
@@ -118,17 +123,18 @@
         android:padding="8dp"
         android:layout_below="@+id/button_foodgroup_eggs" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/button_foodgroup_nuts"
         android:layout_width="160dp"
         android:layout_height="40dp"
-        android:drawableLeft="@drawable/ic_check_circle_24dp"
-        android:text="  Nuts"
+        android:drawableLeft="@drawable/button_toggle_preference"
+        android:textOn="  Nuts"
+        android:textOff="  No nuts"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textAlignment="textStart"
         android:textColor="@color/white"
-        android:background="@drawable/button_shape_preferences"
+        android:background="@drawable/button_toggle_background"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:layout_marginRight="16dp"

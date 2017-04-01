@@ -1,40 +1,80 @@
 package com.bartoszuk.dinnerwise.model;
 
+import java.util.Objects;
+
 /**
  * Created by Maria Bartoszuk on 26/03/2017.
  */
 
 public class Quantity {
 
-    private final int howMany;
+    private final int numerator;
+    private final int denominator;
+    private final String unit;
+
+    public static Quantity fraction(int numerator, int denominator) {
+        return new Quantity(numerator, denominator, "");
+    }
 
     public static Quantity pieces(int howMany) {
-        return new Quantity(howMany);
+        return new Quantity(howMany, 1, "");
+    }
+
+    public static Quantity grams(int howMany) {
+        return new Quantity(howMany, 1, " g");
+    }
+
+    public static Quantity tbsp(int howMany) {
+        return new Quantity(howMany, 1, " tbsp");
+    }
+
+    public static Quantity tbsp(int fractionNumerator, int fractionDenominator) {
+        return new Quantity(fractionNumerator, fractionDenominator, " tbsp");
+    }
+
+    public static Quantity tsp(int howMany) {
+        return new Quantity(howMany, 1, " tsp");
+    }
+
+    public static Quantity tsp(int fractionNumerator, int fractionDenominator) {
+        return new Quantity(fractionNumerator, fractionDenominator, " tsp");
     }
 
     // When there is no point in specifying quantity
     public static Quantity na() {
-        return new Quantity(1);
+        return new Quantity(1, 1, "");
     }
 
     public static Quantity fromDb(String encoded) {
-        return new Quantity(Integer.parseInt(encoded));
+        String[] parts = encoded.trim().split(",", -1);
+        return new Quantity(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), parts[2]);
     }
 
-    private Quantity(int howMany) {
-        this.howMany = howMany;
+    private Quantity(int numerator, int denominator, String unit) {
+        this.numerator = numerator;
+        this.denominator = denominator;
+        this.unit = unit;
     }
 
     public String of(Ingredient ingredient) {
-        if (howMany == 1) {
-            return ingredient.getName();
-        } else {
-            return String.format("%d %s", howMany, ingredient.getName());
+        String quantity = "";
+        if (denominator > 1) {
+            quantity = String.format("%d/%d", numerator, denominator);
+        } else if (numerator > 1) {
+            quantity = Integer.toString(numerator);
         }
+        if (!unit.equals("") && quantity.equals("")) {
+            quantity = "1";
+        }
+        String prefix = quantity + unit;
+        if (!prefix.equals("")) {
+            prefix = prefix + " ";
+        }
+        return prefix + ingredient.getName();
     }
 
     public String dbFormat() {
-        return Integer.toString(howMany);
+        return String.format("%d,%d,%s", numerator, denominator, unit);
     }
 
     @Override
@@ -43,11 +83,13 @@ public class Quantity {
             return false;
         }
         Quantity that = (Quantity) other;
-        return this.howMany == that.howMany;
+        return this.numerator == that.numerator
+                && this.denominator == that.denominator
+                && this.unit.equals(that.unit);
     }
 
     @Override
     public int hashCode() {
-        return howMany;
+        return Objects.hash(numerator, denominator, unit);
     }
 }
