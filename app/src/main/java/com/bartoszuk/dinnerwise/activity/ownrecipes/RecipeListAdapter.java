@@ -56,6 +56,7 @@ public class RecipeListAdapter extends BaseAdapter implements Filterable {
         return position;
     }
 
+    // Setting up all the elements of a single view in the list.
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -82,7 +83,7 @@ public class RecipeListAdapter extends BaseAdapter implements Filterable {
         return convertView;
     }
 
-    //To use for search.
+    // To use for search.
     @Override
     public Filter getFilter() {
         return new Filter() {

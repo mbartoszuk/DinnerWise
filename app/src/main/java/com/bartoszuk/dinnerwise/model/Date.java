@@ -29,7 +29,6 @@ public class Date {
     public boolean equals(Object obj) {
         if (obj instanceof Date) {
             Date date = (Date) obj;
-
             return (year == date.year) && (month == date.month) && (day == date.day);
         }
         return false;

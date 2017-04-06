@@ -18,10 +18,11 @@ public class PreparationTimePicker extends TimeDurationPickerDialogFragment {
         return TimeDurationPicker.HH_MM;
     }
 
+    // Displaying the initial value in the picker when it's opened.
+    // 0 if it's first time opening, the caluclated value if it has been set before.
     @Override
     protected long getInitialDuration() {
-        EditText preparationTimeInput =
-            (EditText) getActivity().findViewById(R.id.recipe_preparation_time_input);
+        EditText preparationTimeInput = (EditText) getActivity().findViewById(R.id.recipe_preparation_time_input);
         String input = preparationTimeInput.getText().toString().trim();
         int durationMinutes;
         try {
@@ -32,6 +33,7 @@ public class PreparationTimePicker extends TimeDurationPickerDialogFragment {
         return durationMinutes * 60 * 1000;  // In milliseconds.
     }
 
+    // Setting the chosen time to display in the view.
     @Override
     public void onDurationSet(TimeDurationPicker view, long durationMillis) {
         EditText preparationTimeInput =

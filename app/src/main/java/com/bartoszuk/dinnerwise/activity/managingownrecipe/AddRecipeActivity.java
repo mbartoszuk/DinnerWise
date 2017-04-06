@@ -2,8 +2,6 @@ package com.bartoszuk.dinnerwise.activity.managingownrecipe;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +13,6 @@ import com.bartoszuk.dinnerwise.model.RecipeSet;
 import com.bartoszuk.dinnerwise.model.RecipesDB;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -70,31 +67,38 @@ public class AddRecipeActivity extends AppCompatActivity {
             newRecipe = db.findRecipeById(newRecipe.getId());
         }
 
+        // Recipe title input.
         EditText title = (EditText) findViewById(R.id.recipe_title_input);
         title.setText(newRecipe.getTitle());
 
+        // Recipe description input.
         EditText description = (EditText) findViewById(R.id.recipe_description_input);
         description.setText(newRecipe.getDescription());
 
+        // Recipe preparation time input.
         EditText prepTime = (EditText) findViewById(R.id.recipe_preparation_time_input);
         int preparationTimeInMinutes = newRecipe.getPreparationTimeInMinutes();
         if (preparationTimeInMinutes > 0) {
             prepTime.setText(Integer.toString(preparationTimeInMinutes));
         }
 
+        // Recipe servings input.
         EditText servings = (EditText) findViewById(R.id.recipe_servings_input);
         int numberOfServings = newRecipe.getNumberOfServings();
         if (numberOfServings > 0) {
             servings.setText(Integer.toString(numberOfServings));
         }
 
+        // Recipe ingredients input.
         EditText ingredients = (EditText) findViewById(R.id.recipe_ingredients_input);
+        // Each ingredient is on a different line.
         StringBuilder ingredientLines = new StringBuilder();
         for (Ingredient ingredient : newRecipe.getIngredients()) {
             ingredientLines.append(ingredient + "\n");
         }
         ingredients.setText(ingredientLines.toString());
 
+        // Recipe directions input.
         EditText directions = (EditText) findViewById(R.id.recipe_directions_input);
         directions.setText(newRecipe.getDirections());
     }

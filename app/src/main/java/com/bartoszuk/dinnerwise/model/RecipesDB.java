@@ -30,14 +30,15 @@ public class RecipesDB {
     public Recipe findRecipeById(long id) {
         SQLiteDatabase db = helper.getReadableDatabase();
 
-        // SQL Query: SELECT * FROM Recipes WHERE Recipies.id = id (from parameter)
+        // SQL Query: SELECT * FROM Recipes WHERE Recipes.id = id (from parameter).
         String[] columns = {
-                Recipe.RecipeEntry.COLUMN_NAME_TITLE,
-                Recipe.RecipeEntry.COLUMN_NAME_DESCRIPTION,
-                Recipe.RecipeEntry.COLUMN_NAME_PREPARATION_TIME_MINS,
-                Recipe.RecipeEntry.COLUMN_NAME_SERVINGS,
-                Recipe.RecipeEntry.COLUMN_NAME_INGREDIENTS,
-                Recipe.RecipeEntry.COLUMN_NAME_DIRECTIONS,
+                Recipe.RecipeEntry.COLUMN_NAME_TITLE,  // 0
+                Recipe.RecipeEntry.COLUMN_NAME_DESCRIPTION,  // 1
+                Recipe.RecipeEntry.COLUMN_NAME_PREPARATION_TIME_MINS,  // 2
+                Recipe.RecipeEntry.COLUMN_NAME_SERVINGS,  // 3
+                Recipe.RecipeEntry.COLUMN_NAME_INGREDIENTS,  // 4
+                Recipe.RecipeEntry.COLUMN_NAME_DIRECTIONS,  // 5
+                Recipe.RecipeEntry.COLUMN_NAME_IMAGE_RES_ID  // 6
         };
         String selection = Recipe.RecipeEntry._ID + " = ?";
         String[] selectionArgs = { Long.toString(id) };
@@ -64,6 +65,7 @@ public class RecipesDB {
         }
         recipe.setIngredients(ingredients);
         recipe.setDirections(query.getString(5));
+        recipe.setImageResId(query.getInt(6));
         return recipe;
     }
 
@@ -97,6 +99,7 @@ public class RecipesDB {
         values.put(Recipe.RecipeEntry.COLUMN_NAME_DESCRIPTION, recipe.getDescription());
         values.put(Recipe.RecipeEntry.COLUMN_NAME_PREPARATION_TIME_MINS, recipe.getPreparationTimeInMinutes());
         values.put(Recipe.RecipeEntry.COLUMN_NAME_SERVINGS, recipe.getNumberOfServings());
+        values.put(Recipe.RecipeEntry.COLUMN_NAME_IMAGE_RES_ID, recipe.getImageResId());
         StringBuilder ingredients = new StringBuilder();
         for (Ingredient ingredient : recipe.getIngredients()) {
             ingredients.append(ingredient.dbFormat() + "\n");

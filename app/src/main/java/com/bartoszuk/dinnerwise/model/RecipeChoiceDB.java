@@ -7,6 +7,9 @@ import java.util.Map;
 
 /**
  * Created by Maria Bartoszuk on 12/02/2017.
+ *
+ * Remembers the recipe chosen for the day.
+ * Saves data in the GroceryListRecipe.
  */
 
 public class RecipeChoiceDB {

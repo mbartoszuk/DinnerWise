@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,7 +27,7 @@ import com.roughike.bottombar.BottomBarTab;
  * Created by Maria Bartoszuk on 04/03/2017.
  */
 
-public class OwnRecipesActivity extends LogOut {
+public class  OwnRecipesActivity extends LogOut {
 
     private static final int ADD_RECIPE_REQUEST = 501;
 
@@ -45,7 +44,7 @@ public class OwnRecipesActivity extends LogOut {
         setTitle(getString(R.string.ownRecipes_title));
         setContentView(R.layout.activity_own_recipes);
 
-        // Change the count label when the data is changed.
+        // Changing the count label when the data is changed.
         TextView recipesCount = (TextView) findViewById(R.id.recipe_count_label);
         recipesCount.setText(own.size(null) + " recipes");
 
@@ -63,6 +62,7 @@ public class OwnRecipesActivity extends LogOut {
         // Setting the message for the empty list.
         recipeList.setEmptyView(findViewById(R.id.zero_own_recipes_message_text));
 
+        // Floating Action Button to add a new recipe.
         FloatingActionButton addRecipeButton = (FloatingActionButton) findViewById(R.id.add_recipe_button);
         addRecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +72,7 @@ public class OwnRecipesActivity extends LogOut {
             }
         });
 
+        // Favourites Tab
         BottomBarTab favouritesButton = (BottomBarTab) findViewById(R.id.tab_favourites);
         favouritesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +82,7 @@ public class OwnRecipesActivity extends LogOut {
             }
         });
 
+        // Groceries Tab
         BottomBarTab groceriesButton = (BottomBarTab) findViewById(R.id.tab_groceries);
         groceriesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +93,7 @@ public class OwnRecipesActivity extends LogOut {
         });
     }
 
-    // Find the Week Activity on the stack and goes back to it (to the beginning of the tack).
+    // Find the Week Activity on the stack and goes back to it (to the beginning of the stack).
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, WeekActivity.class);
@@ -99,6 +101,7 @@ public class OwnRecipesActivity extends LogOut {
         startActivity(intent);
     }
 
+    // Managing the actions done in context to Own Recipes activity - ex. adding or deleting a recipe.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -144,6 +147,8 @@ public class OwnRecipesActivity extends LogOut {
                 return true;
             }
         });
+
+        // Display a message if no recipes are found.
         searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {

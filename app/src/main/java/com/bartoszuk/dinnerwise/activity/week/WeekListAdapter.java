@@ -1,11 +1,5 @@
 package com.bartoszuk.dinnerwise.activity.week;
 
-/**
- * Created by Maria Bartoszuk on 01/02/2017.
- *
- * This class acts as a form of controller between the Week Activity view and model.
- */
-
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.res.ResourcesCompat;
@@ -32,6 +26,12 @@ import com.bartoszuk.dinnerwise.model.RecipeChoiceDB;
 import com.bartoszuk.dinnerwise.model.RecipesDB;
 import com.bartoszuk.dinnerwise.model.Week;
 
+/**
+ * Created by Maria Bartoszuk on 01/02/2017.
+ *
+ * This class acts as a form of a controller between the Week Activity view and model.
+ */
+
 final class WeekListAdapter extends BaseExpandableListAdapter {
 
     private final Context context;
@@ -54,6 +54,7 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
+    // Child refers to each view with two recipe choices.
     @Override
     public RecipeChoice getChild(int groupPosition, int childPosition) {
         Date date = getGroup(groupPosition);
@@ -66,6 +67,7 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
         return 0;
     }
 
+    // One recipes view for each day of the week.
     @Override
     public int getChildrenCount(int groupPosition) {
         return 1;
@@ -78,6 +80,8 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
         }
 
         RecipeChoice recipeChoice = getChild(groupPosition, childPosition);
+
+        // Setting up the left recipe choice with its layout.
         final Recipe leftRecipe = recipesDB.findRecipeById(recipeChoice.getRecipeOneId());
         CardView leftCard = (CardView) convertView.findViewById(R.id.recipe_option_left);
         ImageView leftImage = (ImageView) leftCard.findViewById(R.id.recipe_photo);
@@ -96,6 +100,7 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
             }
         });
 
+        // Setting up the right recipe choice with its layout.
         final Recipe rightRecipe = recipesDB.findRecipeById(recipeChoice.getRecipeTwoId());
         CardView rightCard = (CardView) convertView.findViewById(R.id.recipe_option_right);
         ImageView rightImage = (ImageView) rightCard.findViewById(R.id.recipe_photo);
@@ -114,22 +119,31 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
             }
         });
 
-        final AppCompatCheckBox leftCheckbox =
-                (AppCompatCheckBox) leftCard.findViewById(R.id.checkbox_icon);
+
+        final AppCompatCheckBox leftCheckbox = (AppCompatCheckBox) leftCard.findViewById(R.id.checkbox_icon);
+        // Ensuring that if there is anything checked in the reused view (standard Android
+        // practice to save memory), the choice does not have impact on the model.
         leftCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             }
         });
+        // Setting the actual choice of the user.
         leftCheckbox.setChecked(leftRecipe.getId() == recipeChoice.getChosenRecipeId());
         final AppCompatCheckBox rightCheckbox =
                 (AppCompatCheckBox) rightCard.findViewById(R.id.checkbox_icon);
+
+        // Ensuring that if there is anything checked in the reused view (standard Android
+        // practice to save memory), the choice does not have impact on the model.
         rightCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             }
         });
+        // Setting the actual choice of the user.
         rightCheckbox.setChecked(rightRecipe.getId() == recipeChoice.getChosenRecipeId());
+
+        // Updating the model with the chosen view check, unchecking the other one if necessary.
         rightCheckbox.setOnCheckedChangeListener(new IfChecked(leftCheckbox, recipeChoice, rightRecipe));
         leftCheckbox.setOnCheckedChangeListener(new IfChecked(rightCheckbox, recipeChoice, leftRecipe));
 
@@ -142,7 +156,6 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
         } else {
             divider.setVisibility(View.VISIBLE);
         }
-
         return convertView;
     }
 
@@ -151,6 +164,7 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
         return false;
     }
 
+    // Group refers to the title + arrow bar (visible when the child is hidden).
     @Override
     public Date getGroup(int groupPosition) {
         return week.getDay(groupPosition);
@@ -166,6 +180,7 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
         return week.getNumberOfDays();
     }
 
+    // Setting up the layout of the group view.
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -182,6 +197,7 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
+    // Setting the same width for both cards.
     private void equalizeWidth(CardView left, CardView right) {
         int leftMargins = findLeftAndRightMarginsOfPixel(left);
         int rightMargins = findLeftAndRightMarginsOfPixel(right);
@@ -190,6 +206,7 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
         right.getLayoutParams().width = cardWidth;
     }
 
+    // Figuring out the margin of both cards together with their margins.
     private int findLeftAndRightMarginsOfPixel(CardView cardView) {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) cardView.getLayoutParams();
         return params.leftMargin + params.rightMargin;
@@ -202,5 +219,4 @@ final class WeekListAdapter extends BaseExpandableListAdapter {
         windowManager.getDefaultDisplay().getMetrics(metrics);
         return metrics.widthPixels;
     }
-
 }

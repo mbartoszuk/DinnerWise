@@ -25,6 +25,7 @@ public class Recipe {
     private int numberOfServings = 0;
     private List<Ingredient> ingredients = Collections.emptyList();
     private String directions = "";
+    private int imageResId = R.drawable.full_recipe_image_placeholder;
 
     public static class RecipeEntry implements BaseColumns {
         public static final String TABLE_NAME = "recipes";
@@ -36,6 +37,7 @@ public class Recipe {
         public static final String COLUMN_NAME_DIRECTIONS = "directions";
         public static final String COLUMN_NAME_FAVOURITES = "favourites";
         public static final String COLUMN_NAME_OWN = "own";
+        public static final String COLUMN_NAME_IMAGE_RES_ID = "image_res_id";
     }
 
     public Recipe() {}
@@ -50,12 +52,12 @@ public class Recipe {
 
     // Thumbnail image for the Week view.
     public void renderThumbnailInto(ImageView view) {
-        view.setImageResource(R.mipmap.img_placeholder);
+        view.setImageResource(getImageResId());
     }
 
     // Full image for the full recipe view.
     public void renderFullInto(ImageView view) {
-        view.setImageResource(R.drawable.full_recipe_image_placeholder);
+        view.setImageResource(getImageResId());
     }
 
     public String getTitle() {
@@ -91,8 +93,19 @@ public class Recipe {
         return false;
     }
 
+    int getImageResId() {
+        return imageResId;
+    }
+
     void setId(long id) {
         this.id = id;
+    }
+
+    void setImageResId(int imageResId) {
+        this.imageResId = imageResId;
+        if (db != null) {
+            db.update(this);
+        }
     }
 
     public void setTitle(String title) {

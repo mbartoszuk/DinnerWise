@@ -3,10 +3,6 @@ package com.bartoszuk.dinnerwise.model;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * Created by Maria Bartoszuk on 04/03/2017.
  */

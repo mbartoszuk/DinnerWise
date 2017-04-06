@@ -1,9 +1,5 @@
 package com.bartoszuk.dinnerwise.activity.week;
 
-/**
- * Created by Maria Bartoszuk on 01/02/2017.
- */
-
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -20,6 +16,10 @@ import com.bartoszuk.dinnerwise.activity.ownrecipes.OwnRecipesActivity;
 import com.bartoszuk.dinnerwise.model.RecipesDB;
 import com.roughike.bottombar.BottomBarTab;
 
+/**
+ * Created by Maria Bartoszuk on 01/02/2017.
+ */
+
 public class WeekActivity extends LogOut {
 
     private ExpandableListView listView;
@@ -34,6 +34,7 @@ public class WeekActivity extends LogOut {
         listView.setAdapter(new WeekListAdapter(RecipesDB.db(getApplicationContext()), this, getBaseContext(), getLayoutInflater()));
         setExpandArrowPosition();
 
+        // Own Recipes Tab
         BottomBarTab ownRecipesButton = (BottomBarTab) findViewById(R.id.tab_ownrecipes);
         ownRecipesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +44,7 @@ public class WeekActivity extends LogOut {
             }
         });
 
+        // Favourites Tab
         BottomBarTab favouritesButton = (BottomBarTab) findViewById(R.id.tab_favourites);
         favouritesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +54,7 @@ public class WeekActivity extends LogOut {
             }
         });
 
+        // Groceries Tab
         BottomBarTab groceriesButton = (BottomBarTab) findViewById(R.id.tab_groceries);
         groceriesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +71,7 @@ public class WeekActivity extends LogOut {
         setExpandArrowPosition();
     }
 
-    /** Sets the position of the dropdown and collapse arrow icons. */
+    // Setting the position of the dropdown and collapses arrow icons.
     private void setExpandArrowPosition() {
         int width = dpi(48);
         int marginRight = dpi(16);
@@ -81,13 +84,13 @@ public class WeekActivity extends LogOut {
         }
     }
 
-    /** Converts from DPI to px. */
+    // Converting from DPI to px.
     private static int dpi(int dpiValue) {
         return dpiValue * Resources.getSystem().getDisplayMetrics().densityDpi
                 / DisplayMetrics.DENSITY_DEFAULT;
     }
 
-    /** Adding the menu to the top of the activity. */
+    // Adding the menu to the top of the activity.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

@@ -3,7 +3,6 @@ package com.bartoszuk.dinnerwise.activity.favourites;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,7 +37,7 @@ public class FavouritesActivity extends LogOut {
         setTitle(getString(R.string.favourites_title));
         setContentView(R.layout.activity_favourites);
 
-        // Change the count label when the data is changed.
+        // Changing the count label accordingly when the data is changed.
         TextView recipesCount = (TextView) findViewById(R.id.recipe_count_label);
         recipesCount.setText(favourites.size(null) + " recipes");
 
@@ -56,6 +55,7 @@ public class FavouritesActivity extends LogOut {
         // Setting the message for the empty list.
         recipeList.setEmptyView(findViewById(R.id.zero_favourites_message_text));
 
+        // Own Recipes Tab
         BottomBarTab ownRecipesButton = (BottomBarTab) findViewById(R.id.tab_ownrecipes);
         ownRecipesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +65,7 @@ public class FavouritesActivity extends LogOut {
             }
         });
 
+        // Groceries Tab
         BottomBarTab groceriesButton = (BottomBarTab) findViewById(R.id.tab_groceries);
         groceriesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +76,7 @@ public class FavouritesActivity extends LogOut {
         });
     }
 
-    // Find the Week Activity on the stack and goes back to it (to the beginning of the tack).
+    // Find the Week Activity on the stack and goes back to it (to the beginning of the stack).
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, WeekActivity.class);
@@ -83,6 +84,7 @@ public class FavouritesActivity extends LogOut {
         startActivity(intent);
     }
 
+    // Managing the actions done in context to Favourites activity - ex. removing a recipe.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -90,6 +92,7 @@ public class FavouritesActivity extends LogOut {
             int addToFavouritesResult = data.getIntExtra(FullRecipeActivity.RECIPE_FAVOURITE_RESULT, 0);
             if (addToFavouritesResult == FullRecipeActivity.RECIPE_REMOVED_FROM_FAVOURITES) {
                 adapter.notifyDataSetChanged();
+                //Display the toast accordingly.
                 Toast.makeText(getApplicationContext(), R.string.recipe_unfavourited_toast, Toast.LENGTH_SHORT)
                         .show();
             }
@@ -117,6 +120,8 @@ public class FavouritesActivity extends LogOut {
                 return true;
             }
         });
+
+        // Display a message if no recipes are found.
         searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {

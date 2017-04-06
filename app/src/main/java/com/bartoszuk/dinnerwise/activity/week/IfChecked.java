@@ -9,7 +9,7 @@ import com.bartoszuk.dinnerwise.model.RecipeChoice;
 /**
  * Created by Maria Bartoszuk on 12/02/2017.
  *
- * This class is a listiner tha manages the checkboxes. It helps to keep one checkbox checked at a time.
+ * This class is a listener tha manages the checkboxes. It helps to keep one checkbox checked at a time.
  */
 final class IfChecked implements CompoundButton.OnCheckedChangeListener {
 
@@ -23,6 +23,7 @@ final class IfChecked implements CompoundButton.OnCheckedChangeListener {
         this.recipe = recipe;
     }
 
+    // Unchecking the box opposite to the one clicked.
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {

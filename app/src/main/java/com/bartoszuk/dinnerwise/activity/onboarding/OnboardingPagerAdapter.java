@@ -37,16 +37,19 @@ public class OnboardingPagerAdapter extends PagerAdapter {
         this.layoutInflater = layoutInflater;
         this.typeface = Typeface.createFromAsset(assets, "fonts/Quicksand-Light.ttf");
 
+        // All screens' titles.
         title.add(R.string.onboarding_title_one);
         title.add(R.string.onboarding_title_two);
         title.add(R.string.onboarding_title_three);
         title.add(R.string.onboarding_title_four);
 
+        // All screen's tips.
         tip.add(R.string.onboarding_tip_one);
         tip.add(R.string.onboarding_tip_two);
         tip.add(R.string.onboarding_tip_three);
         tip.add(R.string.onboarding_tip_four);
 
+        // Setting the images based on the view number.
         for (int i = 1; i <= 4; i++) {
             String path = String.format("images/onboarding/%d.png", i);
             try (InputStream imageStream = assets.open(path)) {

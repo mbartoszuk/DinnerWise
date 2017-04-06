@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.bartoszuk.dinnerwise.R;
@@ -17,11 +16,8 @@ import com.bartoszuk.dinnerwise.activity.createaccount.CreateAccountActivity;
 import com.bartoszuk.dinnerwise.activity.onboarding.OnboardingActivity;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 
@@ -58,11 +54,9 @@ public class LoginActivity extends LogOut {
             // If the user has not previously signed in on this device or the sign-in has expired,
             // this asynchronous branch will attempt to sign in the user silently.  Cross-device
             // single sign-on will occur in this branch.
-            showProgressDialog();
             opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
                 @Override
                 public void onResult(GoogleSignInResult googleSignInResult) {
-                    hideProgressDialog();
                     handleSignInResult(googleSignInResult);
                 }
             });
@@ -96,7 +90,6 @@ public class LoginActivity extends LogOut {
             startActivity(new Intent(this, OnboardingActivity.class));
             finish();
         }
-        // TODO: Display failure message?
     }
 
     private void signIn() {
@@ -104,13 +97,7 @@ public class LoginActivity extends LogOut {
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    private void showProgressDialog() {
-        // TODO: Show progress dialog when async login.
-    }
-
-    private void hideProgressDialog() {
-    }
-
+    // Go over to the Create Account activity.
     public void goToCreateAccount(View view) {
         startActivity(new Intent(this, CreateAccountActivity.class));
         finish();

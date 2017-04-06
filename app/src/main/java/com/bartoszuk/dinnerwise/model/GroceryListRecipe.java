@@ -14,7 +14,7 @@ public class GroceryListRecipe {
     private boolean discarded = false;
     private final Set<String> checkedIngredients = new HashSet<>();
 
-    // For saving into the database.
+    // For saving into the Grocery List Recipe database.
     private GroceryList list;
 
     GroceryListRecipe(DayOfWeek dayOfWeek, long recipeId) {
@@ -70,6 +70,7 @@ public class GroceryListRecipe {
         this.list = list;
     }
 
+    // Database encoding.
     String dbCheckedIngredients() {
         StringBuilder builder = new StringBuilder();
         boolean first = true;
@@ -84,11 +85,12 @@ public class GroceryListRecipe {
         return builder.toString();
     }
 
+    // Splitting the String of ingredients (all), dividing them with pipe symbol.
+    // Database decoding.
     void loadCheckIngredientsFromDb(String encoded) {
         for (String ingredient : encoded.split("\\|")) {
             checkedIngredients.add(ingredient);
         }
-
     }
 
     @Override

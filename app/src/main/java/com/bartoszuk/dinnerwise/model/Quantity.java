@@ -12,10 +12,12 @@ public class Quantity {
     private final int denominator;
     private final String unit;
 
+    // Optional to use with whole numbers.
     public static Quantity fraction(int numerator, int denominator) {
         return new Quantity(numerator, denominator, "");
     }
 
+    // Helper methods in displaying quantities in the grocery list.
     public static Quantity pieces(int howMany) {
         return new Quantity(howMany, 1, "");
     }
@@ -40,7 +42,7 @@ public class Quantity {
         return new Quantity(fractionNumerator, fractionDenominator, " tsp");
     }
 
-    // When there is no point in specifying quantity
+    // When there is no point in specifying quantity.
     public static Quantity na() {
         return new Quantity(1, 1, "");
     }

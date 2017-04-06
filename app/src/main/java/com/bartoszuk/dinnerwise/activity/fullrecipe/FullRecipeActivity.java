@@ -14,11 +14,9 @@ import android.widget.Toast;
 import com.bartoszuk.dinnerwise.R;
 import com.bartoszuk.dinnerwise.activity.managingownrecipe.AddRecipeActivity;
 import com.bartoszuk.dinnerwise.model.Ingredient;
-import com.bartoszuk.dinnerwise.model.RecipeSet;
 import com.bartoszuk.dinnerwise.model.Recipe;
+import com.bartoszuk.dinnerwise.model.RecipeSet;
 import com.bartoszuk.dinnerwise.model.RecipesDB;
-
-import java.util.Arrays;
 
 public class FullRecipeActivity extends AppCompatActivity {
 
@@ -29,7 +27,7 @@ public class FullRecipeActivity extends AppCompatActivity {
     public static final int RECIPE_DELETED = 2;
 
     public static final String RECIPE_FAVOURITE_RESULT = "recipe_favourite_result";
-    public static final int RECIPE_ADDDED_TO_FAVOURITES = 1;
+    public static final int RECIPE_ADDED_TO_FAVOURITES = 1;
     public static final int RECIPE_REMOVED_FROM_FAVOURITES = 2;
 
     private static final int EDIT_REQUEST_CODE = 241;
@@ -40,9 +38,6 @@ public class FullRecipeActivity extends AppCompatActivity {
     private RecipeSet favouriteRecipes;
 
     private Intent resultData;
-
-    public FullRecipeActivity() {
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +55,7 @@ public class FullRecipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_full_recipe);
     }
 
+    // Setting up / refreshing the data in the view.
     @Override
     protected void onStart() {
         super.onStart();
@@ -68,20 +64,25 @@ public class FullRecipeActivity extends AppCompatActivity {
         setResult(RESULT_CANCELED, resultData);
     }
 
+    // Displaying the recipe data in the interface.
     private void renderModel() {
         // Refresh.
         if (recipeModel.getId() != 0) {
             recipeModel = db.findRecipeById(recipeModel.getId());
         }
 
+        // Recipe title.
         setTitle(recipeModel.getTitle());
 
+        // Recipe image.
         recipeModel.renderFullInto((ImageView) findViewById(R.id.full_recipe_image));
 
+        // Recipe preparation time.
         TextView preparationTimeServings = (TextView) findViewById(R.id.preparation_time_servings_text);
         preparationTimeServings.setText(recipeModel.getPreparationTimeInMinutes() + " minutes  |  "
                 + recipeModel.getNumberOfServings() + " servings");
 
+        // Recipe ingredients - displaying as a list with dots.
         TextView ingredients = (TextView) findViewById(R.id.ingredients_text);
         StringBuilder ingredientsContent = new StringBuilder();
         for (Ingredient ingredient : recipeModel.getIngredients()) {
@@ -89,13 +90,16 @@ public class FullRecipeActivity extends AppCompatActivity {
         }
         ingredients.setText(ingredientsContent.toString());
 
+        // Recipe description.
         TextView description = (TextView) findViewById(R.id.description_text);
         description.setText(recipeModel.getDescription());
 
+        // Recipe directions.
         TextView directions = (TextView) findViewById(R.id.directions_text);
         directions.setText(recipeModel.getDirections());
     }
 
+    // Displaying the action bar according to where the full recipe is used.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (own.contains(recipeModel.getId())) {
@@ -110,7 +114,7 @@ public class FullRecipeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle favourites icon selection
+        // Handling favourites icon selection, recipe edit or deleting.
         switch (item.getItemId()) {
             case R.id.action_addToFavorites:
                 if (favouriteRecipes.contains(recipeModel.getId())) {
@@ -118,7 +122,7 @@ public class FullRecipeActivity extends AppCompatActivity {
                     resultData.putExtra(RECIPE_FAVOURITE_RESULT, RECIPE_REMOVED_FROM_FAVOURITES);
                 } else {
                     favouriteRecipes.add(recipeModel.getId());
-                    resultData.putExtra(RECIPE_FAVOURITE_RESULT, RECIPE_ADDDED_TO_FAVOURITES);
+                    resultData.putExtra(RECIPE_FAVOURITE_RESULT, RECIPE_ADDED_TO_FAVOURITES);
                 }
                 displayFavouritesIcon(item);
                 return true;
@@ -157,13 +161,14 @@ public class FullRecipeActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         renderModel();
-        // Was edited successfully.
+        // Recipe was edited successfully.
         if (requestCode == EDIT_REQUEST_CODE && resultCode == RESULT_OK) {
             Toast.makeText(getApplicationContext(), R.string.recipe_edited_toast, Toast.LENGTH_SHORT).show();
             resultData.putExtra(RECIPE_EDITING_RESULT, RECIPE_EDITED);
             setResult(RESULT_OK, resultData);
         }
 
+        // Recipe was discarded.
         if (requestCode == EDIT_REQUEST_CODE && resultCode == RESULT_CANCELED) {
             Toast.makeText(getApplicationContext(), R.string.recipe_discarded_toast, Toast.LENGTH_SHORT).show();
         }

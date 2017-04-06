@@ -66,7 +66,7 @@ public class OnboardingActivity extends AppCompatActivity {
             dotsArray.add(singleDot);
         }
 
-        // Listenes to the page index to know which dot to select.
+        // Listening to the page index to know which dot to select.
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -83,6 +83,7 @@ public class OnboardingActivity extends AppCompatActivity {
         });
     }
 
+    // Skipping the onboarding if the user is already logged in before opening the application.
     @Override
     protected void onStart() {
         super.onStart();

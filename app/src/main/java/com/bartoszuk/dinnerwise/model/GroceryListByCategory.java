@@ -18,13 +18,18 @@ public class GroceryListByCategory {
         this.list = list;
         this.db = db;
     }
-    
+
+    // Informing what categories are there (all categories) to sort by.
     public SortedSet<String> getCategories() {
         TreeSet<String> categories = new TreeSet<>();
+        // Taking all the chosen days.
         for (DayOfWeek day : list.selectedDays()) {
+            // Taking the recipe chosen for each day.
             GroceryListRecipe groceryListRecipe = list.recipeOn(day);
+            // Taking only the recipes, which are not crossed off.
             if (!groceryListRecipe.isDiscarded()) {
                 Recipe recipe = db.findRecipeById(groceryListRecipe.getRecipeId());
+                // For every ingredient of the recipe, add it to the correct category.
                 for (Ingredient ingredient : recipe.getIngredients()) {
                     categories.add(ingredient.getCategory());
                 }
@@ -33,6 +38,7 @@ public class GroceryListByCategory {
         return categories;
     }
 
+    // Takes a specific category and returns all the ingredients in that category.
     public Map<GroceryListRecipe, Recipe> recipesIn(String category) {
         HashMap<GroceryListRecipe, Recipe> inCategory = new HashMap<>();
         for (DayOfWeek day : list.selectedDays()) {

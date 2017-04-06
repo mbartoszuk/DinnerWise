@@ -1,11 +1,14 @@
 package com.bartoszuk.dinnerwise.activity.secondarymenu;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 
 import com.bartoszuk.dinnerwise.R;
+
+/**
+ * Created by Maria Bartoszuk on 28/03/2017.
+ */
 
 public class AboutActivity extends AppCompatActivity {
 

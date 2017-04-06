@@ -37,6 +37,7 @@ public class GroceryList {
         return selectedDays().size();
     }
 
+    // Getting all the days for which a recipe was chosen.
     public Set<DayOfWeek> selectedDays() {
         SQLiteDatabase db = helper.getReadableDatabase();
         String[] columns = {RecipeEntry.COLUMN_NAME_DAY_OF_WEEK};
@@ -50,6 +51,8 @@ public class GroceryList {
         return days;
     }
 
+    // Returns the recipe that was chosen for the specific day of the week.
+    // Also helps in sorting the grocery lists chronologically by day of week.
     public GroceryListRecipe recipeOn(DayOfWeek dayOfWeek) {
         SQLiteDatabase db = helper.getReadableDatabase();
         String[] columns = {
@@ -66,6 +69,8 @@ public class GroceryList {
         if (!query.moveToFirst()) {
             return null;
         }
+        // 0 refers to the recipe being normal
+        // 1 refers to the recipe being crossed off
         GroceryListRecipe recipe = new GroceryListRecipe(dayOfWeek, query.getLong(0));
         if (1 == query.getInt(1)) {
             recipe.discard();
@@ -75,6 +80,7 @@ public class GroceryList {
         return recipe;
     }
 
+    // Clearing the recipe from the grocery list when it's unchecked in the Week Activity.
     public void clearRecipeOn(DayOfWeek dayOfWeek) {
         SQLiteDatabase db = helper.getWritableDatabase();
         String selection = RecipeEntry.COLUMN_NAME_DAY_OF_WEEK + " = ?";
@@ -82,10 +88,12 @@ public class GroceryList {
         db.delete(RecipeEntry.TABLE_NAME, selection, selectionArgs);
     }
 
+    // Setting a recipe to the day it was checked on.
     public void setRecipeOn(DayOfWeek dayOfWeek, long recipeId) {
         update(new GroceryListRecipe(dayOfWeek, recipeId));
     }
 
+    // Updating the Grocery List Recipe database (second database).
     void update(GroceryListRecipe listItem) {
         SQLiteDatabase db = helper.getWritableDatabase();
         String whereClause = RecipeEntry.COLUMN_NAME_DAY_OF_WEEK + " = ?";
@@ -96,6 +104,7 @@ public class GroceryList {
         }
     }
 
+    // While saving the Grocery List Recipe db, helps to translate the recipe to values in the db.
     ContentValues values(GroceryListRecipe listItem) {
         ContentValues values = new ContentValues();
         values.put(RecipeEntry.COLUMN_NAME_RECIPE_ID, listItem.getRecipeId());

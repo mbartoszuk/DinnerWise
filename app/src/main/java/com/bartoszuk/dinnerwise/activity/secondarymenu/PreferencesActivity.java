@@ -1,22 +1,22 @@
 package com.bartoszuk.dinnerwise.activity.secondarymenu;
 
-
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.bartoszuk.dinnerwise.R;
+
+/**
+ * Created by Maria Bartoszuk on 29/03/2017.
+ */
 
 public class PreferencesActivity extends AppCompatActivity {
 
@@ -47,7 +47,6 @@ public class PreferencesActivity extends AppCompatActivity {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
-
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.preferences_view_pager);
@@ -134,6 +133,7 @@ public class PreferencesActivity extends AppCompatActivity {
             return 2;
         }
 
+        // Fill in the names of the two tabs.
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {

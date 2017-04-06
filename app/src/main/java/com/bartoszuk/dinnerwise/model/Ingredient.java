@@ -1,7 +1,5 @@
 package com.bartoszuk.dinnerwise.model;
 
-import android.content.Intent;
-
 import java.util.Objects;
 
 /**
