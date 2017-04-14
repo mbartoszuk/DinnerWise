@@ -44,6 +44,7 @@ public class ByRecipeFragment extends Fragment implements Refresh {
         return layout;
     }
 
+    // Letting the view know that the data was change and the interface needs to be redrawn.
     @Override
     public void refresh() {
         listAdapter.notifyDataSetInvalidated();

@@ -73,7 +73,7 @@ public class GroceriesByCategoryAdapter extends BaseExpandableListAdapter {
         return category;
     }
 
-    // Gets the single ingredients of a recipe.
+    // Gets the single ingredient of a recipe.
     @Override
     public Pair<Ingredient, GroceryListRecipe> getChild(int groupPosition, int childPosition) {
         String category = getGroup(groupPosition);
@@ -159,10 +159,12 @@ public class GroceriesByCategoryAdapter extends BaseExpandableListAdapter {
         return false;
     }
 
+    // Creates a list of ingredients (from specific recipes), sorted alphabetically, then by recipe ID.
     private List<Pair<Ingredient, GroceryListRecipe>> ingredientsInCategory(String category) {
         List<Pair<Ingredient, GroceryListRecipe>> ingredients = new ArrayList<>();
         for (Map.Entry<GroceryListRecipe, Recipe> recipe : groceryListModel.recipesIn(category).entrySet()) {
             if (!recipe.getKey().isDiscarded()) {
+                // Doesn't display the ingredient if it has been crossed off.
                 for (Ingredient ingredient : recipe.getValue().getIngredients()) {
                     if (ingredient.getCategory().equals(category)) {
                         ingredients.add(Pair.create(ingredient, recipe.getKey()));
@@ -174,6 +176,7 @@ public class GroceriesByCategoryAdapter extends BaseExpandableListAdapter {
 
             Collator collator = Collator.getInstance(Locale.US);
 
+            // Comparing strings of names of recipes for alphabetical sorting.
             @Override
             public int compare(Pair<Ingredient, GroceryListRecipe> left, Pair<Ingredient, GroceryListRecipe> right) {
                 int ingredientComparison = collator.compare(left.first.getName(), right.first.getName());

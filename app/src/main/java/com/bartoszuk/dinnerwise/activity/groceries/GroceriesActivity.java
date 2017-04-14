@@ -1,14 +1,12 @@
 package com.bartoszuk.dinnerwise.activity.groceries;
 
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ExpandableListView;
 
 import com.bartoszuk.dinnerwise.R;
 import com.bartoszuk.dinnerwise.activity.LogOut;
@@ -60,6 +58,7 @@ public class GroceriesActivity extends LogOut {
             }
         });
 
+        // Own Recipes Tab
         BottomBarTab ownRecipesButton = (BottomBarTab) findViewById(R.id.tab_ownrecipes);
         ownRecipesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +68,7 @@ public class GroceriesActivity extends LogOut {
             }
         });
 
+        // Favourites Tab
         BottomBarTab favouritesButton = (BottomBarTab) findViewById(R.id.tab_favourites);
         favouritesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +79,7 @@ public class GroceriesActivity extends LogOut {
         });
     }
 
-    // Find the Week Activity on the stack and goes back to it (to the beginning of the tack).
+    // Find the Week Activity on the stack and goes back to it (to the beginning of the stack).
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, WeekActivity.class);
@@ -87,7 +87,7 @@ public class GroceriesActivity extends LogOut {
         startActivity(intent);
     }
 
-    /** Adding the menu to the top of the activity. */
+    // Adding the menu to the top of the activity.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

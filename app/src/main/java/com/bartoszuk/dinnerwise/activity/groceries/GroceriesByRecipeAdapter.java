@@ -103,19 +103,19 @@ public class GroceriesByRecipeAdapter extends BaseExpandableListAdapter {
         final GroceryListRecipe recipeItem = getGroup(groupPosition);
         Recipe recipe = recipesDB.findRecipeById(recipeItem.getRecipeId());
 
-        // Show the item discarded in the UI if model says so.
+        // Shows the item discarded in the UI, if model says so.
         if (recipeItem.isDiscarded()) {
             isExpanded = false;
         }
 
-        // Strike through the text on its whole length.
+        // Strikes through the text on its whole length.
         recipeTitleView.setText(recipe.getTitle(), TextView.BufferType.SPANNABLE);
         if (!isExpanded) {
             Spannable text = (Spannable) recipeTitleView.getText();
             text.setSpan(STRIKETHROUGH_SPAN, 0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
-        // Strike through and collapse when recipe removed from the list
+        // Strikes through and collapse when recipe is removed from the list
         final ImageButton collapseRecipeListButton = (ImageButton) convertView.findViewById(R.id.collapse_recipe_list);
         collapseRecipeListButton.setSelected(isExpanded);
         collapseRecipeListButton.setOnClickListener(new View.OnClickListener() {

@@ -1,6 +1,5 @@
 package com.bartoszuk.dinnerwise.activity.groceries;
 
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -39,6 +38,7 @@ public class ByCategoryFragment extends Fragment implements Refresh {
         return layout;
     }
 
+    // Letting the view know that the data was change and the interface needs to be redrawn.
     @Override
     public void refresh() {
         listAdapter.notifyDataSetInvalidated();
