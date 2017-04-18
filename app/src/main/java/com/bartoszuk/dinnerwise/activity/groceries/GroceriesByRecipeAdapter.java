@@ -80,17 +80,17 @@ public class GroceriesByRecipeAdapter extends BaseExpandableListAdapter {
 
     @Override
     public long getGroupId(int groupPosition) {
-        return groupPosition;
+        return getGroup(groupPosition).hashCode();
     }
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return groupPosition * getChildrenCount(groupPosition) + childPosition;
+        return getChild(groupPosition, childPosition).hashCode();
     }
 
     @Override
     public boolean hasStableIds() {
-        return false;
+        return true;
     }
 
     // Manages the view of a recipe in the grocery list.
